@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fulluntyped", "fulluntyped\fulluntyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{41897A66-6095-41F8-AB00-BD414B645835}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input", "Input", "{F81FB97C-0834-401C-A189-CA87C30AEC34}"
+	ProjectSection(SolutionItems) = preProject
+		lambdaCalcPgm.src = lambdaCalcPgm.src
+		lambdaRecursPgm.src = lambdaRecursPgm.src
+		test.f = test.f
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.ActiveCfg = Debug|x86
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.Build.0 = Debug|x86
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.ActiveCfg = Release|x86
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+source https://nuget.org/api/v2
+
+group Projects
+	source https://nuget.org/api/v2
+
+	nuget Argu
+	nuget FSharp.Compatibility.OCaml.Format
+nuget FSharpx.Extras
+
+group Build
+  source https://nuget.org/api/v2
+  
+  nuget SourceLink.Fake
+  nuget FAKE
+  nuget FSharp.Formatting
+
+  github fsharp/FAKE modules/Octokit/Octokit.fsx
+
+group Test
+  source https://nuget.org/api/v2
+  
+  nuget NUnit 
+  nuget NUnit.Runners 

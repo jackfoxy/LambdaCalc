@@ -1,0 +1,22 @@
+tru = lambda t. lambda f. t;
+fls = lambda t. lambda f. f;
+c0 = lambda s. lambda z. z;
+c1 = lambda s. lambda z. s z;
+c3 = lambda s. lambda z. s (s (s z));
+cond = lambda p. lambda t. lambda f. p t f;
+iszro = lambda m. m (lambda x. fls) tru;
+plus = lambda m. lambda n. lambda s. lambda z. m s (n s z);
+mult = lambda m. lambda n. m (plus n) c0;
+pair = lambda f. lambda s. lambda b. b f s;
+fst = lambda p. p tru;
+snd = lambda p. p fls;
+prd = lambda m. fst (m (lambda p. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
+/*(λf.(λy.f(y y))(λy.f(y y)))(λf.λx. if x==0 then 1 else x*f(x-1)) */
+/*fact = (lambda f. (lambda y. f (y y))(lambda y. f (y y)))(lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x))) c3 ) ;*/
+fix = lambda f. (lambda x. f (lambda y. x x y))(lambda x. f (lambda y. x x y));
+fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
+
+h = fix fact;
+l = h c3; /*stackoverflow*/
+
+

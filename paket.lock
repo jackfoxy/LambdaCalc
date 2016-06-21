@@ -1,0 +1,57 @@
+
+
+GROUP Build
+NUGET
+  remote: https://www.nuget.org/api/v2
+    FAKE (4.29.2)
+    FSharp.Compiler.Service (2.0.0.6)
+    FSharp.Formatting (2.14.4)
+      FSharp.Compiler.Service (2.0.0.6)
+      FSharpVSPowerTools.Core (>= 2.3 < 2.4)
+    FSharpVSPowerTools.Core (2.3)
+      FSharp.Compiler.Service (>= 2.0.0.3)
+    Microsoft.Bcl (1.1.10) - framework: net10, net11, net20, net30, net35, net40, net40-full
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: net10, net11, net20, net30, net35, net40, net40-full
+    Microsoft.Net.Http (2.2.29) - framework: net10, net11, net20, net30, net35, net40, net40-full
+      Microsoft.Bcl (>= 1.1.10)
+      Microsoft.Bcl.Build (>= 1.0.14)
+    Octokit (0.20)
+      Microsoft.Net.Http  - framework: net10, net11, net20, net30, net35, net40, net40-full
+    SourceLink.Fake (1.1)
+GITHUB
+  remote: fsharp/FAKE
+    modules/Octokit/Octokit.fsx (c063bf415dac7f7d4df4c37fe76badce76cae3c3)
+      Octokit
+GROUP Projects
+NUGET
+  remote: https://www.nuget.org/api/v2
+    Argu (2.1)
+    FSharp.Compatibility.OCaml (0.1.12)
+    FSharp.Compatibility.OCaml.Format (0.1.12)
+      FSharp.Compatibility.OCaml (>= 0.1.12)
+    FSharp.Control.AsyncSeq (2.0.8)
+    FSharp.Core (4.0.0.1)
+    FSharpx.Async (1.12)
+      FSharp.Control.AsyncSeq
+    FSharpx.Collections (1.15.1)
+      FSharp.Core
+    FSharpx.Extras (1.10.3)
+      FSharpx.Async (>= 1.12)
+      FSharpx.Collections (>= 1.10.1)
+
+GROUP Test
+NUGET
+  remote: https://www.nuget.org/api/v2
+    NUnit (3.2.1)
+    NUnit.ConsoleRunner (3.2.1)
+    NUnit.Extension.NUnitProjectLoader (3.2.1)
+    NUnit.Extension.NUnitV2Driver (3.2.1)
+    NUnit.Extension.NUnitV2ResultWriter (3.2.1)
+    NUnit.Extension.VSProjectLoader (3.2.1)
+    NUnit.Runners (3.2.1)
+      NUnit.ConsoleRunner (3.2.1)
+      NUnit.Extension.NUnitProjectLoader (3.2.1)
+      NUnit.Extension.NUnitV2Driver (3.2.1)
+      NUnit.Extension.NUnitV2ResultWriter (3.2.1)
+      NUnit.Extension.VSProjectLoader (3.2.1)
