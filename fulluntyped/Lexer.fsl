@@ -28,56 +28,14 @@ let lexeme lexbuf =
 
 let reservedWords = [
   (* Keywords *)
-  ("if", fun i -> Parser.IF i);
-  ("then", fun i -> Parser.THEN i);
-  ("else", fun i -> Parser.ELSE i);
-  ("true", fun i -> Parser.TRUE i);
-  ("false", fun i -> Parser.FALSE i);
   ("lambda", fun i -> Parser.LAMBDA i);
-  ("timesfloat", fun i -> Parser.TIMESFLOAT i);
-  ("succ", fun i -> Parser.SUCC i);
-  ("pred", fun i -> Parser.PRED i);
-  ("iszero", fun i -> Parser.ISZERO i);
-  ("let", fun i -> Parser.LET i);
-  ("in", fun i -> Parser.IN i);
   
   (* Symbols *)
-  ("_", fun i -> Parser.USCORE i);
-  ("'", fun i -> Parser.APOSTROPHE i);
-  ("\"", fun i -> Parser.DQUOTE i);
-  ("!", fun i -> Parser.BANG i);
-  ("#", fun i -> Parser.HASH i);
-  ("$", fun i -> Parser.TRIANGLE i);
-  ("*", fun i -> Parser.STAR i);
-  ("|", fun i -> Parser.VBAR i);
   (".", fun i -> Parser.DOT i);
   (";", fun i -> Parser.SEMI i);
-  (",", fun i -> Parser.COMMA i);
-  ("/", fun i -> Parser.SLASH i);
-  (":", fun i -> Parser.COLON i);
-  ("::", fun i -> Parser.COLONCOLON i);
   ("=", fun i -> Parser.EQ i);
-  ("==", fun i -> Parser.EQEQ i);
-  ("[", fun i -> Parser.LSQUARE i); 
-  ("<", fun i -> Parser.LT i);
-  ("{", fun i -> Parser.LCURLY i); 
   ("(", fun i -> Parser.LPAREN i); 
-  ("<-", fun i -> Parser.LEFTARROW i); 
-  ("{|", fun i -> Parser.LCURLYBAR i); 
-  ("[|", fun i -> Parser.LSQUAREBAR i); 
-  ("}", fun i -> Parser.RCURLY i);
   (")", fun i -> Parser.RPAREN i);
-  ("]", fun i -> Parser.RSQUARE i);
-  (">", fun i -> Parser.GT i);
-  ("|}", fun i -> Parser.BARRCURLY i);
-  ("|>", fun i -> Parser.BARGT i);
-  ("|]", fun i -> Parser.BARRSQUARE i);
-
-  (* Special compound symbols: *)
-  (":=", fun i -> Parser.COLONEQ i);
-  ("->", fun i -> Parser.ARROW i);
-  ("=>", fun i -> Parser.DARROW i);
-  ("==>", fun i -> Parser.DDARROW i);
 ]
 
 (* Support functions *)
@@ -98,12 +56,12 @@ let createID i (str : string) =
         else
             Parser.LCID { i = i; v = str; }
 
-let rec lineno = ref 1
-and depth = ref 0
-and start = ref 0
+let lineno = ref 1 
+let depth = ref 0
+let start = ref 0
 
-and filename = ref ""
-and startLex = ref dummyinfo
+let filename = ref ""
+let startLex = ref dummyinfo
 
 let newline (lexbuf : LexBuffer<char>) =
     incr lineno
@@ -128,7 +86,6 @@ let extractLineno (yytext : string) offset =
     Int32.Parse (yytext.Substring(offset, (String.length yytext - offset)))
 }
 
-
 (* The main body of the lexical analyzer *)
 
 rule main = parse
@@ -145,12 +102,6 @@ rule main = parse
 
 | "# line " ['0'-'9']+
     { lineno := extractLineno (lexeme lexbuf) 7 - 1; getFile lexbuf }
-
-| ['0'-'9']+
-    { Parser.INTV { i = info lexbuf; v = int (lexeme lexbuf); } }
-
-| ['0'-'9']+ '.' ['0'-'9']+
-    { Parser.FLOATV { i = info lexbuf; v= float (lexeme lexbuf); } }
 
 | ['A'-'Z' 'a'-'z' '_']
   ['A'-'Z' 'a'-'z' '_' '0'-'9' '\'']*
@@ -217,5 +168,3 @@ and escaped = parse
    }
 | [^ '"' '\\' 't' 'n' '\'']
     { error (info lexbuf) "Illegal character constant" }
-
-(*  *)

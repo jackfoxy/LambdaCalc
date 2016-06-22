@@ -5,22 +5,9 @@ module Ast
 open Support.Error
 
 type Term =
-    | TmTrue of Info
-    | TmFalse of Info
-    | TmIf of Info * Term * Term * Term
     | TmVar of Info * int * int
     | TmAbs of Info * string * Term
     | TmApp of Info * Term * Term
-    | TmRecord of Info * (string * Term) list
-    | TmProj of Info * Term * string
-    | TmFloat of Info * float
-    | TmTimesfloat of Info * Term * Term
-    | TmString of Info * string
-    | TmZero of Info
-    | TmSucc of Info * Term
-    | TmPred of Info * Term
-    | TmIsZero of Info * Term
-    | TmLet of Info * string * Term * Term
 
 type Binding = 
     | NameBind 
@@ -48,6 +35,6 @@ val termSubstTop : s : Term -> t : Term -> Term
 
 val getBinding : fi : Info -> ctx : Context -> i : int -> Binding
 
-val printtmATerm : outer : bool -> ctx : Context -> t : Term -> unit
+val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
 
 val prBinding : ctx : Context -> b : Binding -> unit

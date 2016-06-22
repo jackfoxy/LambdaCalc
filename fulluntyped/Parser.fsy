@@ -34,64 +34,20 @@ type Toplevel = Ast.Context -> (Ast.Command list * Ast.Context)
  */
 
 /* Keyword tokens */
-%token <Support.Error.Info> IF
-%token <Support.Error.Info> THEN
-%token <Support.Error.Info> ELSE
-%token <Support.Error.Info> TRUE
-%token <Support.Error.Info> FALSE
 %token <Support.Error.Info> LAMBDA
-%token <Support.Error.Info> TIMESFLOAT
-%token <Support.Error.Info> SUCC
-%token <Support.Error.Info> PRED
-%token <Support.Error.Info> ISZERO
-%token <Support.Error.Info> LET
-%token <Support.Error.Info> IN
 
 /* Identifier and constant value tokens */
 %token <string Support.Error.WithInfo> UCID  /* uppercase-initial */
 %token <string Support.Error.WithInfo> LCID  /* lowercase/symbolic-initial */
-%token <int Support.Error.WithInfo> INTV
-%token <float Support.Error.WithInfo> FLOATV
 %token <string Support.Error.WithInfo> STRINGV
 
 /* Symbolic tokens */
-%token <Support.Error.Info> APOSTROPHE
-%token <Support.Error.Info> DQUOTE
-%token <Support.Error.Info> ARROW
-%token <Support.Error.Info> BANG
-%token <Support.Error.Info> BARGT
-%token <Support.Error.Info> BARRCURLY
-%token <Support.Error.Info> BARRSQUARE
-%token <Support.Error.Info> COLON
-%token <Support.Error.Info> COLONCOLON
-%token <Support.Error.Info> COLONEQ
-%token <Support.Error.Info> COLONHASH
-%token <Support.Error.Info> COMMA
-%token <Support.Error.Info> DARROW
-%token <Support.Error.Info> DDARROW
 %token <Support.Error.Info> DOT
 %token <Support.Error.Info> EOF
 %token <Support.Error.Info> EQ
-%token <Support.Error.Info> EQEQ
-%token <Support.Error.Info> EXISTS
-%token <Support.Error.Info> GT
-%token <Support.Error.Info> HASH
-%token <Support.Error.Info> LCURLY
-%token <Support.Error.Info> LCURLYBAR
-%token <Support.Error.Info> LEFTARROW
 %token <Support.Error.Info> LPAREN
-%token <Support.Error.Info> LSQUARE
-%token <Support.Error.Info> LSQUAREBAR
-%token <Support.Error.Info> LT
-%token <Support.Error.Info> RCURLY
 %token <Support.Error.Info> RPAREN
-%token <Support.Error.Info> RSQUARE
 %token <Support.Error.Info> SEMI
-%token <Support.Error.Info> SLASH
-%token <Support.Error.Info> STAR
-%token <Support.Error.Info> TRIANGLE
-%token <Support.Error.Info> USCORE
-%token <Support.Error.Info> VBAR
 
 /* ---------------------------------------------------------------------- */
 /* The starting production of the generated parser is the syntactic class
@@ -136,28 +92,16 @@ Command :
 
 /* Right-hand sides of top-level bindings */
 Binder :
-    SLASH
-      { fun ctx -> NameBind }
-  | EQ Term
+	EQ Term
       { fun ctx -> TmAbbBind($2 ctx) }
 
 Term :
     AppTerm
       { $1 }
-  | IF Term THEN Term ELSE Term
-      { fun ctx -> TmIf($1, $2 ctx, $4 ctx, $6 ctx) }
   | LAMBDA LCID DOT Term 
       { fun ctx ->
           let ctx1 = addName ctx $2.v in
           TmAbs($1, $2.v, $4 ctx1) }
-  | LAMBDA USCORE DOT Term 
-      { fun ctx ->
-          let ctx1 = addName ctx "_" in
-          TmAbs($1, "_", $4 ctx1) }
-  | LET LCID EQ Term IN Term
-      { fun ctx -> TmLet($1, $2.v, $4 ctx, $6 (addName ctx $2.v)) }
-  | LET USCORE EQ Term IN Term
-      { fun ctx -> TmLet($1, "_", $4 ctx, $6 (addName ctx "_")) }
 
 AppTerm :
     PathTerm
@@ -167,50 +111,18 @@ AppTerm :
           let e1 = $1 ctx in
           let e2 = $2 ctx in
           TmApp(tmInfo e1,e1,e2) }
-  | TIMESFLOAT PathTerm PathTerm
-      { fun ctx -> TmTimesfloat($1, $2 ctx, $3 ctx) }
-  | SUCC PathTerm
-      { fun ctx -> TmSucc($1, $2 ctx) }
-  | PRED PathTerm
-      { fun ctx -> TmPred($1, $2 ctx) }
-  | ISZERO PathTerm
-      { fun ctx -> TmIsZero($1, $2 ctx) }
 
 PathTerm :
-    PathTerm DOT LCID
-      { fun ctx ->
-          TmProj($2, $1 ctx, $3.v) }
-  | PathTerm DOT INTV
-      { fun ctx ->
-          TmProj ($2, $1 ctx, string $3.v) }
-  | ATerm
+	ATerm
       { $1 }
 
 /* Atomic terms are ones that never require extra parentheses */
 ATerm :
     LPAREN Term RPAREN  
       { $2 } 
-  | TRUE
-      { fun ctx -> TmTrue ($1) }
-  | FALSE
-      { fun ctx -> TmFalse ($1) }
   | LCID 
       { fun ctx ->
           TmVar ($1.i, name2Index $1.i ctx $1.v, ctxLength ctx) }
-  | LCURLY Fields RCURLY
-      { fun ctx ->
-          TmRecord ($1, $2 ctx 1) }
-  | FLOATV
-      { fun ctx -> TmFloat ($1.i, $1.v) }
-  | STRINGV
-      { fun ctx -> TmString ($1.i, $1.v) }
-  | INTV
-      { fun ctx ->
-          let rec f n =
-            match n with
-            | 0 -> TmZero ($1.i)
-            | n -> TmSucc ($1.i, f (n - 1))
-          f $1.v }
 
 Fields :
     /* empty */
@@ -221,14 +133,9 @@ Fields :
 NEFields :
     Field
       { fun ctx i -> [$1 ctx i] }
-  | Field COMMA NEFields
-      { fun ctx i -> ($1 ctx i) :: ($3 ctx (i+1)) }
 
 Field :
     LCID EQ Term
       { fun ctx i -> ($1.v, $3 ctx) }
   | Term
       { fun ctx i -> (string i, $1 ctx) }
-
-
-/*   */

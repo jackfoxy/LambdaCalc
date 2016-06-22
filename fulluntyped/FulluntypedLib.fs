@@ -50,7 +50,7 @@ module FulluntypedLib =
         match cmd with
         | Eval(_, t) -> 
             let t' = eval ctx t
-            printtmATerm true ctx t'
+            printTerm true ctx t'
             force_newline()
             ctx
         | Bind(_, x, bind) -> 

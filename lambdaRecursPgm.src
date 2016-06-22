@@ -17,6 +17,6 @@ fix = lambda f. (lambda x. f (lambda y. x x y))(lambda x. f (lambda y. x x y));
 fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
 
 h = fix fact;
-l = h c3; /*stackoverflow*/
+/*l = h c3; stackoverflow*/
 
 
