@@ -15,9 +15,9 @@ open FSharpTapl.Compatability
 
 (* Datatypes *)
 type Term =
-  | TmVar of Info * int * int
-  | TmAbs of Info * string * Term
-  | TmApp of Info * Term * Term
+  | TmVariable of Info * int * int
+  | TmAbstraction of Info * string * Term
+  | TmApplication of Info * Term * Term
 
 type Binding = 
     | NameBind 
@@ -65,15 +65,15 @@ let rec name2Index fi (ctx : Context) x =
 let tmmap onvar c t =
   let rec walk c t =
     match t with
-    | TmVar (fi, x, n) -> onvar fi c x n
-    | TmAbs (fi, x, t2) -> TmAbs (fi, x, walk (c + 1) t2)
-    | TmApp (fi, t1, t2) -> TmApp (fi, walk c t1, walk c t2)
+    | TmVariable (fi, x, n) -> onvar fi c x n
+    | TmAbstraction (fi, x, t2) -> TmAbstraction (fi, x, walk (c + 1) t2)
+    | TmApplication (fi, t1, t2) -> TmApplication (fi, walk c t1, walk c t2)
   in walk c t
   
 let termShiftAbove d c t =
   tmmap
     (fun fi c x n ->
-       if x >= c then TmVar (fi, x + d, n + d) else TmVar (fi, x, n + d))
+       if x >= c then TmVariable (fi, x + d, n + d) else TmVariable (fi, x, n + d))
     c t
   
 let termShift d t = termShiftAbove d 0 t
@@ -86,7 +86,7 @@ let bindingshift d bind =
 (* Substitution *)
 let termSubst j s t =
   tmmap
-    (fun fi c x n -> if x = (j + c) then termShift c s else TmVar (fi, x, n))
+    (fun fi c x n -> if x = (j + c) then termShift c s else TmVariable (fi, x, n))
     0 t
   
 let termSubstTop s t = termShift (-1) (termSubst 0 (termShift 1 s) t)
@@ -103,9 +103,9 @@ let rec getBinding fi (ctx : Context) i =
 (* Extracting file info *)
 let tmInfo t =
   match t with
-  | TmVar (fi, _, _) -> fi
-  | TmAbs (fi, _, _) -> fi
-  | TmApp (fi, _, _) -> fi
+  | TmVariable (fi, _, _) -> fi
+  | TmAbstraction (fi, _, _) -> fi
+  | TmApplication (fi, _, _) -> fi
   
 (* Printing *)
 (* The printing functions call these utility functions to insert grouping
@@ -125,11 +125,11 @@ let obox () = open_hvbox 2
 let cbox () = close_box()
 let ``break`` () = print_break 0 0
   
-let small t = match t with | TmVar (_) -> true | _ -> false
+let small t = match t with | TmVariable (_) -> true | _ -> false
   
 let rec printtmTerm outer ctx t =
   match t with
-  | TmAbs (_, x, t2) ->
+  | TmAbstraction (_, x, t2) ->
       let (ctx', x') = pickfreshname ctx x
       in
         (obox ();
@@ -139,12 +139,12 @@ let rec printtmTerm outer ctx t =
          if (small t2) && (not outer) then ``break`` () else print_space ()
          printtmTerm outer ctx' t2;
          cbox ())
-  | t -> printtmAppTerm outer ctx t
-and printtmAppTerm outer ctx t =
+  | t -> printTmApplicationTerm outer ctx t
+and printTmApplicationTerm outer ctx t =
   match t with
-  | TmApp (_, t1, t2) ->
+  | TmApplication (_, t1, t2) ->
       (obox0 ();
-       printtmAppTerm false ctx t1;
+       printTmApplicationTerm false ctx t1;
        print_space ();
        printTerm false ctx t2;
        cbox ())
@@ -154,7 +154,7 @@ and printtmPathTerm outer ctx t =
   | t -> printTerm outer ctx t
 and printTerm outer (ctx : Context) t =
   match t with
-  | TmVar (fi, x, n) ->
+  | TmVariable (fi, x, n) ->
       if (ctxLength ctx) = n
       then pr (index2Name fi ctx x)
       else

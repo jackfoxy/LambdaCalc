@@ -5,9 +5,9 @@ module Ast
 open Support.Error
 
 type Term =
-    | TmVar of Info * int * int
-    | TmAbs of Info * string * Term
-    | TmApp of Info * Term * Term
+    | TmVariable of Info * int * int
+    | TmAbstraction of Info * string * Term
+    | TmApplication of Info * Term * Term
 
 type Binding = 
     | NameBind 
