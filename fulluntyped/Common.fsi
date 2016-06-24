@@ -32,8 +32,6 @@ module Common =
     exception NoRuleAppliesException
     exception NotFoundException
 
-    val runMain : main : (unit -> unit) -> 'a
-
 open CommandLine
 
 module Compatability =

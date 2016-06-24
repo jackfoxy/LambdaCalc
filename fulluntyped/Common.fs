@@ -236,25 +236,3 @@ module Common =
 
     exception NoRuleAppliesException
     exception NotFoundException
-    exception ExitException of int
-
-    let runMain (main : unit -> unit) =
-
-        set_max_boxes 1000
-        set_margin 67
-        
-        let res =
-            try 
-                (fun () -> 
-                    try 
-                        main ()
-                        0 
-                    with | ExitException x -> x) ()
-            with e ->
-                printfn "%A" e
-                2
-
-        Compatability.print_flush ()
-//        printfn "Hit any key to exit."
-//        System.Console.ReadKey() |> ignore
-        exit res

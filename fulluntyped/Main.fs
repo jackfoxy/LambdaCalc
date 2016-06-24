@@ -11,10 +11,15 @@ namespace FSharpTapl
 
 open Ast
 open CommandLine
+open Compatability
 open Core
+open FSharp.Compatibility.OCaml.Format
 open FulluntypedLib
 
 module console1 =
+
+    exception ExitException of int
+
     [<EntryPoint>]
     let main argv = 
 
@@ -23,14 +28,27 @@ module console1 =
         match parsedCommand.Source with
         | NoSource -> 
             reportError parsedCommand
+            0
         | input -> 
-            let main () =
-                processInput parsedCommand input emptyContext |> ignore
 
-            Common.runMain main
-            ()
+            set_max_boxes 1000
+            set_margin 67
+        
+            let res =
+                try 
+                    (fun () -> 
+                        try 
+                            processInput parsedCommand input emptyContext |> ignore
+                            0 
+                        with 
+                            | ExitException x -> x) ()
+                with e ->
+                    printfn "%A" e
+                    2
 
-        0
+            Compatability.print_flush ()
 
+//            printfn "Hit any key to exit."
+//            System.Console.ReadKey() |> ignore
 
-                
+            exit res

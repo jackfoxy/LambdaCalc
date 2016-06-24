@@ -4,6 +4,33 @@ module Ast
 
 open Support.Error
 
+(*
+TAPL p. 72
+
+Syntax
+
+t ::=
+    x       /* variable */
+    λx.t    /* abstraction */
+    t t     /* application */
+
+v ::=
+    λx.t    /* abstraction value */
+
+Evaluation
+
+       t1 -> t1'    
+    ---------------      /* E-APP1 */
+    t1 t2 -> t1' t2
+
+       t2 -> t2'    
+    ---------------      /* E-APP2 */
+    v1 t2 -> v1 t2'
+
+    (λx.t12) v2 -> [x |-> v2]t12    /* abstraction value */
+
+*)
+
 type Term =
     | TmVariable of Info * int * int
     | TmAbstraction of Info * string * Term
