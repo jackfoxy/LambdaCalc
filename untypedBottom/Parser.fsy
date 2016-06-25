@@ -1,0 +1,141 @@
+﻿/*
+Copyright (c) 2003, Benjamin C. Pierce
+Copyright (c) 2012, Jack Pappas
+All rights reserved.
+
+This code is provided under the terms of the 2-clause ("Simplified") BSD license.
+See LICENSE.TXT for licensing details.
+*/
+/*  
+ *  Yacc grammar for the parser.  The files parser.fsi and parser.fs
+ *  are generated automatically from parser.fsy.
+ */
+
+%{
+open Ast
+
+// HACK : This works around a bug in the current version of FsYacc
+// (as of Oct-26-2012) where it doesn't correctly parse %type declarations
+// containing a function arrow ('->'). By creating an alias for the type,
+// we can use the alias for the %type declaration and it'll be parsed correctly.
+type Toplevel = Ast.Context -> (Ast.Command list * Ast.Context)
+%}
+
+/* ---------------------------------------------------------------------- */
+/* Preliminaries */
+
+/* We first list all the tokens mentioned in the parsing rules
+   below.  The names of the tokens are common to the parser and the
+   generated lexical analyzer.  Each token is annotated with the type
+   of data that it carries; normally, this is just file information
+   (which is used by the parser to annotate the abstract syntax trees
+   that it constructs), but sometimes -- in the case of identifiers and
+   constant values -- more information is provided.
+ */
+
+/* Keyword tokens */
+%token <Support.Error.Info> LAMBDA
+
+/* Identifier and constant value tokens */
+%token <string Support.Error.WithInfo> UCID  /* uppercase-initial */
+%token <string Support.Error.WithInfo> LCID  /* lowercase/symbolic-initial */
+%token <string Support.Error.WithInfo> STRINGV
+
+/* Symbolic tokens */
+%token <Support.Error.Info> DOT
+%token <Support.Error.Info> EOF
+%token <Support.Error.Info> EQ
+%token <Support.Error.Info> LPAREN
+%token <Support.Error.Info> RPAREN
+%token <Support.Error.Info> SEMI
+
+/* ---------------------------------------------------------------------- */
+/* The starting production of the generated parser is the syntactic class
+   toplevel.  The type that is returned when a toplevel is recognized is
+     Ast.Context -> (Ast.Command list * Ast.Context) 
+   that is, the parser returns to the user program a function that,
+   when given a naming context, returns a fully parsed list of
+   Ast.Commands and the new naming context that results when
+   all the names bound in these commands are defined.
+
+   All of the syntactic productions in the parser follow the same pattern:
+   they take a context as argument and return a fully parsed abstract
+   syntax tree (and, if they involve any constructs that bind variables
+   in some following phrase, a new context).
+   
+*/
+
+%start toplevel
+%type < Toplevel > toplevel
+%%
+
+/* ---------------------------------------------------------------------- */
+/* Main body of the parser definition */
+
+/* The top level of a file is a sequence of commands, each terminated
+   by a semicolon. */
+toplevel :
+    EOF
+      { fun ctx -> [],ctx }
+  | Command SEMI toplevel
+      { fun ctx ->
+          let cmd,ctx = $1 ctx in
+          let cmds,ctx = $3 ctx in
+          cmd::cmds,ctx }
+
+/* A top-level command */
+Command :
+  | Term 
+      { fun ctx -> (let t = $1 ctx in Eval(tmInfo t,t)),ctx }
+  | LCID Binder
+      { fun ctx -> ((Bind($1.i,$1.v,$2 ctx)), addName ctx $1.v) }
+
+/* Right-hand sides of top-level bindings */
+Binder :
+	EQ Term
+      { fun ctx -> TmAbbBind($2 ctx) }
+
+Term :
+    AppTerm
+      { $1 }
+  | LAMBDA LCID DOT Term 
+      { fun ctx ->
+          let ctx1 = addName ctx $2.v in
+          TmAbstraction($1, $2.v, $4 ctx1) }
+
+AppTerm :
+    PathTerm
+      { $1 }
+  | AppTerm PathTerm
+      { fun ctx ->
+          let e1 = $1 ctx in
+          let e2 = $2 ctx in
+          TmApplication(tmInfo e1,e1,e2) }
+
+PathTerm :
+	ATerm
+      { $1 }
+
+/* Atomic terms are ones that never require extra parentheses */
+ATerm :
+    LPAREN Term RPAREN  
+      { $2 } 
+  | LCID 
+      { fun ctx ->
+          TmVariable ($1.i, name2Index $1.i ctx $1.v, ctxLength ctx) }
+
+Fields :
+    /* empty */
+      { fun ctx i -> [] }
+  | NEFields
+      { $1 }
+
+NEFields :
+    Field
+      { fun ctx i -> [$1 ctx i] }
+
+Field :
+    LCID EQ Term
+      { fun ctx i -> ($1.v, $3 ctx) }
+  | Term
+      { fun ctx i -> (string i, $1 ctx) }
