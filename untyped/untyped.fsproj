@@ -7,12 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{c88b1088-6a46-4bff-8b68-71130b83b428}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>fulluntyped</RootNamespace>
-    <AssemblyName>fulluntyped</AssemblyName>
+    <RootNamespace>untyped</RootNamespace>
+    <AssemblyName>untyped</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <Name>fulluntyped</Name>
+    <Name>untyped</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\bin\Debug\fulluntyped.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\untyped.XML</DocumentationFile>
     <NoWarn>62</NoWarn>
     <StartArguments>-i ..\..\test.f</StartArguments>
   </PropertyGroup>
@@ -39,7 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\bin\Release\fulluntyped.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\untyped.XML</DocumentationFile>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '11.0'">
@@ -72,8 +72,8 @@
     </FsLex>
     <Compile Include="Core.fsi" />
     <Compile Include="Core.fs" />
-    <Compile Include="FulluntypedLib.fsi" />
-    <Compile Include="FulluntypedLib.fs" />
+    <Compile Include="UntypedLib.fsi" />
+    <Compile Include="UntypedLib.fs" />
     <Compile Include="Main.fs" />
     <Content Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

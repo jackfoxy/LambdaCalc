@@ -14,7 +14,7 @@ open CommandLine
 open Compatability
 open Core
 open FSharp.Compatibility.OCaml.Format
-open FulluntypedLib
+open UntypedLib
 
 module console1 =
 
