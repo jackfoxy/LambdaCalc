@@ -48,6 +48,7 @@ type Toplevel = Ast.Context -> (Ast.Command list * Ast.Context)
 %token <Support.Error.Info> LPAREN
 %token <Support.Error.Info> RPAREN
 %token <Support.Error.Info> SEMI
+%token <Support.Error.Info> SLASH
 
 /* ---------------------------------------------------------------------- */
 /* The starting production of the generated parser is the syntactic class
@@ -92,7 +93,9 @@ Command :
 
 /* Right-hand sides of top-level bindings */
 Binder :
-	EQ Term
+	SLASH
+      { fun ctx -> NameBind }
+  | EQ Term
       { fun ctx -> TmAbbBind($2 ctx) }
 
 Term :
