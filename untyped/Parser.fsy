@@ -39,7 +39,6 @@ type Toplevel = Ast.Context -> (Ast.Command list * Ast.Context)
 /* Identifier and constant value tokens */
 %token <string Support.Error.WithInfo> UCID  /* uppercase-initial */
 %token <string Support.Error.WithInfo> LCID  /* lowercase/symbolic-initial */
-%token <string Support.Error.WithInfo> STRINGV
 
 /* Symbolic tokens */
 %token <Support.Error.Info> DOT
@@ -126,19 +125,3 @@ ATerm :
   | LCID 
       { fun ctx ->
           TmVariable ($1.i, name2Index $1.i ctx $1.v, ctxLength ctx) }
-
-Fields :
-    /* empty */
-      { fun ctx i -> [] }
-  | NEFields
-      { $1 }
-
-NEFields :
-    Field
-      { fun ctx i -> [$1 ctx i] }
-
-Field :
-    LCID EQ Term
-      { fun ctx i -> ($1.v, $3 ctx) }
-  | Term
-      { fun ctx i -> (string i, $1 ctx) }

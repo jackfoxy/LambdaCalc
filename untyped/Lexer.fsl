@@ -71,20 +71,6 @@ let newline (lexbuf : LexBuffer<char>) =
 let info (lexbuf : LexBuffer<char>) =
     let lexeme_start = lexbuf.StartPos.pos_cnum  // Lexing.lexeme_start lexbuf
     createInfo !filename !lineno (lexeme_start - !start)
-
-let stringBuffer = System.Text.StringBuilder (2048)
-
-let resetStr () : unit =
-    stringBuffer.Clear () |> ignore
-
-let addStr (ch : char) =
-    stringBuffer.Append ch |> ignore
-
-let getStr () =
-    stringBuffer.ToString ()
-
-let extractLineno (yytext : string) offset =
-    Int32.Parse (yytext.Substring(offset, (String.length yytext - offset)))
 }
 
 (* The main body of the lexical analyzer *)
@@ -98,28 +84,12 @@ rule main = parse
 
 | "/*" { depth := 1; startLex := info lexbuf; comment lexbuf; main lexbuf }
 
-| "# " ['0'-'9']+
-    { lineno := extractLineno (lexeme lexbuf) 2 - 1; getFile lexbuf }
-
-| "# line " ['0'-'9']+
-    { lineno := extractLineno (lexeme lexbuf) 7 - 1; getFile lexbuf }
-
 | ['A'-'Z' 'a'-'z' '_']
   ['A'-'Z' 'a'-'z' '_' '0'-'9' '\'']*
     { createID (info lexbuf) (lexeme lexbuf) }
 
-| ":=" | "<:" | "<-" | "->" | "=>" | "==>"
-| "{|" | "|}" | "<|" | "|>" | "[|" | "|]" | "=="
+| ['/' ';' '(' ')' '.' '=']
     { createID (info lexbuf) (lexeme lexbuf) }
-
-| ['~' '%' '\\' '+' '-' '&' '|' ':' '@' '`' '$']+
-    { createID (info lexbuf) (lexeme lexbuf) }
-
-| ['*' '#' '/' '!' '?' '^' '(' ')' '{' '}' '[' ']' '<' '>' '.' ';' '_' ','
-   '=' '\'']
-    { createID (info lexbuf) (lexeme lexbuf) }
-
-| "\"" { resetStr(); startLex := info lexbuf; string lexbuf }
 
 | eof { Parser.EOF (info lexbuf) }
 
@@ -145,27 +115,3 @@ and getName = parse
 
 and finishName = parse
   '"' [^ '\n']* { main lexbuf }
-
-and string = parse
-| '"'  { Parser.STRINGV {i = !startLex; v = getStr (); } }
-| '\\' { addStr (escaped lexbuf); string lexbuf }
-| '\n' { addStr '\n'; newline lexbuf; string lexbuf }
-| eof  { error !startLex "String not terminated" }
-| _    { addStr (lexbuf.LexemeChar 0); string lexbuf }
-
-and escaped = parse
-| 'n'     { '\n' }
-| 't'     { '\t' }
-| '\\'     { '\\' }
-| '"'    { '\034'  }
-| '\''     { '\'' }
-| ['0'-'9']['0'-'9']['0'-'9']
-   {
-     let x = int (lexeme lexbuf)
-     if x > 255 then
-        error (info lexbuf) "Illegal character constant"
-     else
-        char x
-   }
-| [^ '"' '\\' 't' 'n' '\'']
-    { error (info lexbuf) "Illegal character constant" }
