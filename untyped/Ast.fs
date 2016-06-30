@@ -15,19 +15,19 @@ open FSharpTapl.Compatability
 
 (* Datatypes *)
 type Term =
-  | TmVariable of Info * int * int
-  | TmAbstraction of Info * string * Term
-  | TmApplication of Info * Term * Term
+    | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
+    | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
+    | Application of FileInfo : Info * Applicator : Term * Applicand : Term
 
 type Binding = 
     | NameBind 
-    | TmAbbBind of Term
+    | AbbstractionBind of Term
 
 type Context = (string * Binding) list
 
 type Command = 
-    | Eval of Info * Term 
-    | Bind of Info * string * Binding
+    | Eval of FileInfo : Info * Term 
+    | Bind of FileInfo : Info * Name : string * Binding
 
 (* Context management *)
 let emptyContext : Context = []
@@ -57,18 +57,18 @@ let rec name2Index fi (ctx : Context) x =
 let tmmap onvar c t =
     let rec walk c t =
         match t with
-        | TmVariable (fi, x, n) -> 
+        | Variable (fi, x, n) -> 
             onvar fi c x n
-        | TmAbstraction (fi, x, t2) -> 
-            TmAbstraction (fi, x, walk (c + 1) t2)
-        | TmApplication (fi, t1, t2) -> 
-            TmApplication (fi, walk c t1, walk c t2)
+        | Abstraction (fi, x, t2) -> 
+            Abstraction (fi, x, walk (c + 1) t2)
+        | Application (fi, t1, t2) -> 
+            Application (fi, walk c t1, walk c t2)
     walk c t
   
 let termShiftAbove d c t =
     tmmap
         (fun fi c x n ->
-            if x >= c then TmVariable (fi, x + d, n + d) else TmVariable (fi, x, n + d))
+            if x >= c then Variable (fi, x + d, n + d) else Variable (fi, x, n + d))
         c t
   
 let termShift d t = termShiftAbove d 0 t
@@ -76,12 +76,12 @@ let termShift d t = termShiftAbove d 0 t
 let bindingshift d bind =
     match bind with
     | NameBind -> NameBind
-    | TmAbbBind t -> TmAbbBind (termShift d t)
+    | AbbstractionBind t -> AbbstractionBind (termShift d t)
   
 (* Substitution *)
 let termSubst j s t =
     tmmap
-        (fun fi c x n -> if x = (j + c) then termShift c s else TmVariable (fi, x, n))
+        (fun fi c x n -> if x = (j + c) then termShift c s else Variable (fi, x, n))
         0 t
   
 let termSubstTop s t = termShift (-1) (termSubst 0 (termShift 1 s) t)
@@ -98,11 +98,11 @@ let rec getBinding fi (ctx : Context) i =
       error fi (msg i (List.length ctx))
   
 (* Extracting file info *)
-let tmInfo t =
+let termInfo t =
     match t with
-    | TmVariable (fi, _, _) -> fi
-    | TmAbstraction (fi, _, _) -> fi
-    | TmApplication (fi, _, _) -> fi
+    | Variable (fi, _, _) -> fi
+    | Abstraction (fi, _, _) -> fi
+    | Application (fi, _, _) -> fi
   
 (* Printing *)
 (* The printing functions call these utility functions to insert grouping
@@ -124,7 +124,7 @@ let ``break`` () = print_break 0 0
   
 let small t = 
     match t with 
-    | TmVariable (_) -> true 
+    | Variable (_) -> true 
     | _ -> false
   
 let index2Name fi (ctx : Context) x =
@@ -137,7 +137,7 @@ let index2Name fi (ctx : Context) x =
 
 let rec printtmTerm outer ctx t =
     match t with
-    | TmAbstraction (_, x, t2) ->
+    | Abstraction (_, x, t2) ->
         let (ctx', x') = pickfreshname ctx x
         obox ()
         pr "lambda "
@@ -146,19 +146,19 @@ let rec printtmTerm outer ctx t =
         if (small t2) && (not outer) then ``break`` () else print_space ()
         printtmTerm outer ctx' t2;
         cbox ()
-    | t -> printTmApplicationTerm outer ctx t
-and printTmApplicationTerm outer ctx t =
+    | t -> printApplicationTerm outer ctx t
+and printApplicationTerm outer ctx t =
     match t with
-    | TmApplication (_, t1, t2) ->
+    | Application (_, t1, t2) ->
         obox0 ()
-        printTmApplicationTerm false ctx t1
+        printApplicationTerm false ctx t1
         print_space ()
         printTerm false ctx t2
         cbox ()
     | t -> printTerm outer ctx t
 and printTerm outer (ctx : Context) t =
     match t with
-    | TmVariable (fi, x, n) ->
+    | Variable (fi, x, n) ->
       if (ctxLength ctx) = n
       then pr (index2Name fi ctx x)
       else
@@ -175,8 +175,8 @@ and printTerm outer (ctx : Context) t =
   
 let printtm ctx t = printtmTerm true ctx t
   
-let prBinding ctx b =
+let printBinding ctx b =
     match b with 
     | NameBind -> () 
-    | TmAbbBind t -> (pr "= "; printtm ctx t)
+    | AbbstractionBind t -> (pr "= "; printtm ctx t)
   

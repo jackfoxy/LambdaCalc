@@ -86,7 +86,7 @@ toplevel :
 /* A top-level command */
 Command :
   | Term 
-      { fun ctx -> (let t = $1 ctx in Eval(tmInfo t,t)),ctx }
+      { fun ctx -> (let t = $1 ctx in Eval(termInfo t,t)),ctx }
   | LCID Binder
       { fun ctx -> ((Bind($1.i,$1.v,$2 ctx)), addName ctx $1.v) }
 
@@ -95,7 +95,7 @@ Binder :
 	SLASH
       { fun ctx -> NameBind }
   | EQ Term
-      { fun ctx -> TmAbbBind($2 ctx) }
+      { fun ctx -> AbbstractionBind($2 ctx) }
 
 Term :
     AppTerm
@@ -103,7 +103,7 @@ Term :
   | LAMBDA LCID DOT Term 
       { fun ctx ->
           let ctx1 = addName ctx $2.v in
-          TmAbstraction($1, $2.v, $4 ctx1) }
+          Abstraction($1, $2.v, $4 ctx1) }
 
 AppTerm :
     PathTerm
@@ -112,7 +112,7 @@ AppTerm :
       { fun ctx ->
           let e1 = $1 ctx in
           let e2 = $2 ctx in
-          TmApplication(tmInfo e1,e1,e2) }
+          Application(termInfo e1,e1,e2) }
 
 PathTerm :
 	ATerm
@@ -124,4 +124,4 @@ ATerm :
       { $2 } 
   | LCID 
       { fun ctx ->
-          TmVariable ($1.i, name2Index $1.i ctx $1.v, ctxLength ctx) }
+          Variable ($1.i, name2Index $1.i ctx $1.v, ctxLength ctx) }

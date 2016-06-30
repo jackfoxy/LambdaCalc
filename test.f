@@ -1,7 +1,11 @@
 /* Examples for testing */
 
 /* naive tests*/
+
 /*
+x/;
+x;
+
 lambda x. x;
 (lambda x. x) (lambda x. x x); 
 
@@ -9,8 +13,10 @@ x=lambda x.x;
 y=(lambda x.x)(lambda x.x); 
 
 x y;
+
 */
 
+fix = lambda f. (lambda x. f (lambda y. x x y))(lambda x. f (lambda y. x x y));
 bottom = lambda t. lambda b. b;
 /**/
 tru = lambda t. lambda f. t;
@@ -46,7 +52,6 @@ mult = lambda m. lambda n. m (plus n) c0;
 
 prd = lambda m. fst (m (lambda p. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
 
-fix = lambda f. (lambda x. f (lambda y. x x y))(lambda x. f (lambda y. x x y));
 fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
 
 h = fix fact;

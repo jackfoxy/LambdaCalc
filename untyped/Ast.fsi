@@ -32,19 +32,19 @@ Evaluation
 *)
 
 type Term =
-    | TmVariable of Info * int * int
-    | TmAbstraction of Info * string * Term
-    | TmApplication of Info * Term * Term
+    | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
+    | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
+    | Application of FileInfo : Info * Applicator : Term * Applicand : Term
 
 type Binding = 
     | NameBind 
-    | TmAbbBind of Term
+    | AbbstractionBind of Term
 
 type Command =
-    | Eval of Info * Term 
-    | Bind of Info * string * Binding
+    | Eval of FileInfo : Info * Term 
+    | Bind of FileInfo : Info * Name : string * Binding
 
-val tmInfo : t : Term -> Info
+val termInfo : t : Term -> Info
 
 type Context = (string * Binding) list
 
@@ -64,4 +64,4 @@ val getBinding : fi : Info -> ctx : Context -> i : int -> Binding
 
 val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
 
-val prBinding : ctx : Context -> b : Binding -> unit
+val printBinding : ctx : Context -> b : Binding -> unit

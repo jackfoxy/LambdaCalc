@@ -27,24 +27,71 @@ Evaluation
     ---------------      /* E-APP2 */
     v1 t2 -> v1 t2'
 
-    (λx.t12) v2 -> [x |-> v2]t12    /* abstraction value */
+    (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
 
 *)
 
 type Term =
-    | TmVariable of Info * int * int
-    | TmAbstraction of Info * string * Term
-    | TmApplication of Info * Term * Term
+    | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
+    | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
+    | Application of FileInfo : Info * Applicator : Term * Applicand : Term
+    /// Bottom = λ t. λ b. b
+    | Bottom of FileInfo : Info * Name : string *       //Abstraction t
+                (Info * string * (Info * int * int))        //Abstraction b
+    /// Fix = λ f. (λ x. f (λ y. x x y))(λ x. f (λ y. x x y))
+    | Fix of FileInfo : Info * Name : string *          //Abstraction f
+                (Info *                                     //Application 
+
+                    (Info * string *                            //Abstraction x
+                        (Info *                                     //Application
+                            (Info * int * int) 
+                            *
+                            (Info * string *                            //Abstraction y
+                                (Info *                                     //Application
+                                    (Info *                                     //Application
+                                        (Info *                                     //Application 
+                                            (Info * int * int) * (Info * int * int) 
+                                        )
+                                        * 
+                                        (Info * int * int) 
+                                    )
+                                    *
+                                    (Info * int * int)
+                                )
+                            )
+                        )
+                    )
+                    *
+                    (Info * string *                            //Abstraction x
+                        (Info *                                     //Application
+                            (Info * int * int) 
+                            *
+                            (Info * string *                            //Abstraction y
+                                (Info *                                     //Application
+                                    (Info *                                     //Application
+                                        (Info *                                     //Application 
+                                            (Info * int * int) * (Info * int * int) 
+                                        )
+                                        * 
+                                        (Info * int * int) 
+                                    )
+                                    *
+                                    (Info * int * int)
+                                )
+                            )
+                        )
+                    )
+                )
 
 type Binding = 
     | NameBind 
-    | TmAbbBind of Term
+    | AbbstractionBind of Term
 
 type Command =
-    | Eval of Info * Term 
-    | Bind of Info * string * Binding
+    | Eval of FileInfo : Info * Term 
+    | Bind of FileInfo : Info * Name : string * Binding
 
-val tmInfo : t : Term -> Info
+val termInfo : t : Term -> Info
 
 type Context = (string * Binding) list
 
@@ -64,4 +111,4 @@ val getBinding : fi : Info -> ctx : Context -> i : int -> Binding
 
 val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
 
-val prBinding : ctx : Context -> b : Binding -> unit
+val printBinding : ctx : Context -> b : Binding -> unit

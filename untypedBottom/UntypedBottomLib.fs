@@ -57,7 +57,7 @@ module UntypedBottomLib =
             let bind' = evalBinding ctx bind
             pr x
             pr " "
-            prBinding ctx bind'
+            printBinding ctx bind'
             force_newline()
             addBinding ctx x bind'
     
