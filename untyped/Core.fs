@@ -12,24 +12,18 @@ module Core
 
 open Ast
 open FSharpTapl
-open Support.Error
 
 (* ------------------------   EVALUATION  ------------------------ *)
 
-let rec isval ctx t =
-    match t with
-    | Abstraction (_) -> true
-    | _ -> false
-  
 let rec eval1 ctx t =
     match t with
     | Variable (fi, n, _) ->
         match getBinding fi ctx n with
         | AbbstractionBind t -> t
         | _ -> raise Common.NoRuleAppliesException
-    | Application (_, (Abstraction (_, _, t12)), v2) when isval ctx v2 ->
+    | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
         termSubstTop v2 t12
-    | Application (fi, v1, t2) when isval ctx v1 ->
+    | Application (fi, (Abstraction (_) as v1), t2) ->
         let t2' = eval1 ctx t2 
         Application (fi, v1, t2')
     | Application (fi, t1, t2) -> 
