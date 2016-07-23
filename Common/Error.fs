@@ -30,8 +30,7 @@ let errf f =
     raise (ExitException 1)
 
 let printInfo = function
-    (* In the text of the book, file positions in error messages are replaced
-        with the string "Error:" *)
+    (* In the text of the book, file positions in error messages are replaced with the string "Error:" *)
     | FI (f, l, c) ->
         print_string f
         print_string ":"

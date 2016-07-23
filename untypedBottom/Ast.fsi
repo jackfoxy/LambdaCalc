@@ -35,53 +35,52 @@ type Term =
     | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
     | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
     | Application of FileInfo : Info * Applicator : Term * Applicand : Term
-    /// Bottom = λ t. λ b. b
-    | Bottom of FileInfo : Info * Name : string *       //Abstraction t
-                (Info * string * (Info * int * int))        //Abstraction b
-    /// Fix = λ f. (λ x. f (λ y. x x y))(λ x. f (λ y. x x y))
-    | Fix of FileInfo : Info * Name : string *          //Abstraction f
-                (Info *                                     //Application 
-
-                    (Info * string *                            //Abstraction x
-                        (Info *                                     //Application
-                            (Info * int * int) 
-                            *
-                            (Info * string *                            //Abstraction y
-                                (Info *                                     //Application
-                                    (Info *                                     //Application
-                                        (Info *                                     //Application 
-                                            (Info * int * int) * (Info * int * int) 
-                                        )
-                                        * 
-                                        (Info * int * int) 
-                                    )
-                                    *
-                                    (Info * int * int)
-                                )
-                            )
-                        )
-                    )
-                    *
-                    (Info * string *                            //Abstraction x
-                        (Info *                                     //Application
-                            (Info * int * int) 
-                            *
-                            (Info * string *                            //Abstraction y
-                                (Info *                                     //Application
-                                    (Info *                                     //Application
-                                        (Info *                                     //Application 
-                                            (Info * int * int) * (Info * int * int) 
-                                        )
-                                        * 
-                                        (Info * int * int) 
-                                    )
-                                    *
-                                    (Info * int * int)
-                                )
-                            )
-                        )
-                    )
-                )
+//    /// Bottom = λ t. λ b. b
+//    | Bottom of FileInfo : Info * Name : string * Info * string * Info * int * int
+//    /// Fix = λ f. (λ x. f (λ y. x x y))(λ x. f (λ y. x x y))
+//    | Fix of FileInfo : Info * Name : string *          //Abstraction f
+//                (Info *                                     //Application 
+//
+//                    (Info * string *                            //Abstraction x
+//                        (Info *                                     //Application
+//                            (Info * int * int) 
+//                            *
+//                            (Info * string *                            //Abstraction y
+//                                (Info *                                     //Application
+//                                    (Info *                                     //Application
+//                                        (Info *                                     //Application 
+//                                            (Info * int * int) * (Info * int * int) 
+//                                        )
+//                                        * 
+//                                        (Info * int * int) 
+//                                    )
+//                                    *
+//                                    (Info * int * int)
+//                                )
+//                            )
+//                        )
+//                    )
+//                    *
+//                    (Info * string *                            //Abstraction x
+//                        (Info *                                     //Application
+//                            (Info * int * int) 
+//                            *
+//                            (Info * string *                            //Abstraction y
+//                                (Info *                                     //Application
+//                                    (Info *                                     //Application
+//                                        (Info *                                     //Application 
+//                                            (Info * int * int) * (Info * int * int) 
+//                                        )
+//                                        * 
+//                                        (Info * int * int) 
+//                                    )
+//                                    *
+//                                    (Info * int * int)
+//                                )
+//                            )
+//                        )
+//                    )
+//                )
 
 type Binding = 
     | NameBind 

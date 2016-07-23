@@ -15,48 +15,9 @@ open FSharpTapl.Compatability
 
 (* Datatypes *)
 type Term =
-  | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
-  | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
-  | Application of FileInfo : Info * Applicator : Term * Applicand : Term
-  | Bottom of FileInfo : Info * Name : string * (Info * string * (Info * int * int))
-  | Fix of FileInfo : Info * Name : string *                //Abstraction f
-                (Info *                                             //Application 
-                    (Info * string *                                    //Abstraction x
-                        (Info *                                          //Application
-                            (Info * int * int) 
-                            *
-                            (Info * string *                                //Abstraction y
-                                (Info *
-                                    (Info *                                         //Application
-                                        (Info * (Info * int * int) * (Info * int * int) )
-                                        * 
-                                        (Info * int * int) 
-                                    )
-                                    *
-                                    (Info * int * int)
-                                )
-                            )
-                        )
-                    )
-                    *
-                    (Info * string *                                    //Abstraction x
-                        (Info *                                          //Application
-                            (Info * int * int) 
-                            *
-                            (Info * string *                                //Abstraction y
-                                (Info *
-                                    (Info *                                         //Application
-                                        (Info * (Info * int * int) * (Info * int * int) )
-                                        * 
-                                        (Info * int * int) 
-                                    )
-                                    *
-                                    (Info * int * int)
-                                )
-                            )
-                        )
-                    )
-                )
+    | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
+    | Abstraction of FileInfo : Info * Name : string * Abstraction: Term
+    | Application of FileInfo : Info * Applicator : Term * Applicand : Term
 
 type Binding = 
     | NameBind 

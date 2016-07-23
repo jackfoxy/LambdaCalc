@@ -55,4 +55,4 @@ prd = lambda m. fst (m (lambda p. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
 fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
 
 h = fix fact;
-/*l = h c3; stackoverflow*/
+l = h c3; /*stackoverflow*/
