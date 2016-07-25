@@ -108,8 +108,9 @@ let isFixY t =
     match t with
     | Application (_, (Abstraction (fi, name, _)), v2) -> 
         match fi with
-        | Support.Error.Info.FI (_, line, character) when line = 19 && character = 32 ->
-            name = "y"
+        | Support.Error.Info.FI (_, line, character) when line = 19 ->
+            printfn "fix name %s character %i" name character
+            true
         | _ -> false
         
     | _ -> false
@@ -126,7 +127,11 @@ let rec eval1 ctx t =
     match t with
     | Variable (fi, n, _) ->
         match getBinding fi ctx n with
-        | AbbstractionBind t -> t
+        | AbbstractionBind t -> 
+            if (isFixY t) then
+                printfn "is Fix y"
+        
+            t
         | _ -> raise Common.NoRuleAppliesException
 
     | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
@@ -146,11 +151,12 @@ let rec eval1 ctx t =
 
     | Application (fi, (Abstraction (_) as v1), t2) ->
 
-        if isBottom t2 then
-            Some "bottom before eval of applicand"
-            |> printApplication ctx v1 t2 
-
         let t2' = eval1 ctx t2 
+
+        if isBottom t2 then
+            printfn "bottom before eval of applicand"
+//            Some "bottom before eval of applicand"
+//            |> printApplication ctx v1 t2 
 
         if (isFixY t) then
             Some "fix Y, eval applicand"
@@ -161,8 +167,20 @@ let rec eval1 ctx t =
             |> printApplication ctx v1 t2'           
 
         Application (fi, v1, t2')
+
     | Application (fi, t1, t2) -> 
+        
+        if (isFixY t1) then
+            Some "fix Y, eval applicand"
+            |> printApplication ctx t1 t2
+
         let t1' = eval1 ctx t1 
+
+        if (isFixY t1') then
+            Some "fix Y, eval applicand"
+            |> printApplication ctx t1 t2
+         
+
         Application (fi, t1', t2)
 
     | _ -> raise Common.NoRuleAppliesException

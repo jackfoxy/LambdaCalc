@@ -16,7 +16,7 @@ x y;
 
 */
 
-fix = lambda f. (lambda x. f (lambda y. x x y))(lambda x. f (lambda y. x x y));
+fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
 bottom = lambda t. lambda b. b;
 /**/
 tru = lambda t. lambda f. t;
