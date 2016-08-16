@@ -161,7 +161,6 @@ module Compatability =
         Lambda = false
         ErrorMsg = None
         } 
-        
 
     let private makeOutput (parsedCommand' : ParsedCommand) =
 

@@ -25,16 +25,16 @@ module console1 =
 
         let parsedCommand = parse argv
 
-        match parsedCommand.Source with
-        | NoSource -> 
-            reportError parsedCommand
-            0
-        | input -> 
+        let res =
+            match parsedCommand.Source with
+            | NoSource -> 
+                reportError parsedCommand
+                0
+            | input -> 
 
-            set_max_boxes 1000
-            set_margin 67
+                set_max_boxes 1000
+                set_margin 67
         
-            let res =
                 try 
                     (fun () -> 
                         try 
@@ -46,9 +46,11 @@ module console1 =
                     printfn "%A" e
                     2
 
+        try
             Compatability.print_flush ()
+        with _ -> ()
 
-//            printfn "Hit any key to exit."
-//            System.Console.ReadKey() |> ignore
+//       printfn "Hit any key to exit."
+//       System.Console.ReadKey() |> ignore
 
-            exit res
+        exit res
