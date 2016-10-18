@@ -1,4 +1,4 @@
-0) TO DO:
+﻿0) TO DO:
 	Fix F emits bottom test
 
 1) can't prove a program is elegant (shortest program for given IO) Chaitin, Meta Math, p. 125
@@ -48,3 +48,40 @@
 					)
 				)
 			)
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+y t in parent fix -- bottom after eval of applicand
+evaluated applicand t2'>
+
+λ t.
+
+before evaluation t2>
+
+  λ b. b
+
+term t>
+
+(λ f. λ t. λ b. b) (λ t. λ b. b)
+	(λ y. 
+		(λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))
+		(λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))																									y)
+		((λ f. λ t. λ b. b) (λ t. λ b. b))
+
+@@@@@@@@@@@@@ 2016 10 06
+before evaluation applicand t2>
+
+(λ f. λ t. λ b. b)
+	(λ s. λ z. (λ s'. λ z'. s' z') s ((λ t. λ b.b) s z))
+
+term t>
+
+(λ y.
+   (λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))
+   (λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))
+   y)
+
+((λ f. λ t. λ b.b) (λ s. λ z. (λ s'. λ z'. s' z') s ((λ t. λ b.b) s z)))
+
+failed try> Exception of type 'FSharpTapl.Common+NoRuleAppliesException' was thrown.

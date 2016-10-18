@@ -1,0 +1,27 @@
+(from Indian Wells)
+
+let isYinFix ctx applicator applicand =
+	let info = 
+        getApplicationInfo ctx applicator applicand
+	match info.ApplicatorName, info.ApplicandName.Value, info.ParentAbstractionName with
+	| "y", "t", "fix" -> true
+	| _ -> false
+	
+	
+let bottomAbstraction ctx =
+	fst  ctx = "bottom"
+	match snd ctx with
+	| Abstraction(bottom) -> bottom
+	| _ -> invalidArg "" ""
+	
+	
+length of the context is 1, but the expected de Brujn index is 2, we can fool it with the identity function
+
+
+System.Exception: parse error
+   at Microsoft.FSharp.Text.Parsing.Implementation.popStackUntilErrorShifted@276[tok,a](Tables`1 tables, LexBuffer`1 lexbuf, Stack`1 stateStack, Stack`1 valueStack, AssocTable actionTable, FSharpOption`1 tokenOpt) in D:\BitSync\GitRepos\FsLexYacc\src\FsLexYacc.Runtime\Parsing.fs:line 313
+   at Microsoft.FSharp.Text.Parsing.Implementation.interpret[tok,a](Tables`1 tables, FSharpFunc`2 lexer, LexBuffer`1 lexbuf, Int32 initialState) in D:\BitSync\GitRepos\FsLexYacc\src\FsLexYacc.Runtime\Parsing.fs:line 482
+   at FSharpTapl.UntypedBottomLib.parseIt@31(LexBuffer`1 lexbuf) in C:\BitSync\GitRepos\LambdaCalc\untypedBottom\UntypedBottomLib.fs:line 37
+   at FSharpTapl.UntypedBottomLib.parseInput(Source input) in C:\BitSync\GitRepos\LambdaCalc\untypedBottom\UntypedBottomLib.fs:line 44
+   at FSharpTapl.UntypedBottomLib.processInput(ParsedCommand parsedCommand, Source input, FSharpList`1 ctx) in C:\BitSync\GitRepos\LambdaCalc\untypedBottom\UntypedBottomLib.fs:line 66
+   at FSharpTapl.console1.main(String[] argv) in C:\BitSync\GitRepos\LambdaCalc\untypedBottom\Main.fs:line 45

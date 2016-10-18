@@ -1,0 +1,31 @@
+(λ f. λ t. λ b. b)
+(λ s. λ z. (λ s'. λ z'. s' z') s ((λ t. λ b.b) s z))
+
+
+(λ y.
+   (λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))
+   (λ x. (λ f. λ x'. cond (iszro x') c1 (mult x' (f (prd x')))) (λ y'. x x y'))
+   y)
+
+   
+   AbbstractionBind (Abstraction (FI ("../../fixBottomMin.f",1,9),"t",Abstraction (...,...,...)))
+   
+   fi 
+	Line 1
+	file "../../fixBottomMin.f"
+	character ? 29
+	
+Operational Semantics
+
+bottom ::=
+	λ t.λ b. b
+	
+fix ::=
+	λ f. (λ x. f (λ y. x x y)) (λ x. f (λ y. x x y))
+
+Evaluation
+
+	fix |- [y -> bottom]
+	--------------------
+	  [fix -> bottom]
+	

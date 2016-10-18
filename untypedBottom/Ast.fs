@@ -50,7 +50,7 @@ let rec pickfreshname ctx x =
   
 let rec name2Index fi (ctx : Context) x =
     match ctx with
-    | [] -> error fi ("Identifier " + (x + " is unbound"))
+    | [] -> error fi ("Identifier '" + (x + "' is unbound"))
     | (y, _) :: rest -> if y = x then 0 else 1 + (name2Index fi rest x)
   
 (* Shifting *)

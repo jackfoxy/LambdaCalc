@@ -12,6 +12,7 @@ module Core
 
 open Ast
 open FSharpTapl
+open FSharpTapl.Compatability
 
 type ApplicationInfo =
     {
@@ -83,6 +84,13 @@ let getApplicationInfo ctx applicator applicand =
             }
     | _ -> invalidArg "" ""
 
+let isYinFix ctx applicator applicand =
+    let info = 
+        getApplicationInfo ctx applicator applicand
+    match info.ApplicatorName, info.ApplicandName.Value, info.ParentAbstractionName with
+    | "y", "t", "fix" -> true
+    | _ -> false
+
 let printApplication ctx applicator applicand msg =
     let info = 
         getApplicationInfo ctx applicator applicand
@@ -94,13 +102,19 @@ let printApplication ctx applicator applicand msg =
         | Application (_) ->
             sprintf "%s %s in parent %s" info.ApplicatorName "Application()" info.ParentAbstractionName
         | _ ->
-            sprintf "%s %s in parent %s" info.ApplicatorName info.ApplicandName.Value  info.ParentAbstractionName
+            sprintf "%s %s in parent %s" info.ApplicatorName info.ApplicandName.Value info.ParentAbstractionName
 
     match msg with
     | Some x ->
-        printfn "%s -- %s" applicationMsg x
-    | None ->
-        printfn "%s" applicationMsg
+        let z = sprintf "\n%s -- %s" applicationMsg x
+
+        if z = "\ny t in parent fix -- bottom after eval of applicand" then 
+            z |> pr
+         else ()
+
+    | None -> ()
+//        sprintf "\n%s" applicationMsg
+//        |> pr
 
 (* ------------------------   EVALUATION  ------------------------ *)
 
@@ -109,7 +123,8 @@ let isFixY t =
     | Application (_, (Abstraction (fi, name, _)), v2) -> 
         match fi with
         | Support.Error.Info.FI (_, line, character) when line = 19 ->
-            printfn "fix name %s character %i" name character
+            sprintf "fix name %s character %i" name character
+            |> pr
             true
         | _ -> false
         
@@ -123,6 +138,14 @@ let isBottom t =            //test for bottom is incorrect, redo
     | _ ->
         false
   
+let getAbstraction (ctx : Context) name =
+    let bottom =
+        ctx
+        |> List.find(fun t -> fst t = name)
+    match snd bottom with
+    | AbbstractionBind x -> x
+    | _ -> invalidArg "" ""
+
 let rec eval1 ctx t =
     match t with
     | Variable (fi, n, _) ->
@@ -133,8 +156,10 @@ let rec eval1 ctx t =
 
     | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
 
-        if isBottom v2 then
-            printfn ">>bottom"  //we never seem to catch bottom here when Fix Y
+//        if isBottom v2 then
+//            sprintf "\n>>bottom\n"  //we never seem to catch bottom here when Fix Y
+//            |> pr
+//            printtmTerm true ctx t
 
         termSubstTop v2 t12
 
@@ -142,11 +167,52 @@ let rec eval1 ctx t =
 
         let t2' = eval1 ctx t2 
 
-        if isBottom t2' then
-            Some "bottom after eval of applicand"
-            |> printApplication ctx v1 t2'           
+        try
+            if isBottom t2' && (isYinFix ctx v1 t2') then
+            
+//                Some "bottom after eval of applicand"
+//                |> printApplication ctx v1 t2'
 
-        Application (fi, v1, t2')
+//                printfn "\n"
+//                printfn "\nevaluated applicand          outer t2'>"
+//                printfn "\n%A" t2'
+//                printtmTerm true ctx t2'
+//                printfn "\n"
+//                printfn "\nevaluated applicand          inner t2'>"
+//                printtmTerm false ctx t2'
+//                printfn "\n"
+//                printfn "\nbefore evaluation applicand   outer t2>"
+//                printfn "\n%A" t2
+//                printtmTerm true ctx t2
+//                printfn "\n"
+//                printfn "\nbefore evaluation applicand   inner t2>"
+//                printtmTerm false ctx t2
+//                printfn "\n"
+//                printfn "\nterm                           outer t>"
+//                printfn "\n%A" t
+//                printtmTerm true ctx t 
+//                printfn "\n"
+//                printfn "\nterm                           inner t>"
+//                printtmTerm false ctx t 
+
+
+    //            bottomAbstraction ctx //bad index error
+                let _, binding = ctx.[ctx.Length - 1]
+                match binding with
+                | AbbstractionBind bottom ->
+                    Application (fi, bottom, bottom)   // expected test result
+//                   bottom // test result = 3, bad index divisor 1 higher that above
+//                    bottom |> eval1 ctx  // fails on "no rule"
+
+               // Application (fi, (getAbstraction ctx "id"), (getAbstraction ctx "bottom" |> eval1 ctx))  //stack overflow
+
+                
+                     
+            else
+                Application (fi, v1, t2')
+        with e ->
+            printfn "\nfailed try> %s" e.Message
+            Application (fi, v1, t2')
 
     | Application (fi, t1, t2) -> 
 
