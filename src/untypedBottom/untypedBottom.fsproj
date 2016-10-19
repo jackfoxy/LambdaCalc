@@ -55,7 +55,7 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <Import Project="..\lib\FsLexYacc\FsLexYacc.targets" />
+  <Import Project="..\..\lib\FsLexYacc\FsLexYacc.targets" />
   <ItemGroup>
     <Compile Include="Ast.fsi" />
     <Compile Include="Ast.fs" />
@@ -80,7 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsLexYacc.Runtime">
-      <HintPath>..\lib\FsLexYacc\FsLexYacc.Runtime.dll</HintPath>
+      <HintPath>..\..\lib\FsLexYacc\FsLexYacc.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -97,7 +97,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
       <ItemGroup>
         <Reference Include="Argu">
-          <HintPath>..\packages\projects\Argu\lib\net35\Argu.dll</HintPath>
+          <HintPath>..\..\packages\projects\Argu\lib\net35\Argu.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -106,7 +106,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="Argu">
-          <HintPath>..\packages\projects\Argu\lib\net40\Argu.dll</HintPath>
+          <HintPath>..\..\packages\projects\Argu\lib\net40\Argu.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -117,7 +117,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharp.Compatibility.OCaml">
-          <HintPath>..\packages\projects\FSharp.Compatibility.OCaml\lib\net40\FSharp.Compatibility.OCaml.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Compatibility.OCaml\lib\net40\FSharp.Compatibility.OCaml.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -128,7 +128,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharp.Compatibility.OCaml.Format">
-          <HintPath>..\packages\projects\FSharp.Compatibility.OCaml.Format\lib\net40\FSharp.Compatibility.OCaml.Format.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Compatibility.OCaml.Format\lib\net40\FSharp.Compatibility.OCaml.Format.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -139,7 +139,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile44')">
       <ItemGroup>
         <Reference Include="FSharp.Control.AsyncSeq">
-          <HintPath>..\packages\projects\FSharp.Control.AsyncSeq\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\FSharp.Control.AsyncSeq.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Control.AsyncSeq\lib\portable-net45+netcore45+MonoAndroid1+MonoTouch1\FSharp.Control.AsyncSeq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -148,7 +148,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharp.Control.AsyncSeq">
-          <HintPath>..\packages\projects\FSharp.Control.AsyncSeq\lib\net45\FSharp.Control.AsyncSeq.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Control.AsyncSeq\lib\net45\FSharp.Control.AsyncSeq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -159,7 +159,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0' Or $(TargetFrameworkVersion) == 'v3.5')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\net20\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\net20\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -168,7 +168,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile44')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\portable-net45+netcore45\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\portable-net45+netcore45\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -177,7 +177,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\net40\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\net40\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -186,7 +186,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\portable-net45+monoandroid10+monotouch10+xamarinios10\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -195,7 +195,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile47')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\portable-net45+sl5+netcore45\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\portable-net45+sl5+netcore45\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -204,7 +204,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\portable-net45+netcore45+wp8\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\portable-net45+netcore45+wp8\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -213,7 +213,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="FSharp.Core">
-          <HintPath>..\packages\projects\FSharp.Core\lib\portable-net45+netcore45+wpa81+wp8\FSharp.Core.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharp.Core\lib\portable-net45+netcore45+wpa81+wp8\FSharp.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -224,7 +224,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharpx.Async">
-          <HintPath>..\packages\projects\FSharpx.Async\lib\net40\FSharpx.Async.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharpx.Async\lib\net40\FSharpx.Async.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -235,7 +235,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharpx.Collections">
-          <HintPath>..\packages\projects\FSharpx.Collections\lib\net40\FSharpx.Collections.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharpx.Collections\lib\net40\FSharpx.Collections.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -246,7 +246,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.0' Or $(TargetFrameworkVersion) == 'v1.1' Or $(TargetFrameworkVersion) == 'v1.2' Or $(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5')) Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2'))">
       <ItemGroup>
         <Reference Include="FSharpx.Extras">
-          <HintPath>..\packages\projects\FSharpx.Extras\lib\40\FSharpx.Extras.dll</HintPath>
+          <HintPath>..\..\packages\projects\FSharpx.Extras\lib\40\FSharpx.Extras.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untyped", "untyped\untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{41897A66-6095-41F8-AB00-BD414B645835}"
 	ProjectSection(SolutionItems) = preProject
 		paket.dependencies = paket.dependencies
@@ -27,9 +25,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4
 		Operational Semantics.txt = Operational Semantics.txt
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untypedBottom", "untypedBottom\untypedBottom.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untyped", "src\untyped\untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Common", "Common\Common.fsproj", "{4C12B887-9C36-4563-A935-0EACB658659E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untypedBottom", "src\untypedBottom\untypedBottom.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Common", "src\Common\Common.fsproj", "{4C12B887-9C36-4563-A935-0EACB658659E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

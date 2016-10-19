@@ -1,7 +1,7 @@
 # Generated lex and parse files
-/fulluntyped/Lexer.fs
-*/Parser.fs
-*/Parser.fsi
+**/fulluntyped/Lexer.fs
+**/Parser.fs
+**/Parser.fsi
 
 AssemblyInfo.fs
 
