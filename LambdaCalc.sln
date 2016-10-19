@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4
 		note1.txt = note1.txt
 		note2.txt = note2.txt
 		note3.txt = note3.txt
+		Operational Semantics.txt = Operational Semantics.txt
 	EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untypedBottom", "untypedBottom\untypedBottom.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"

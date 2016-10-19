@@ -26,6 +26,6 @@ fix ::=
 Evaluation
 
 	fix |- [y -> bottom]
-	--------------------
-	  [fix -> bottom]
+   ----------------------
+   [fix -> bottom bottom]
 	
