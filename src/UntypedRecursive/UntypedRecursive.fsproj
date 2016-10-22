@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{c88b1088-6a46-4bff-8b68-71130b83b428}</ProjectGuid>
+    <ProjectGuid>{04563c11-1f58-4ec6-91b1-ecb23df639d3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Untyped</RootNamespace>
-    <AssemblyName>Untyped</AssemblyName>
+    <RootNamespace>UntypedRecursive</RootNamespace>
+    <AssemblyName>UntypedRecursive</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <Name>Untyped</Name>
+    <Name>UntypedRecursive</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
@@ -27,10 +27,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>..\..\bin\Debug\Untyped.XML</DocumentationFile>
+    <DocumentationFile>..\..\bin\Debug\UntypedRecursive.XML</DocumentationFile>
     <NoWarn>62</NoWarn>
-    <StartArguments>-i ..\..\test.f</StartArguments>
-    <Prefer32Bit>true</Prefer32Bit>
+    <StartArguments>-i ../../../fixBottomMin.f</StartArguments>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -40,7 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>..\..\bin\Release\Untyped.XML</DocumentationFile>
+    <DocumentationFile>..\..\bin\Release\UntypedRecursive.XML</DocumentationFile>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '11.0'">
@@ -57,7 +57,7 @@
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <Import Project="..\..\lib\FsLexYacc\FsLexYacc.targets" />
   <ItemGroup>
-    <Compile Include="Parser.fsi" />
+    <None Include="Parser.fsi" />
     <Compile Include="Parser.fs" />
     <Compile Include="Lexer.fs" />
     <FsYacc Include="Parser.fsy">
@@ -66,8 +66,8 @@
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
-    <Compile Include="UntypedLib.fsi" />
-    <Compile Include="UntypedLib.fs" />
+    <Compile Include="UntypedRecursiveLib.fsi" />
+    <Compile Include="UntypedRecursiveLib.fs" />
     <Compile Include="Main.fs" />
     <Content Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

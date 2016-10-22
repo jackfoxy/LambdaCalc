@@ -12,13 +12,16 @@ See LICENSE.TXT for licensing details.
  */
 
 %{
-open Ast
+open Support.Error
+open Jackfoxy.LambdaCalc
+open Jackfoxy.LambdaCalc.UntypedRecursive
+open Jackfoxy.LambdaCalc.UntypedRecursive.Ast
 
 // HACK : This works around a bug in the current version of FsYacc
 // (as of Oct-26-2012) where it doesn't correctly parse %type declarations
 // containing a function arrow ('->'). By creating an alias for the type,
 // we can use the alias for the %type declaration and it'll be parsed correctly.
-type Toplevel = Ast.Context -> (Ast.Command list * Ast.Context)
+type Toplevel = Context -> (Command list * Context)
 %}
 
 /* ---------------------------------------------------------------------- */

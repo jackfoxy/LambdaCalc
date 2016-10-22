@@ -29,11 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4
 		Operational Semantics.txt = Operational Semantics.txt
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untyped", "src\untyped\untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Untyped", "src\Untyped\Untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "untypedBottom", "src\untypedBottom\untypedBottom.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
-EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Common", "src\Common\Common.fsproj", "{4C12B887-9C36-4563-A935-0EACB658659E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UntypedRecursive", "src\UntypedRecursive\UntypedRecursive.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5D98-4A6A-B1E9-C8264EA8599E}"
 	ProjectSection(SolutionItems) = preProject
@@ -57,6 +55,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5A9267
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc.Tests", "tests\LambdaCalc.Tests\LambdaCalc.Tests.fsproj", "{74DF7319-3D78-4DE6-8015-3EE1943C62C1}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc", "src\LambdaCalc\LambdaCalc.fsproj", "{A42BF79B-3F74-4286-A142-A96C798482E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,14 +77,6 @@ Global
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.ActiveCfg = Release|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.ActiveCfg = Release|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.Build.0 = Release|x86
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Debug|x86.Build.0 = Debug|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Release|x86.ActiveCfg = Release|Any CPU
-		{4C12B887-9C36-4563-A935-0EACB658659E}.Release|x86.Build.0 = Release|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -93,6 +85,14 @@ Global
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Release|x86.ActiveCfg = Release|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Release|x86.Build.0 = Release|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{A42BF79B-3F74-4286-A142-A96C798482E4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

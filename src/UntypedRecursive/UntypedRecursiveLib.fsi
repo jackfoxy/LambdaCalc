@@ -1,7 +1,7 @@
-﻿namespace FSharpTapl
+﻿namespace Jackfoxy.LambdaCalc.UntypedRecursive
 
 open Ast
-open CommandLine
+open Jackfoxy.LambdaCalc.CommandLine
 
 module UntypedBottomLib =
 

@@ -1,7 +1,7 @@
-﻿namespace FSharpTapl
+﻿namespace Jackfoxy.LambdaCalc.Untyped
 
 open Ast
-open CommandLine
+open Jackfoxy.LambdaCalc.CommandLine
 
 module UntypedLib =
 

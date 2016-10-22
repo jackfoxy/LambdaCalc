@@ -1,4 +1,6 @@
-﻿(*
+﻿namespace Jackfoxy.LambdaCalc.Untyped
+
+(*
 Copyright (c) 2003, Benjamin C. Pierce
 Copyright (c) 2012, Jack Pappas
 All rights reserved.
@@ -14,11 +16,9 @@ See LICENSE.TXT for licensing details.
    necessary to change this file.
 *)
 
-namespace FSharpTapl
-
 open Ast
-open CommandLine
-open Compatability
+open Jackfoxy.LambdaCalc.CommandLine
+open Jackfoxy.LambdaCalc.Compatability
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
@@ -26,7 +26,7 @@ open Support.Error
 
 module UntypedLib = 
 
-    let parseInput (input : CommandLine.Source) = 
+    let parseInput (input : Source) = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1

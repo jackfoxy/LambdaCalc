@@ -1,4 +1,4 @@
-﻿namespace FSharpTapl
+﻿namespace Jackfoxy.LambdaCalc
 
 module CommandLine = 
     

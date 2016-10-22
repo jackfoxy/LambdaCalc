@@ -1,4 +1,6 @@
-﻿(*
+﻿namespace Jackfoxy.LambdaCalc.UntypedRecursive
+
+(*
 Copyright (c) 2003, Benjamin C. Pierce
 Copyright (c) 2012, Jack Pappas
 All rights reserved.
@@ -7,12 +9,10 @@ This code is provided under the terms of the 2-clause ("Simplified") BSD license
 See LICENSE.TXT for licensing details.
 *)
 
-namespace FSharpTapl
-
 open Ast
-open CommandLine
-open Compatability
 open Core
+open Jackfoxy.LambdaCalc
+open Jackfoxy.LambdaCalc.CommandLine
 open FSharp.Compatibility.OCaml.Format
 open UntypedBottomLib
 

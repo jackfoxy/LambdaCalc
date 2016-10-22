@@ -5,4 +5,4 @@
 #r "../../../lib/FsLexYacc/FsLexYacc.Runtime.dll"
 #r "System.Core.dll"
 #r "System.dll"
-#r "../../LambdaCalc/bin/Debug/LambdaCalc.dll"
+#r "../../LambdaCalc/bin/Release/LambdaCalc.dll"

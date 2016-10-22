@@ -1,35 +1,6 @@
-﻿
-/// Syntax trees and associated support functions.
-module Ast
+﻿namespace Jackfoxy.LambdaCalc.UntypedRecursive
 
 open Support.Error
-
-(*
-TAPL p. 72
-
-Syntax
-
-t ::=
-    x       /* variable */
-    λx.t    /* abstraction */
-    t t     /* application */
-
-v ::=
-    λx.t    /* abstraction value */
-
-Evaluation
-
-       t1 -> t1'    
-    ---------------      /* E-APP1 */
-    t1 t2 -> t1' t2
-
-       t2 -> t2'    
-    ---------------      /* E-APP2 */
-    v1 t2 -> v1 t2'
-
-    (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
-
-*)
 
 type Term =
     | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
@@ -90,26 +61,58 @@ type Command =
     | Eval of FileInfo : Info * Term 
     | Bind of FileInfo : Info * Name : string * Binding
 
-val termInfo : t : Term -> Info
-
 type Context = (string * Binding) list
 
-val emptyContext : Context
+/// Syntax trees and associated support functions.
+module Ast =
 
-val ctxLength : ctx : Context -> int
+(*
+TAPL p. 72
 
-val name2Index : fi : Info -> ctx : Context -> x : string-> int
+Syntax
 
-val addBinding : ctx : Context -> x : string -> bind : Binding -> Context
+t ::=
+    x       /* variable */
+    λx.t    /* abstraction */
+    t t     /* application */
 
-val addName : ctx : Context -> x : string -> Context
+v ::=
+    λx.t    /* abstraction value */
 
-val termSubstTop : s : Term -> t : Term -> Term
+Evaluation
 
-val getBinding : fi : Info -> ctx : Context -> i : int -> Binding
+       t1 -> t1'    
+    ---------------      /* E-APP1 */
+    t1 t2 -> t1' t2
 
-val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
+       t2 -> t2'    
+    ---------------      /* E-APP2 */
+    v1 t2 -> v1 t2'
 
-val printtmTerm : outer : bool -> ctx : Context -> t : Term -> unit
+    (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
 
-val printBinding : ctx : Context -> b : Binding -> unit
+*)
+
+
+
+    val termInfo : t : Term -> Info
+
+    val emptyContext : Context
+
+    val ctxLength : ctx : Context -> int
+
+    val name2Index : fi : Info -> ctx : Context -> x : string-> int
+
+    val addBinding : ctx : Context -> x : string -> bind : Binding -> Context
+
+    val addName : ctx : Context -> x : string -> Context
+
+    val termSubstTop : s : Term -> t : Term -> Term
+
+    val getBinding : fi : Info -> ctx : Context -> i : int -> Binding
+
+    val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
+
+    val printtmTerm : outer : bool -> ctx : Context -> t : Term -> unit
+
+    val printBinding : ctx : Context -> b : Binding -> unit
