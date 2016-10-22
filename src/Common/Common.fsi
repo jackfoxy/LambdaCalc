@@ -20,7 +20,7 @@ module CommandLine =
         ErrorMsg: string option
         }
 
-    val parse : argv : string [] -> ParsedCommand
+    val parse : programName : string -> argv : string [] -> ParsedCommand
 
     val reportError : ParsedCommand -> unit
 

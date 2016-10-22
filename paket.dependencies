@@ -5,6 +5,7 @@ group Projects
 
 	nuget Argu
 	nuget FSharp.Compatibility.OCaml.Format
+
 nuget FSharpx.Extras
 
 group Build

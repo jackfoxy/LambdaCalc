@@ -23,7 +23,7 @@ module console1 =
     [<EntryPoint>]
     let main argv = 
 
-        let parsedCommand = parse argv
+        let parsedCommand = parse (System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName) argv
 
         let res =
             match parsedCommand.Source with

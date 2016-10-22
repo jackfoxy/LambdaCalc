@@ -45,10 +45,16 @@ module CommandLine =
                     | ConsoleInput _ -> "input from console"
                     | Lambda -> @"use and print \u03BB for lambda followed by space"
 
-    let parseCommandLine argv = 
+    let parseCommandLine programName argv = 
 
         try
-            Success (ArgumentParser.Create<CLIArguments>().Parse argv)
+            let parser = 
+                ArgumentParser.Create<CLIArguments>(programName = programName)
+
+            let commandLine = parser.Parse argv
+            let usage = parser.PrintUsage()
+
+            Success (commandLine, usage)
         with e ->
             match e with
             | :? System.ArgumentException -> Failure e.Message
@@ -93,17 +99,17 @@ module CommandLine =
         | [x] -> Success x
         | hd::tl ->Failure (sprintf "more than one input source specified: %s, %s" (hd.ToString()) (tl.Head.ToString()))
         
-    let parse argv = 
+    let parse programName argv = 
 
         match choose { 
-                        let! commandLine = parseCommandLine argv
+                        let! commandLine, usage = parseCommandLine programName argv
                        
                         let! target = parseTarget commandLine
                         let! source = parseSource commandLine
 
                         return 
                             {
-                            Usage = commandLine.Usage()
+                            Usage = usage
                             Source = source
                             Target = target
                             Lambda = commandLine.Contains <@ Lambda @>
@@ -112,9 +118,9 @@ module CommandLine =
                         } with
         | Success x -> x
         | Failure msg -> 
-            let commandLine = ArgumentParser.Create<CLIArguments>()
+            let usage = ArgumentParser.Create<CLIArguments>(programName = programName).PrintUsage()
             {
-            Usage = commandLine.Usage()
+            Usage = usage
             Source = Source.NoSource
             Target = Target.Console 
             Lambda = false
