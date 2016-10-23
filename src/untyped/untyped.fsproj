@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>..\..\bin\Debug\Untyped.XML</DocumentationFile>
     <NoWarn>62</NoWarn>
-    <StartArguments>-i ..\..\test.f</StartArguments>
+    <StartArguments>..\..\lambdaCalcPgm.src ..\..\lambdaCalcPgm.src</StartArguments>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">

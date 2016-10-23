@@ -27,7 +27,7 @@ open Support.Error
 
 module UntypedBottomLib = 
 
-    let parseInput (input : CommandLine.Source) = 
+    let parseInput (input : Source) = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1
@@ -39,11 +39,12 @@ module UntypedBottomLib =
         match input with
         | Source.Console s -> 
             LexBuffer<char>.FromString s 
-            |> parseIt
-        | Source.File path -> 
-            use textReader = new System.IO.StreamReader(path)
-            Lexer.filename := path
-            LexBuffer<char>.FromTextReader textReader 
+            |> parseIt 
+        | Source.File paths -> 
+            use textReader = inputReader paths
+            Lexer.filename := fileNameFromPaths paths
+
+            LexBuffer<char>.FromTextReader textReader
             |> parseIt
         | _ -> invalidArg "can't get here" ""
     

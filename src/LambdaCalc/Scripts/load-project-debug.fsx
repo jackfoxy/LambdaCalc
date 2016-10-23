@@ -1,0 +1,15 @@
+// Warning: generated file; your changes could be lost when a new file is generated.
+#I __SOURCE_DIRECTORY__
+#load "load-references-debug.fsx"
+#load "../AssemblyInfo.fs"
+      "../Common.fsi"
+      "../Common.fs"
+      "../Error.fs"
+      "../UntypedAst.fsi"
+      "../UntypedAst.fs"
+      "../UntypedCore.fsi"
+      "../UntypedCore.fs"
+      "../UntypedRecursiveAst.fsi"
+      "../UntypedRecursiveAst.fs"
+      "../UntypedRecursiveCore.fsi"
+      "../UntypedRecursiveCore.fs"

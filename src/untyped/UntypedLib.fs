@@ -17,8 +17,9 @@ See LICENSE.TXT for licensing details.
 *)
 
 open Ast
-open Jackfoxy.LambdaCalc.CommandLine
-open Jackfoxy.LambdaCalc.Compatability
+open Jackfoxy.LambdaCalc
+open CommandLine
+open Compatability
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
@@ -39,9 +40,10 @@ module UntypedLib =
         | Source.Console s -> 
             LexBuffer<char>.FromString s 
             |> parseIt
-        | Source.File path -> 
-            use textReader = new System.IO.StreamReader(path)
-            Lexer.filename := path
+        | Source.File paths -> 
+            use textReader = inputReader paths
+            Lexer.filename := fileNameFromPaths paths
+                
             LexBuffer<char>.FromTextReader textReader 
             |> parseIt
         | _ -> invalidArg "can't get here" ""

@@ -23,7 +23,7 @@ module console1 =
     [<EntryPoint>]
     let main argv = 
 
-        let parsedCommand = parse (System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName) argv
+        let parsedCommand = parse (System.Reflection.Assembly.GetExecutingAssembly().GetName().Name) argv
 
         let res =
             match parsedCommand.Source with
@@ -50,7 +50,7 @@ module console1 =
             Compatability.print_flush ()
         with _ -> ()
 
-//       printfn "Hit any key to exit."
-//       System.Console.ReadKey() |> ignore
+        printfn "Hit any key to exit."
+        System.Console.ReadKey() |> ignore
 
         exit res

@@ -1,9 +1,10 @@
 ﻿namespace Jackfoxy.LambdaCalc
 
+open System.IO
 module CommandLine = 
     
     type Source =
-        | File of string
+        | File of string list
         | Console of string
         | NoSource
 
@@ -23,6 +24,10 @@ module CommandLine =
     val parse : programName : string -> argv : string [] -> ParsedCommand
 
     val reportError : ParsedCommand -> unit
+
+    val fileNameFromPaths : paths : string list -> string
+
+    val inputReader : paths : string list -> StringReader
 
 module List =
     val assoc : a : 'a  -> l : ('a * 'b) list -> 'b option when 'a : equality

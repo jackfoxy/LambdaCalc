@@ -6,7 +6,7 @@ group Projects
 	nuget Argu
 	nuget FSharp.Compatibility.OCaml.Format
 
-nuget FSharpx.Extras
+	nuget FSharpx.Extras
 
 group Build
   source https://nuget.org/api/v2
