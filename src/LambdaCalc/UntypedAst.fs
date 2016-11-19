@@ -129,7 +129,9 @@ module Ast =
         | _ -> false
   
     let index2Name fi (ctx : Context) x =
-        try let (xn, _) = List.item x ctx in xn
+        try 
+            let (xn, _) = List.item x ctx 
+            xn
         with
         | Failure _ ->
           let msg =

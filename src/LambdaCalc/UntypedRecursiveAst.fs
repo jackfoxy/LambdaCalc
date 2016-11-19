@@ -129,7 +129,9 @@ module Ast =
         | _ -> false
   
     let index2Name fi (ctx : Context) x =
-        try let (xn, _) = List.item x ctx in xn
+        try 
+            let (xn, _) = List.item x ctx 
+            xn
         with
         | Failure _ ->
           let msg =
@@ -160,18 +162,23 @@ module Ast =
     and printTerm outer (ctx : Context) t =
         match t with
         | Variable (fi, x, n) ->
-          if (ctxLength ctx) = n
-          then pr (index2Name fi ctx x)
-          else
-            pr
-              ("[bad index: " +
-                 ((string x) +
-                    ("/" +
-                       ((string n) +
-                          (" in {" +
-                             ((List.fold (fun s (x, _) -> s + (" " + x)) ""
-                                 ctx)
-                                + " }]"))))))
+            match fi with
+            | FI (_, 1, _) ->
+                // bottom variable always uniquely bound, so de Bruijn indexing can be safely ingored
+                pr (index2Name fi ctx x)
+            | _ ->
+                if (ctxLength ctx) = n
+                then pr (index2Name fi ctx x)
+                else
+                    pr
+                      ("[bad index: " +
+                         ((string x) +
+                            ("/" +
+                               ((string n) +
+                                  (" in {" +
+                                     ((List.fold (fun s (x, _) -> s + (" " + x)) ""
+                                         ctx)
+                                        + " }]"))))))
         | t -> (pr "("; printtmTerm outer ctx t; pr ")")
   
     let printtm ctx t = printtmTerm true ctx t

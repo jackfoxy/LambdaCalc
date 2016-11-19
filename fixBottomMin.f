@@ -36,12 +36,15 @@ xor = lambda a. lambda b. and (nand a b) (or a b);
 xnor = lambda a. lambda b. not (xor a b);
 eql = lambda m. lambda n. and (iszro (m prd n)) (iszro (n prd m));
 
+/*it is true that c1 = c1 (true)*/
 xnor tru (eql c1 (cond tru c1 c0));
+/*it is false that c1 = c1 (false)*/
 xnor fls (eql c1 (cond tru c1 c0));
 
 
-
+/*it is false that c3 = l (true)*/
 xnor fls (eql c3 l);
+/*it is true that c6 = l (true)*/
 xnor tru (eql c6 l);
 /*
 l2 = h c2;

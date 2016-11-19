@@ -35,7 +35,6 @@ module console1 =
                 set_max_boxes 1000
                 set_margin 67
         
-            
                 try 
                     (fun () -> 
                         try 

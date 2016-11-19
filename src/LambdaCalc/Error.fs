@@ -10,7 +10,6 @@ See LICENSE.TXT for licensing details.
 [<AutoOpen>]
 module Support.Error
 
-open System
 open FSharp.Compatibility.OCaml.Format
 
 exception ExitException of int

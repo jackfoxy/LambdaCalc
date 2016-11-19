@@ -36,6 +36,7 @@ module UntypedBottomLib =
                 Parser.toplevel Lexer.main lexbuf
             with Parsing.RecoverableParseError -> 
                 error (Lexer.info lexbuf) "Parse error"
+
         match input with
         | Source.Console s -> 
             LexBuffer<char>.FromString s 

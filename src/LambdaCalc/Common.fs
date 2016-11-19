@@ -267,10 +267,6 @@ module Compatability =
         (getOutputFormatter()
         |> pp_print_string) s'
 
-    let open_hovbox indent =
-        (getOutputFormatter()
-        |> pp_open_hovbox) indent
-        
     let open_hvbox indent =
         (getOutputFormatter()
         |> pp_open_hvbox) indent

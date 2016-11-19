@@ -14,6 +14,33 @@
 	Line 1
 	file "../../fixBottomMin.f"
 	character ? 29
+
+(*
+TAPL p. 72
+
+Syntax
+
+t ::=
+    x       /* variable */
+    λx.t    /* abstraction */
+    t t     /* application */
+
+v ::=
+    λx.t    /* abstraction value */
+
+Evaluation
+
+       t1 -> t1'    
+    ---------------      /* E-APP1 */
+    t1 t2 -> t1' t2
+
+       t2 -> t2'    
+    ---------------      /* E-APP2 */
+    v1 t2 -> v1 t2'
+
+    (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
+
+*)
 	
 Operational Semantics
 
@@ -28,4 +55,24 @@ Evaluation
 	fix |- [y -> bottom]
    ----------------------
    [fix -> bottom bottom]
-	
+
+
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Write-Host "λλλλλ"
+[Console]::WriteLine("λ")
+
+#time
+
+let rec Y f x = f (Y f) x
+
+let Y' f x = 
+    let r = ref Unchecked.defaultof<'a -> 'b>
+    r := (fun x -> f !r x)
+    f !r  x
+
+let iter f x = if x = 100000000 then x else f (x + 1)
+
+// Real: 00:00:01.504, CPU: 00:00:01.497, GC gen0: 572, gen1: 1, gen2: 0
+Y iter 1
+// Real: 00:00:00.769, CPU: 00:00:00.780, GC gen0: 0, gen1: 0, gen2: 0
+Y' iter 1
