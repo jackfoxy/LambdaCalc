@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{41897A66
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input", "Input", "{F81FB97C-0834-401C-A189-CA87C30AEC34}"
 	ProjectSection(SolutionItems) = preProject
+		deBruijnTest.f = deBruijnTest.f
 		fixBottomMin.f = fixBottomMin.f
 		lambdaCalcPgm.src = lambdaCalcPgm.src
 		lambdaRecursPgm.src = lambdaRecursPgm.src
