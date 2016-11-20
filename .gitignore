@@ -5,9 +5,6 @@
 
 AssemblyInfo.fs
 
-# Generated documentation folder
-docs/output/
-
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
@@ -66,10 +63,10 @@ localpackages/
 paket-files
 *.orig
 .paket/paket.exe
-docs/content/license.md
-docs/content/release-notes.md
+docsraw/content/license.md
+docsraw/content/release-notes.md
 .fake
-docs/tools/FSharp.Formatting.svclog
+docsraw/tools/FSharp.Formatting.svclog
 
 # Office Temp Files
 ~$*

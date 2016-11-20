@@ -42,14 +42,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB2AE0-66E4-4747-AFDF-578A64C68034}"
 	ProjectSection(SolutionItems) = preProject
-		docs\content\index.fsx = docs\content\index.fsx
-		docs\content\tutorial.fsx = docs\content\tutorial.fsx
+		docsraw\content\index.fsx = docsraw\content\index.fsx
+		docsraw\content\tutorial.fsx = docsraw\content\tutorial.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
 	ProjectSection(SolutionItems) = preProject
-		docs\tools\generate.fsx = docs\tools\generate.fsx
-		docs\tools\templates\template.cshtml = docs\tools\templates\template.cshtml
+		docsraw\tools\generate.fsx = docsraw\tools\generate.fsx
+		docsraw\tools\templates\template.cshtml = docsraw\tools\templates\template.cshtml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5A9267-6E29-40D7-AA21-115193171F4D}"
@@ -57,6 +57,12 @@ EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc.Tests", "tests\LambdaCalc.Tests\LambdaCalc.Tests.fsproj", "{74DF7319-3D78-4DE6-8015-3EE1943C62C1}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc", "src\LambdaCalc\LambdaCalc.fsproj", "{A42BF79B-3F74-4286-A142-A96C798482E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{CF43620B-6103-491C-ADFA-5F3A76DEE963}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
