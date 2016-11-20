@@ -9,7 +9,6 @@ open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open Fake.UserInputHelper
 open System
-open System.IO
 #if MONO
 #else
 #load "packages/build/SourceLink.Fake/tools/Fake.fsx"
@@ -172,6 +171,7 @@ Target "SourceLink" (fun _ ->
 Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
         { p with
+            LockDependencies = true
             OutputPath = "bin"
             Version = release.NugetVersion
             ReleaseNotes = toLines release.Notes})
@@ -377,7 +377,7 @@ Target "All" DoNothing
   ==> "GenerateDocs"
 #if MONO
 #else
-  =?> ("SourceLink", Pdbstr.tryFind().IsSome )
+//  =?> ("SourceLink", Pdbstr.tryFind().IsSome )
 #endif
   ==> "NuGet"
   ==> "BuildPackage"
