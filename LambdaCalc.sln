@@ -32,7 +32,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Untyped", "src\Untyped\Untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UntypedRecursive", "src\UntypedRecursive\UntypedRecursive.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UntypedRecurs", "src\UntypedRecurs\UntypedRecurs.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5D98-4A6A-B1E9-C8264EA8599E}"
 	ProjectSection(SolutionItems) = preProject

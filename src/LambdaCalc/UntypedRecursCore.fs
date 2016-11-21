@@ -1,4 +1,4 @@
-﻿namespace Jackfoxy.LambdaCalc.UntypedRecursive
+﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
 
 (*
 Copyright (c) 2003, Benjamin C. Pierce

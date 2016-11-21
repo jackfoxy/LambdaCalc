@@ -1,4 +1,4 @@
-﻿namespace Jackfoxy.LambdaCalc.UntypedRecursive
+﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
 
 open Support.Error
 

@@ -14,8 +14,8 @@ See LICENSE.TXT for licensing details.
 %{
 open Support.Error
 open Jackfoxy.LambdaCalc
-open Jackfoxy.LambdaCalc.UntypedRecursive
-open Jackfoxy.LambdaCalc.UntypedRecursive.Ast
+open Jackfoxy.LambdaCalc.UntypedRecurs
+open Jackfoxy.LambdaCalc.UntypedRecurs.Ast
 
 // HACK : This works around a bug in the current version of FsYacc
 // (as of Oct-26-2012) where it doesn't correctly parse %type declarations

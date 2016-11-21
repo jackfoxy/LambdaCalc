@@ -51,10 +51,10 @@
     <Compile Include="UntypedAst.fs" />
     <Compile Include="UntypedCore.fsi" />
     <Compile Include="UntypedCore.fs" />
-    <Compile Include="UntypedRecursiveAst.fsi" />
-    <Compile Include="UntypedRecursiveAst.fs" />
-    <Compile Include="UntypedRecursiveCore.fsi" />
-    <Compile Include="UntypedRecursiveCore.fs" />
+    <Compile Include="UntypedRecursAst.fsi" />
+    <Compile Include="UntypedRecursAst.fs" />
+    <Compile Include="UntypedRecursCore.fsi" />
+    <Compile Include="UntypedRecursCore.fs" />
     <None Include="paket.references" />
     <None Include="Scripts\load-references-release.fsx" />
     <None Include="Scripts\load-project-release.fsx" />

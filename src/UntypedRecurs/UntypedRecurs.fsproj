@@ -7,12 +7,12 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{04563c11-1f58-4ec6-91b1-ecb23df639d3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UntypedRecursive</RootNamespace>
-    <AssemblyName>UntypedRecursive</AssemblyName>
+    <RootNamespace>UntypedRecurs</RootNamespace>
+    <AssemblyName>UntypedRecurs</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <Name>UntypedRecursive</Name>
+    <Name>UntypedRecurs</Name>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\UntypedRecursive.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\UntypedRecurs.XML</DocumentationFile>
     <NoWarn>62</NoWarn>
     <StartArguments>..\..\..\..\fixBottomMin.f</StartArguments>
     <Prefer32Bit>false</Prefer32Bit>
@@ -40,7 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <DocumentationFile>bin\Release\UntypedRecursive.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\UntypedRecurs.XML</DocumentationFile>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '11.0'">
@@ -66,8 +66,8 @@
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
-    <Compile Include="UntypedRecursiveLib.fsi" />
-    <Compile Include="UntypedRecursiveLib.fs" />
+    <Compile Include="UntypedRecursLib.fsi" />
+    <Compile Include="UntypedRecursLib.fs" />
     <Compile Include="Main.fs" />
     <Content Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
