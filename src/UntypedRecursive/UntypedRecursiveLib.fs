@@ -24,8 +24,27 @@ open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
 open Support.Error
+open System.IO
+
 
 module UntypedBottomLib = 
+    
+    [<Literal>]
+    let BottomFix =
+        @"bottom = lambda t.lambda b. b;
+fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));"
+
+    let inputReader (paths : string list) =
+        let streams = 
+            paths
+            |> List.map (fun x -> new StreamReader(x))
+        let input =
+            streams
+            |> List.fold (fun s t -> 
+                let x = t.ReadToEnd()
+                t.Dispose()
+                s + x) ""
+        new System.IO.StringReader(BottomFix + (input.Replace("\u03BB", "lambda ")))
 
     let parseInput (input : Source) = 
 
@@ -39,7 +58,7 @@ module UntypedBottomLib =
 
         match input with
         | Source.Console s -> 
-            LexBuffer<char>.FromString s 
+            LexBuffer<char>.FromString (BottomFix + (s.Replace("\u03BB", "lambda ")) )
             |> parseIt 
         | Source.File paths -> 
             use textReader = inputReader paths

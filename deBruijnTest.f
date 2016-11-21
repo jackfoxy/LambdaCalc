@@ -1,6 +1,4 @@
-bottom = lambda t.lambda b. b;
-fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
-/* inusre ignoring bottom variable de Bruijn indexing still works with same variable name reused */
+/* ensure ignoring bottom variable de Bruijn indexing still works with same variable name reused */
 tru = lambda t. lambda f. t;
 fls = bottom;
 c0 = bottom;

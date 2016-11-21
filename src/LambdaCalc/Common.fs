@@ -197,7 +197,7 @@ module CommandLine =
                 let x = t.ReadToEnd()
                 t.Dispose()
                 s + x) ""
-        new System.IO.StringReader(input)
+        new System.IO.StringReader(input.Replace("\u03BB", "lambda "))
 
 module List =
     let assoc a (l : ('a * 'b) list) =

@@ -1,40 +1,38 @@
-bottom = lambda t.lambda b. b;
-fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
-tru = lambda t. lambda f. t;
+﻿tru = λt. λf. t;
 fls = bottom;
 c0 = bottom;
 nil = bottom;
-c1 = lambda s. lambda z. s z;
-c2 = lambda s. lambda z. s (s z);
-c3 = lambda s. lambda z. s (s (s z));
-c4 = lambda s. lambda z. s (s (s (s z)));
-c6 = lambda s. lambda z. s (s (s (s (s (s z)))));
+c1 = λs. λz. s z;
+c2 = λs. λz. s (s z);
+c3 = λs. λz. s (s (s z));
+c4 = λs. λz. s (s (s (s z)));
+c6 = λs. λz. s (s (s (s (s (s z)))));
 
-c24 = lambda s. lambda z. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))));
+c24 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))));
 
-cond = lambda p. lambda t. lambda f. p t f;
-iszro = lambda m. m (lambda x. fls) tru;
-pair = lambda f. lambda s. lambda b. b f s;
-fst = lambda p. p tru;
-snd = lambda p. p fls;
-plus = lambda m. lambda n. lambda s. lambda z. m s (n s z);
-mult = lambda m. lambda n. m (plus n) c0;
-prd = lambda m. fst (m (lambda p. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
-fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
-id = lambda x. x;
+cond = λp. λt. λf. p t f;
+iszro = λm. m (λx. fls) tru;
+pair = λf. λs. λb. b f s;
+fst = λp. p tru;
+snd = λp. p fls;
+plus = λm. λn. λs. λz. m s (n s z);
+mult = λm. λn. m (plus n) c0;
+prd = λm. fst (m (λp. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
+fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));
+id = λx. x;
 h = fix fact;
 l = h c3; /*stackoverflow*/
 
 
 
 /*tests */
-not = lambda a. a fls tru;
-and = lambda b. lambda c. b c fls;
-or = lambda b. lambda c. b tru c;
-nand = lambda a. lambda b. not (and a b);
-xor = lambda a. lambda b. and (nand a b) (or a b);
-xnor = lambda a. lambda b. not (xor a b);
-eql = lambda m. lambda n. and (iszro (m prd n)) (iszro (n prd m));
+not = λa. a fls tru;
+and = λb. λc. b c fls;
+or = λb. λc. b tru c;
+nand = λa. λb. not (and a b);
+xor = λa. λb. and (nand a b) (or a b);
+xnor = λa. λb. not (xor a b);
+eql = λm. λn. and (iszro (m prd n)) (iszro (n prd m));
 
 /*it is true that c1 = c1 (true)*/
 xnor tru (eql c1 (cond tru c1 c0));

@@ -39,7 +39,7 @@ module UntypedLib =
 
         match input with
         | Source.Console s -> 
-            LexBuffer<char>.FromString s 
+            LexBuffer<char>.FromString (s.Replace("\u03BB", "lambda ")) 
             |> parseIt
         | Source.File paths -> 
             use textReader = inputReader paths
