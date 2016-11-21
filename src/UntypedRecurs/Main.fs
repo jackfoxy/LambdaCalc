@@ -14,7 +14,7 @@ open Core
 open Jackfoxy.LambdaCalc
 open Jackfoxy.LambdaCalc.CommandLine
 open FSharp.Compatibility.OCaml.Format
-open UntypedBottomLib
+open UntypedRecursLib
 
 module console1 =
 
