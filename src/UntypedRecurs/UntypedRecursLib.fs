@@ -19,7 +19,7 @@ See LICENSE.TXT for licensing details.
 open Ast
 open Jackfoxy.LambdaCalc
 open CommandLine
-open Compatability
+open PrettyPrint
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
@@ -72,23 +72,20 @@ fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
         | Eval(_, t) -> 
             let t' = eval ctx t
             printTerm true ctx t'
-            force_newline()
+            forceNewline()
             ctx
         | Bind(_, x, bind) -> 
             let bind' = evalBinding ctx bind
             pr x
             pr " "
             printBinding ctx bind'
-            force_newline()
+            forceNewline()
             addBinding ctx x bind'
     
-    let processInput parsedCommand input ctx = 
-        setOutput parsedCommand
+    let processInput input ctx = 
         let (cmds, _) = parseInput input ctx
         
         let g ctx c = 
-            open_hvbox 0
             let results = processCommand ctx c
-            print_flush ()
             results
         List.fold g ctx cmds

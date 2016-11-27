@@ -4,8 +4,6 @@ group Projects
 	source https://nuget.org/api/v2
 
 	nuget Argu
-	nuget FSharp.Compatibility.OCaml.Format
-
 	nuget FSharpx.Extras
 
 group Build

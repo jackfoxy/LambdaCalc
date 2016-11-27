@@ -13,7 +13,6 @@ open Ast
 open Core
 open Jackfoxy.LambdaCalc
 open Jackfoxy.LambdaCalc.CommandLine
-open FSharp.Compatibility.OCaml.Format
 open UntypedLib
 
 module console1 =
@@ -25,32 +24,19 @@ module console1 =
 
         let parsedCommand = parse (System.Reflection.Assembly.GetExecutingAssembly().GetName().Name) argv
 
-        let res =
-            match parsedCommand.Source with
-            | NoSource -> 
-                reportError parsedCommand
-                0
-            | input -> 
+        match parsedCommand.Source with
+        | NoSource -> 
+            reportError parsedCommand
+            0
+        | input -> 
 
-                set_max_boxes 1000
-                set_margin 67
-        
-                try 
-                    (fun () -> 
-                        try 
-                            processInput parsedCommand input emptyContext |> ignore
-                            0 
-                        with 
-                            | ExitException x -> x) ()
-                with e ->
-                    printfn "%A" e
-                    2
-
-        try
-            Compatability.print_flush ()
-        with _ -> ()
-
-//        printfn "Hit any key to exit."
-//        System.Console.ReadKey() |> ignore
-
-        exit res
+            try 
+                (fun () -> 
+                    try 
+                        processInput input emptyContext |> ignore
+                        0 
+                    with 
+                        | ExitException x -> x) ()
+            with e ->
+                printfn "%A" e
+                2

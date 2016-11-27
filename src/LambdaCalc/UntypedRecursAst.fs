@@ -10,7 +10,7 @@ See LICENSE.TXT for licensing details.
 *)
 
 open Support.Error
-open Jackfoxy.LambdaCalc.Compatability
+open Jackfoxy.LambdaCalc.PrettyPrint
 
 type Term =
     | Variable of FileInfo : Info * DeBruinIndex : int * ContextLength : int
@@ -118,11 +118,7 @@ module Ast =
       See the documentation for the Format module in the OCaml library for
       more details. 
     *)
-    let obox0 () = open_hvbox 0
-    let obox () = open_hvbox 2
-    let cbox () = close_box()
-    let ``break`` () = print_break 0 0
-  
+
     let small t = 
         match t with 
         | Variable (_) -> true 
@@ -142,22 +138,18 @@ module Ast =
         match t with
         | Abstraction (_, x, t2) ->
             let (ctx', x') = pickfreshname ctx x
-            obox ()
             pr "lambda "
             pr x'
             pr "."
-            if (small t2) && (not outer) then ``break`` () else print_space ()
+            if (small t2) && (not outer) then printBreak () else printSpace ()
             printtmTerm outer ctx' t2;
-            cbox ()
         | t -> printApplicationTerm outer ctx t
     and printApplicationTerm outer ctx t =
         match t with
         | Application (_, t1, t2) ->
-            obox0 ()
             printApplicationTerm false ctx t1
-            print_space ()
+            printSpace ()
             printTerm false ctx t2
-            cbox ()
         | t -> printTerm outer ctx t
     and printTerm outer (ctx : Context) t =
         match t with

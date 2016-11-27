@@ -10,7 +10,7 @@ See LICENSE.TXT for licensing details.
 [<AutoOpen>]
 module Support.Error
 
-open FSharp.Compatibility.OCaml.Format
+open Jackfoxy.LambdaCalc.PrettyPrint
 
 exception ExitException of int
 
@@ -24,33 +24,32 @@ let dummyinfo = UNKNOWN
 let createInfo f l c = FI (f, l, c)
 
 let errf f =
-    open_vbox 0
-    open_hvbox 0; f(); print_cut(); close_box(); print_newline()
+    f()
     raise (ExitException 1)
 
 let printInfo = function
     (* In the text of the book, file positions in error messages are replaced with the string "Error:" *)
     | FI (f, l, c) ->
-        print_string f
-        print_string ":"
-        print_int l; print_string "."
-        print_int c; print_string ":"
+        pr f
+        pr ":"
+        printInt l; pr "."
+        printInt c; pr ":"
     | UNKNOWN ->
-        print_string "<Unknown file and line>: "
+        pr "<Unknown file and line>: "
 
-let errfAt fi f = errf(fun()-> printInfo fi; print_space(); f())
+let errfAt fi f = errf(fun()-> printInfo fi; printSpace(); f())
 
-let err s = errf (fun()-> print_string "Error: "; print_string s; print_newline())
+let err s = errf (fun()-> pr "Error: "; pr s; forceNewline())
 
-let error fi s = errfAt fi (fun()-> print_string s; print_newline())
+let error fi s = errfAt fi (fun()-> pr s; forceNewline())
 
 let warning s =
-    print_string "Warning: "
-    print_string s
-    print_newline()
+    pr "Warning: "
+    pr s
+    forceNewline()
 
 let warningAt fi s =
     printInfo fi
-    print_string " Warning: "
-    print_string s
-    print_newline()
+    pr " Warning: "
+    pr s
+    forceNewline()

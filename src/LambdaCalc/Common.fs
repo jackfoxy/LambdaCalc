@@ -210,90 +210,78 @@ module List =
                 else loop tl
         loop l
 
-open FSharp.Compatibility.OCaml.Format
+module PrettyPrint =
 
-open CommandLine
-open System.IO
-
-module Compatability =
-
-    let mutable private output' : TextWriter option = None
-
-    let mutable private formatter' : formatter option = None
-
-    let mutable private parsedCommand : ParsedCommand =
+    type private PrintState =
         {
-        Usage = ""
-        Source = Source.NoSource
-        Target = Target.Console 
-        Lambda = false
-        ErrorMsg = None
-        } 
+        LineLength : int
+        NextIndent : int
+        PrevOpenParen : bool
+        }
 
-    let private makeOutput (parsedCommand' : ParsedCommand) =
+    let private indent = 4
 
-        parsedCommand <- parsedCommand'
+    let mutable private printState =
+        {
+        LineLength = 0
+        NextIndent = indent
+        PrevOpenParen = false
+        }
 
-        output' <-
-            match parsedCommand.Target with
-            | Target.File path -> 
-                new StreamWriter(path) :> TextWriter
-                |> TextWriter.Synchronized
-                |> Some 
-            | Target.Console -> Some Microsoft.FSharp.Core.Operators.stdout 
+    let printInt i = 
+        Microsoft.FSharp.Core.Printf.printf "%i" i
 
-        formatter' <- (output'.Value |> formatter_of_out_channel |> Some )
+        printState <-
+            { printState with
+                LineLength = printState.LineLength + i.ToString().Length
+                PrevOpenParen = false
+                }
 
-    let setOutput (parsedCommand : ParsedCommand) =
+    let rec pr (s : string) = 
+        if (s.Contains "lambda" || s.Contains "λ") && printState.PrevOpenParen then 
+            printBreak()
 
-        match output' with
-        | None ->
-            makeOutput parsedCommand
+        Microsoft.FSharp.Core.Printf.printf "%s" s
+
+        printState <-
+            { printState with
+                LineLength = printState.LineLength + s.Length
+                PrevOpenParen =
+                    if s.EndsWith("(") then true
+                    else false
+                }
+
+    and printBreak () =
+        if printState.LineLength > 120 then
+            Microsoft.FSharp.Core.Printf.printf "\n"
+            System.String(' ', printState.NextIndent) 
+            |> pr
             
-        | Some x -> 
-            x.Dispose()
-            makeOutput parsedCommand
+            printState <-
+                {
+                LineLength = printState.NextIndent
+                NextIndent = printState.NextIndent + indent
+                PrevOpenParen = false
+                }
+        else
+            ()
 
-    let getOutputFormatter() =
-        
-        match output' with
-        | None ->
-            invalidArg "" ""
-        | Some _ -> 
-            formatter'.Value
+    let printSpace() =
+        Microsoft.FSharp.Core.Printf.printf " "
 
-    let pr (s : string) = 
-        let s' = if parsedCommand.Lambda then s.Replace("lambda ", "\u03BB") else s
-        (getOutputFormatter()
-        |> pp_print_string) s'
+        printState <-
+            { printState with
+                LineLength = printState.LineLength + 1
+                }
 
-    let open_hvbox indent =
-        (getOutputFormatter()
-        |> pp_open_hvbox) indent
-
-    let print_int i = 
-        (getOutputFormatter()
-        |> pp_print_int) i
-
-    let close_box() =
-        (getOutputFormatter()
-        |> pp_close_box) ()
-
-    let print_break width offset =
-        (getOutputFormatter()
-        |> pp_print_break) width offset
-
-    let print_space() =
-        (getOutputFormatter()
-        |> pp_print_space) ()
-
-    let force_newline() =
-        (getOutputFormatter()
-        |> pp_force_newline) ()
-
-    let print_flush () =
-        let formatter = getOutputFormatter()
-        pp_print_flush formatter ()
+    let forceNewline() =
+        Microsoft.FSharp.Core.Printf.printf "\n"
+        printState <-
+                {
+                LineLength = 0
+                NextIndent = indent
+                PrevOpenParen = false
+                }
 
 module Common =
 

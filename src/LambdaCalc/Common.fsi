@@ -39,22 +39,14 @@ module Common =
 
 open CommandLine
 
-module Compatability =
-
-    val setOutput : parsedCommand : ParsedCommand -> unit
+module PrettyPrint =
 
     val pr: string -> unit
 
-    val open_hvbox : indent : int -> unit
+    val printInt : i : int -> unit
 
-    val print_int : i : int -> unit
+    val printBreak : unit -> unit
 
-    val close_box : unit -> unit
+    val printSpace : unit -> unit
 
-    val print_break : int -> int -> unit
-
-    val print_space : unit -> unit
-
-    val force_newline : unit -> unit
-
-    val print_flush : unit -> unit
+    val forceNewline : unit -> unit
