@@ -30,7 +30,7 @@
     <DocumentationFile>bin\Debug\UntypedRecurs.XML</DocumentationFile>
     <NoWarn>62</NoWarn>
     <StartArguments>..\..\..\..\fixBottomMin.f</StartArguments>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -57,7 +57,7 @@
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
   <Import Project="..\..\lib\FsLexYacc\FsLexYacc.targets" />
   <ItemGroup>
-    <None Include="Parser.fsi" />
+    <Compile Include="Parser.fsi" />
     <Compile Include="Parser.fs" />
     <Compile Include="Lexer.fs" />
     <FsYacc Include="Parser.fsy">

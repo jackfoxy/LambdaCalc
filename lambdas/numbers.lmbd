@@ -1,0 +1,16 @@
+c1 = λs. λz. s z;
+c2 = λs. λz. s (s z);
+c3 = λs. λz. s (s (s z));
+c4 = λs. λz. s (s (s (s z)));
+c6 = λs. λz. s (s (s (s (s (s z)))));
+
+c24 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))));
+
+iszro = λm. m (λx. fls) tru;
+
+plus = λm. λn. λs. λz. m s (n s z);
+mult = λm. λn. m (plus n) c0;
+
+prd = λm. fst (m (λp. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
+
+eql = λm. λn. and (iszro (m prd n)) (iszro (n prd m));

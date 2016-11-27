@@ -1,0 +1,10 @@
+tru = λt. λf. t;
+
+not = λa. a fls tru;
+and = λb. λc. b c fls;
+or = λb. λc. b tru c;
+nand = λa. λb. not (and a b);
+xor = λa. λb. and (nand a b) (or a b);
+xnor = λa. λb. not (xor a b);
+
+cond = λp. λt. λf. p t f;

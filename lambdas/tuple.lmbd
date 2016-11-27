@@ -1,0 +1,3 @@
+pair = λf. λs. λb. b f s;
+fst = λp. p tru;
+snd = λp. p fls;

@@ -50,7 +50,7 @@ module console1 =
             Compatability.print_flush ()
         with _ -> ()
 
-        printfn "Hit any key to exit."
-        System.Console.ReadKey() |> ignore
+//        printfn "Hit any key to exit."
+//        System.Console.ReadKey() |> ignore
 
         exit res

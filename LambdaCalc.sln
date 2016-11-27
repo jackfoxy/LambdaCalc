@@ -24,8 +24,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4-7F71-491B-9D2E-CCDB186BCD84}"
 	ProjectSection(SolutionItems) = preProject
 		note0.txt = note0.txt
-		note1.txt = note1.txt
-		note2.txt = note2.txt
 		Operational Semantics.txt = Operational Semantics.txt
 	EndProjectSection
 EndProject
@@ -61,6 +59,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{CF43620B-610
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lambdas", "lambdas", "{31A6FE9C-2C8C-4C22-9485-83A92B13414D}"
+	ProjectSection(SolutionItems) = preProject
+		lambdas\boolean.lmbd = lambdas\boolean.lmbd
+		lambdas\numbers.lmbd = lambdas\numbers.lmbd
+		lambdas\recursPrelude.lmbd = lambdas\recursPrelude.lmbd
+		lambdas\tuple.lmbd = lambdas\tuple.lmbd
+		lambdas\untypedPrelude.lmbd = lambdas\untypedPrelude.lmbd
 	EndProjectSection
 EndProject
 Global
