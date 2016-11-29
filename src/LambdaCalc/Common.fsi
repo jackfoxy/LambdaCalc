@@ -41,6 +41,8 @@ open CommandLine
 
 module PrettyPrint =
 
+    val mutable useLambda : bool
+
     val pr: string -> unit
 
     val printInt : i : int -> unit

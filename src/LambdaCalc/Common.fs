@@ -221,6 +221,8 @@ module PrettyPrint =
 
     let private indent = 4
 
+    let mutable useLambda = false
+
     let mutable private printState =
         {
         LineLength = 0
@@ -241,11 +243,13 @@ module PrettyPrint =
         if (s.Contains "lambda" || s.Contains "λ") && printState.PrevOpenParen then 
             printBreak()
 
-        Microsoft.FSharp.Core.Printf.printf "%s" s
+        let s' = if useLambda then s.Replace("lambda ", "\u03BB") else s
+
+        Microsoft.FSharp.Core.Printf.printf "%s" s'
 
         printState <-
             { printState with
-                LineLength = printState.LineLength + s.Length
+                LineLength = printState.LineLength + s'.Length
                 PrevOpenParen =
                     if s.EndsWith("(") then true
                     else false

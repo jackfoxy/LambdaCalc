@@ -1,23 +1,12 @@
 ﻿namespace Jackfoxy.LambdaCalc.Untyped
 
-(*
-Copyright (c) 2003, Benjamin C. Pierce
-Copyright (c) 2012, Jack Pappas
-All rights reserved.
-
-This code is provided under the terms of the 2-clause ("Simplified") BSD license.
-See LICENSE.TXT for licensing details.
-*)
-
 open Ast
 open Core
 open Jackfoxy.LambdaCalc
 open Jackfoxy.LambdaCalc.CommandLine
 open UntypedLib
 
-module console1 =
-
-    exception ExitException of int
+module Console =
 
     [<EntryPoint>]
     let main argv = 
@@ -30,13 +19,11 @@ module console1 =
             0
         | input -> 
 
+            PrettyPrint.useLambda <- parsedCommand.Lambda
+
             try 
-                (fun () -> 
-                    try 
-                        processInput input emptyContext |> ignore
-                        0 
-                    with 
-                        | ExitException x -> x) ()
+                processInput input emptyContext |> ignore
+                0 
             with e ->
                 printfn "%A" e
                 2
