@@ -4,6 +4,8 @@
 #load "../AssemblyInfo.fs"
       "../Common.fsi"
       "../Common.fs"
+      "../CommandLine.fsi"
+      "../CommandLine.fs"
       "../PrettyPrint.fsi"
       "../PrettyPrint.fs"
       "../Error.fs"

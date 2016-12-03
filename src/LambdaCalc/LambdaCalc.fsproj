@@ -46,6 +46,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="Common.fsi" />
     <Compile Include="Common.fs" />
+    <Compile Include="CommandLine.fsi" />
+    <Compile Include="CommandLine.fs" />
     <Compile Include="PrettyPrint.fsi" />
     <Compile Include="PrettyPrint.fs" />
     <Compile Include="Error.fs" />
