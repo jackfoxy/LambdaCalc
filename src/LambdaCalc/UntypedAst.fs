@@ -141,7 +141,7 @@ module Ast =
             pr "lambda "
             pr x'
             pr "."
-            if (small t2) && (not outer) then printBreak () else printSpace ()
+            if (small t2) && (not outer) then printSpace () //then printBreak () else printSpace ()
             printtmTerm outer ctx' t2;
         | t -> printApplicationTerm outer ctx t
     and printApplicationTerm outer ctx t =

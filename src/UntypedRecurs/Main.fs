@@ -16,13 +16,14 @@ module Console =
         match parsedCommand.Source with
         | NoSource -> 
             reportError parsedCommand
-            0
+            1
         | input -> 
 
             PrettyPrint.useLambda <- parsedCommand.Lambda
 
             try 
                 processInput input emptyContext |> ignore
+                PrettyPrint.flush()
                 0 
             with e ->
                 printfn "%A" e

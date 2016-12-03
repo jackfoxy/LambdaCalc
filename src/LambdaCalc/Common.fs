@@ -103,7 +103,7 @@ module CommandLine =
             | None -> fileList
 
         match inputs
-            |> List.tryFind (fun x -> File.Exists(x) |> not) with
+            |> List.tryFind (fun x -> x |> (File.Exists >> not)) with
         | Some x ->
             sprintf "input file does not exist: %s" x
             |> Failure 
@@ -198,94 +198,6 @@ module CommandLine =
                 t.Dispose()
                 s + x) ""
         new System.IO.StringReader(input.Replace("\u03BB", "lambda "))
-
-module List =
-    let assoc a (l : ('a * 'b) list) =
-        
-        let rec loop (l' : ('a * 'b) list) =
-            match l' with
-            | [] -> None
-            | (a', b')::tl ->
-                if a' = a then Some b'
-                else loop tl
-        loop l
-
-module PrettyPrint =
-
-    type private PrintState =
-        {
-        LineLength : int
-        NextIndent : int
-        PrevOpenParen : bool
-        }
-
-    let private indent = 4
-
-    let mutable useLambda = false
-
-    let mutable private printState =
-        {
-        LineLength = 0
-        NextIndent = indent
-        PrevOpenParen = false
-        }
-
-    let printInt i = 
-        Microsoft.FSharp.Core.Printf.printf "%i" i
-
-        printState <-
-            { printState with
-                LineLength = printState.LineLength + i.ToString().Length
-                PrevOpenParen = false
-                }
-
-    let rec pr (s : string) = 
-        if (s.Contains "lambda" || s.Contains "λ") && printState.PrevOpenParen then 
-            printBreak()
-
-        let s' = if useLambda then s.Replace("lambda ", "\u03BB") else s
-
-        Microsoft.FSharp.Core.Printf.printf "%s" s'
-
-        printState <-
-            { printState with
-                LineLength = printState.LineLength + s'.Length
-                PrevOpenParen =
-                    if s.EndsWith("(") then true
-                    else false
-                }
-
-    and printBreak () =
-        if printState.LineLength > 120 then
-            Microsoft.FSharp.Core.Printf.printf "\n"
-            System.String(' ', printState.NextIndent) 
-            |> pr
-            
-            printState <-
-                {
-                LineLength = printState.NextIndent
-                NextIndent = printState.NextIndent + indent
-                PrevOpenParen = false
-                }
-        else
-            ()
-
-    let printSpace() =
-        Microsoft.FSharp.Core.Printf.printf " "
-
-        printState <-
-            { printState with
-                LineLength = printState.LineLength + 1
-                }
-
-    let forceNewline() =
-        Microsoft.FSharp.Core.Printf.printf "\n"
-        printState <-
-                {
-                LineLength = 0
-                NextIndent = indent
-                PrevOpenParen = false
-                }
 
 module Common =
 

@@ -1,6 +1,7 @@
 ﻿namespace Jackfoxy.LambdaCalc
 
 open System.IO
+
 module CommandLine = 
     
     type Source =
@@ -29,26 +30,7 @@ module CommandLine =
 
     val inputReader : paths : string list -> StringReader
 
-module List =
-    val assoc : a : 'a  -> l : ('a * 'b) list -> 'b option when 'a : equality
-
 module Common =
 
     exception NoRuleAppliesException
     exception NotFoundException
-
-open CommandLine
-
-module PrettyPrint =
-
-    val mutable useLambda : bool
-
-    val pr: string -> unit
-
-    val printInt : i : int -> unit
-
-    val printBreak : unit -> unit
-
-    val printSpace : unit -> unit
-
-    val forceNewline : unit -> unit

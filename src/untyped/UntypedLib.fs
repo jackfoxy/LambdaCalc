@@ -54,14 +54,14 @@ module UntypedLib =
         | Eval(_, t) -> 
             let t' = eval ctx t
             printTerm true ctx t'
-            forceNewline()
+            flush()
             ctx
         | Bind(_, x, bind) -> 
             let bind' = evalBinding ctx bind
             pr x
             pr " "
             printBinding ctx bind'
-            forceNewline()
+            flush()
             addBinding ctx x bind'
     
     let processInput input ctx = 

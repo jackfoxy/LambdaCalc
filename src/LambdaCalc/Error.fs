@@ -39,17 +39,6 @@ let printInfo = function
 
 let errfAt fi f = errf(fun()-> printInfo fi; printSpace(); f())
 
-let err s = errf (fun()-> pr "Error: "; pr s; forceNewline())
+let err s = errf (fun()-> pr "Error: "; pr s; flush())
 
-let error fi s = errfAt fi (fun()-> pr s; forceNewline())
-
-let warning s =
-    pr "Warning: "
-    pr s
-    forceNewline()
-
-let warningAt fi s =
-    printInfo fi
-    pr " Warning: "
-    pr s
-    forceNewline()
+let error fi s = errfAt fi (fun()-> pr s; flush())

@@ -72,14 +72,14 @@ fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
         | Eval(_, t) -> 
             let t' = eval ctx t
             printTerm true ctx t'
-            forceNewline()
+            flush()
             ctx
         | Bind(_, x, bind) -> 
             let bind' = evalBinding ctx bind
             pr x
             pr " "
             printBinding ctx bind'
-            forceNewline()
+            flush()
             addBinding ctx x bind'
     
     let processInput input ctx = 

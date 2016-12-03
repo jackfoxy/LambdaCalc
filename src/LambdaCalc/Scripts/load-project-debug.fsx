@@ -4,6 +4,8 @@
 #load "../AssemblyInfo.fs"
       "../Common.fsi"
       "../Common.fs"
+      "../PrettyPrint.fsi"
+      "../PrettyPrint.fs"
       "../Error.fs"
       "../UntypedAst.fsi"
       "../UntypedAst.fs"
