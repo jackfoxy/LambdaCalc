@@ -168,34 +168,3 @@ module CommandLine =
             Lambda = false
             ErrorMsg = Some msg
             } 
-
-    let reportError (parsedCommand : ParsedCommand) =
-        
-        match parsedCommand.ErrorMsg with
-        | Some msg ->
-            printfn "%s" msg
-            printfn " "
-        | None -> ()
-
-        printfn "%s" parsedCommand.Usage
-
-    let fileNameFromPaths paths =
-        paths
-        |> List.fold (fun (s : string) t -> 
-            if s.Length = 0 then
-                t
-            else
-                s + " " + t) ""
-
-    let inputReader (paths : string list) =
-        let streams = 
-            paths
-            |> List.map (fun x -> new StreamReader(x))
-        let input =
-            streams
-            |> List.fold (fun s t -> 
-                let x = t.ReadToEnd()
-                t.Dispose()
-                s + x) ""
-        new System.IO.StringReader(input.Replace("\u03BB", "lambda "))
-

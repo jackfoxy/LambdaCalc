@@ -19,6 +19,7 @@ See LICENSE.TXT for licensing details.
 open Ast
 open Jackfoxy.LambdaCalc
 open CommandLine
+open Common
 open PrettyPrint
 open Core
 open Microsoft.FSharp.Text
@@ -29,23 +30,9 @@ open System.IO
 module UntypedRecursLib = 
     
     [<Literal>]
-    let BottomFix =
-        @"bottom = lambda t.lambda b. b;
-fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));"
+    let BottomFix = "bottom = lambda t.lambda b. b;\nfix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));\n"
 
-    let inputReader (paths : string list) =
-        let streams = 
-            paths
-            |> List.map (fun x -> new StreamReader(x))
-        let input =
-            streams
-            |> List.fold (fun s t -> 
-                let x = t.ReadToEnd()
-                t.Dispose()
-                s + x) ""
-        new System.IO.StringReader(BottomFix + (input.Replace("\u03BB", "lambda ")))
-
-    let parseInput (input : Source) = 
+    let parseInput (inputSource : Source) = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1
@@ -53,18 +40,27 @@ fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
             try 
                 Parser.toplevel Lexer.main lexbuf
             with Parsing.RecoverableParseError -> 
-                error (Lexer.info lexbuf) "Parse error"
+                error (Lexer.info lexbuf) "Parse error (missing ending ; ?)"
 
-        match input with
+        match inputSource with
         | Source.Console s -> 
-            LexBuffer<char>.FromString (BottomFix + (s.Replace("\u03BB", "lambda ")) )
+            let s' = 
+                if s.EndsWith(";") then s
+                else s + ";"
+            LexBuffer<char>.FromString (BottomFix + (s'.Replace("\u03BB", "lambda ")) )
             |> parseIt 
         | Source.File paths -> 
-            use textReader = inputReader paths
-            Lexer.filename := fileNameFromPaths paths
+            let input = getInput BottomFix paths
 
-            LexBuffer<char>.FromTextReader textReader
-            |> parseIt
+            Lexer.filename := input.ConcatNames
+                
+            let out =
+                LexBuffer<char>.FromTextReader input.InputReader 
+                |> parseIt
+
+            input.InputReader.Dispose()
+            out
+
         | _ -> invalidArg "can't get here" ""
     
     let rec processCommand ctx cmd = 
@@ -82,7 +78,9 @@ fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));
             flush()
             addBinding ctx x bind'
     
-    let processInput input ctx = 
+    let processInput input = 
+        let ctx = emptyContext
+
         let (cmds, _) = parseInput input ctx
         
         let g ctx c = 

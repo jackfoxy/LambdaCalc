@@ -23,9 +23,3 @@ module CommandLine =
         }
 
     val parse : programName : string -> argv : string [] -> ParsedCommand
-
-    val reportError : ParsedCommand -> unit
-
-    val fileNameFromPaths : paths : string list -> string
-
-    val inputReader : paths : string list -> StringReader

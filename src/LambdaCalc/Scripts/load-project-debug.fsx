@@ -2,6 +2,8 @@
 #I __SOURCE_DIRECTORY__
 #load "load-references-debug.fsx"
 #load "../AssemblyInfo.fs"
+      "../CommandLine.fsi"
+      "../CommandLine.fs"
       "../Common.fsi"
       "../Common.fs"
       "../PrettyPrint.fsi"

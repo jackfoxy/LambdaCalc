@@ -1,9 +1,9 @@
 ﻿namespace Jackfoxy.LambdaCalc.Untyped
 
-open Ast
 open Core
 open Jackfoxy.LambdaCalc
-open Jackfoxy.LambdaCalc.CommandLine
+open Common
+open CommandLine
 open UntypedLib
 
 module Console =
@@ -22,7 +22,7 @@ module Console =
             PrettyPrint.useLambda <- parsedCommand.Lambda
 
             try 
-                processInput input emptyContext |> ignore
+                processInput input |> ignore
                 PrettyPrint.flush()
                 0 
             with e ->

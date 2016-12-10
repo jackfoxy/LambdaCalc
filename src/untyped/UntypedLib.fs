@@ -18,6 +18,7 @@ See LICENSE.TXT for licensing details.
 
 open Ast
 open Jackfoxy.LambdaCalc
+open Common
 open CommandLine
 open PrettyPrint
 open Core
@@ -27,7 +28,7 @@ open Support.Error
 
 module UntypedLib = 
 
-    let parseInput (input : Source) = 
+    let parseInput (inputSource : Source) = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1
@@ -35,18 +36,28 @@ module UntypedLib =
             try 
                 Parser.toplevel Lexer.main lexbuf
             with Parsing.RecoverableParseError -> 
-                error (Lexer.info lexbuf) "Parse error"
+                error (Lexer.info lexbuf) "Parse error (missing ending ; ?)"
 
-        match input with
-        | Source.Console s -> 
-            LexBuffer<char>.FromString (s.Replace("\u03BB", "lambda ")) 
+        match inputSource with
+        | Source.Console s ->
+            let s' = 
+                if s.EndsWith(";") then s
+                else s + ";"
+            LexBuffer<char>.FromString (s'.Replace("\u03BB", "lambda ")) 
             |> parseIt
+
         | Source.File paths -> 
-            use textReader = inputReader paths
-            Lexer.filename := fileNameFromPaths paths
+            let input = getInput "" paths
+
+            Lexer.filename := input.ConcatNames
                 
-            LexBuffer<char>.FromTextReader textReader 
-            |> parseIt
+            let out =
+                LexBuffer<char>.FromTextReader input.InputReader 
+                |> parseIt
+
+            input.InputReader.Dispose()
+            out
+
         | _ -> invalidArg "can't get here" ""
     
     let rec processCommand ctx cmd = 
@@ -63,11 +74,14 @@ module UntypedLib =
             printBinding ctx bind'
             flush()
             addBinding ctx x bind'
-    
-    let processInput input ctx = 
+
+    let processInput input =
+        let ctx = emptyContext
+
         let (cmds, _) = parseInput input ctx
         
         let g ctx c = 
             let results = processCommand ctx c
             results
         List.fold g ctx cmds
+

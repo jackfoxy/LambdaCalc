@@ -107,16 +107,7 @@ module Ast =
   
     (* Printing *)
     (* The printing functions call these utility functions to insert grouping
-      information and line-breaking hints for the pretty-printing library:
-         obox   Open a "box" whose contents will be indented by two spaces if
-                the whole box cannot fit on the current line
-         obox0  Same but indent continuation lines to the same column as the
-                beginning of the box rather than 2 more columns to the right
-         cbox   Close the current box
-         break  Insert a breakpoint indicating where the line maybe broken if
-                necessary.
-      See the documentation for the Format module in the OCaml library for
-      more details. 
+      information the pretty-printing library
     *)
 
     let small t = 
@@ -141,7 +132,7 @@ module Ast =
             pr "lambda "
             pr x'
             pr "."
-            if (small t2) && (not outer) then printSpace () //then printBreak () else printSpace ()
+            if (small t2) && (not outer) then printSpace ()
             printtmTerm outer ctx' t2;
         | t -> printApplicationTerm outer ctx t
     and printApplicationTerm outer ctx t =
