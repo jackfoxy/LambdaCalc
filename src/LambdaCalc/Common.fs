@@ -12,6 +12,7 @@ module Common =
         {
         Input : string
         Lines : string []
+        PriorLineCount : int
         }
 
     type Input =
@@ -46,7 +47,10 @@ module Common =
         (content + x + "\n"), 
             {
             Input = path
-            Lines = x.Split '\n'}::inputLines
+            Lines = x.Split '\n'
+            PriorLineCount = 
+                inputLines
+                |> List.fold (fun s t -> s + t.Lines.Length) 0}::inputLines
 
     let getInput internalInput (paths : string list) =
         let input =
@@ -57,5 +61,15 @@ module Common =
         {
         InputReader = new System.IO.StringReader((internalInput + (fst input)).Replace("\u03BB", "lambda "))
         ConcatNames = fileNameFromPaths paths
-        InputLines = snd input
+        InputLines = 
+            if internalInput.Length > 0 then
+                {
+                Input = "INTERNAL"
+                Lines = internalInput.Split '\n'
+                PriorLineCount = 0
+                }::snd input
+                |> List.rev
+            else
+                snd input 
+                |> List.rev
         }

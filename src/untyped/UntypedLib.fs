@@ -28,6 +28,8 @@ open Support.Error
 
 module UntypedLib = 
 
+    let mutable inputLines : InputLines list = []
+
     let parseInput (inputSource : Source) = 
 
         let parseIt lexbuf = 
@@ -43,7 +45,10 @@ module UntypedLib =
             let s' = 
                 if s.EndsWith(";") then s
                 else s + ";"
-            LexBuffer<char>.FromString (s'.Replace("\u03BB", "lambda ")) 
+
+            let consoleInput = s'.Replace("\u03BB", "lambda ")
+
+            LexBuffer<char>.FromString (consoleInput) 
             |> parseIt
 
         | Source.File paths -> 
@@ -56,11 +61,30 @@ module UntypedLib =
                 |> parseIt
 
             input.InputReader.Dispose()
+            inputLines <- input.InputLines
             out
 
         | _ -> invalidArg "can't get here" ""
-    
-    let rec processCommand ctx cmd = 
+
+    let printInputSource t inputLines =
+        let line = 
+            match t with
+            | Variable ((FI (_, line, _)), _ , _) -> line
+            | Abstraction ((FI (_, line, _)), _ , _) -> line
+            | Application ((FI (_, line, _)), _ , _) -> line
+            | _ -> System.Int32.MaxValue
+
+        match inputLines |> List.tryFindIndex (fun x -> x.PriorLineCount = (line - 1)) with
+        | Some n -> 
+            if n + 1 < inputLines.Length then
+                if n > 0 then
+                    pr "\n"
+                pr ("/*" + (inputLines.[n+1].Input)  + "*/\n")
+                flush()
+        | None ->
+            ()
+
+    let processCommand ctx cmd = 
         match cmd with
         | Eval(_, t) -> 
             let t' = eval ctx t
@@ -68,6 +92,10 @@ module UntypedLib =
             flush()
             ctx
         | Bind(_, x, bind) -> 
+            match bind with 
+            | NameBind -> () 
+            | AbbstractionBind t ->
+                printInputSource t inputLines
             let bind' = evalBinding ctx bind
             pr x
             pr " "

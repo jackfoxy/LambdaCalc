@@ -9,6 +9,7 @@ module Common =
         {
         Input : string
         Lines : string []
+        PriorLineCount : int
         }
 
     type Input =
