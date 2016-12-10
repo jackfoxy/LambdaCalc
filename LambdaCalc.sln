@@ -12,15 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{41897A66
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Input", "Input", "{F81FB97C-0834-401C-A189-CA87C30AEC34}"
-	ProjectSection(SolutionItems) = preProject
-		deBruijnTest.f = deBruijnTest.f
-		fixBottomMin.f = fixBottomMin.f
-		lambdaCalcPgm.src = lambdaCalcPgm.src
-		lambdaRecursPgm.src = lambdaRecursPgm.src
-		test.f = test.f
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4-7F71-491B-9D2E-CCDB186BCD84}"
 	ProjectSection(SolutionItems) = preProject
 		note0.txt = note0.txt
@@ -64,10 +55,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lambdas", "lambdas", "{31A6FE9C-2C8C-4C22-9485-83A92B13414D}"
 	ProjectSection(SolutionItems) = preProject
 		lambdas\boolean.lmbd = lambdas\boolean.lmbd
+		lambdas\deBruijnTest.lmbd = lambdas\deBruijnTest.lmbd
+		lambdas\fixBottomMin.lmbd = lambdas\fixBottomMin.lmbd
+		lambdas\lambdaCalcPgm.lmbd = lambdas\lambdaCalcPgm.lmbd
+		lambdas\lambdaRecursPgm.lmbd = lambdas\lambdaRecursPgm.lmbd
 		lambdas\numbers.lmbd = lambdas\numbers.lmbd
 		lambdas\recursPrelude.lmbd = lambdas\recursPrelude.lmbd
+		lambdas\test.lmbd = lambdas\test.lmbd
 		lambdas\tuple.lmbd = lambdas\tuple.lmbd
 		lambdas\untypedPrelude.lmbd = lambdas\untypedPrelude.lmbd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50AD6414-DA94-44F8-BABB-A4345F4AF883}"
+	ProjectSection(SolutionItems) = preProject
+		lambdas\tests\cond.lmbd = lambdas\tests\cond.lmbd
+		lambdas\tests\numbers.lmbd = lambdas\tests\numbers.lmbd
 	EndProjectSection
 EndProject
 Global
@@ -79,12 +81,14 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.Build.0 = Debug|x86
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.ActiveCfg = Debug|x86
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.Build.0 = Debug|x86
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|Any CPU.ActiveCfg = Release|x86
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.ActiveCfg = Release|x86
 		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.Build.0 = Release|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.Build.0 = Debug|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.ActiveCfg = Debug|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.Build.0 = Debug|x86
 		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.ActiveCfg = Release|x86
@@ -114,5 +118,6 @@ Global
 		{A9CB2AE0-66E4-4747-AFDF-578A64C68034} = {913E62B0-5D98-4A6A-B1E9-C8264EA8599E}
 		{2331FF94-41B7-4242-B273-D6386055DFCA} = {913E62B0-5D98-4A6A-B1E9-C8264EA8599E}
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1} = {AE5A9267-6E29-40D7-AA21-115193171F4D}
+		{50AD6414-DA94-44F8-BABB-A4345F4AF883} = {31A6FE9C-2C8C-4C22-9485-83A92B13414D}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,42 @@
+/*exponate tests*/
+xnor tru (eql c1 (exp c1 c0));
+xnor tru (eql c1 (exp c1 c1));
+xnor tru (eql c1 (exp c1 c2));
+xnor tru (eql c1 (exp c2 c0));
+xnor tru (eql c2 (exp c2 c1));
+xnor tru (eql c4 (exp c2 c2));
+xnor tru (eql c8 (exp c2 c3));
+xnor tru (eql c9 (exp c3 c2));
+
+/*plus tests*/
+xnor tru (eql c1 (plus c1 c0));
+xnor tru (eql c1 (plus c0 c1));
+xnor tru (eql c2 (plus c2 c0));
+xnor fls (eql c1 (plus c2 c0));
+xnor tru (eql c6 (plus c2 c4));
+xnor tru (eql c6 (plus c4 c2));
+
+/*successor tests*/
+xnor tru (eql c1 (scc c0));
+xnor tru (eql c2 (scc c1));
+xnor tru (eql c6 (scc c5));
+xnor fls (eql c5 (scc c5));
+
+/*predecessor tests*/
+xnor tru (eql c0 (prd c0));
+xnor tru (eql c0 (prd c1));
+xnor tru (eql c1 (prd c2));
+xnor tru (eql c5 (prd c6));
+xnor fls (eql c6 (prd c6));
+
+/*is zero tests*/
+xnor tru (iszro (prd c0));
+xnor tru (iszro (prd c1));
+xnor fls (iszro (scc c0));
+xnor fls (iszro (prd c6));
+
+/*multiply tests*/
+xnor tru (iszro (mult c1 c0));
+xnor tru (eql c6 (mult c2 c3));
+xnor fls (eql c5 (mult c2 c3));
+xnor tru (eql c24 (mult c4 c6));

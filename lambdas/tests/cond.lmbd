@@ -1,0 +1,8 @@
+/*conditional tests*/
+xnor tru (eql c1 (cond tru c1 c0));
+xnor tru (eql c0 (cond fls c1 c0));
+xnor fls (eql c1 (cond fls c1 c0));
+
+xnor tru (cond tru tru fls);
+xnor tru (cond fls fls tru);
+xnor fls (cond fls tru fls);

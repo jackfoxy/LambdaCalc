@@ -23,9 +23,8 @@ id = λx. x;
 h = fix fact;
 l = h c3; /*stackoverflow*/
 
+fix fact c3;
 
-
-/*tests */
 not = λa. a fls tru;
 and = λb. λc. b c fls;
 or = λb. λc. b tru c;
@@ -34,11 +33,12 @@ xor = λa. λb. and (nand a b) (or a b);
 xnor = λa. λb. not (xor a b);
 eql = λm. λn. and (iszro (m prd n)) (iszro (n prd m));
 
+/*tests */
+
 /*it is true that c1 = c1 (true)*/
 xnor tru (eql c1 (cond tru c1 c0));
 /*it is false that c1 = c1 (false)*/
 xnor fls (eql c1 (cond tru c1 c0));
-
 
 /*it is false that c3 = l (true)*/
 xnor fls (eql c3 l);

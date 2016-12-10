@@ -2,3 +2,18 @@
 1) can't prove a program is elegant (shortest program for given IO) Chaitin, Meta Math, p. 125
 
 2) FsLexYac 7.0.2
+
+3) change fileinfo here in Error.fs (actually line and character are later rewritten inside parser)
+
+let createInfo f l c = FI (f, l, c)
+
+3a) next best place to catch it is here in ...Lib.fs
+
+	let processInput input ctx = 
+        let (cmds, _) = parseInput input ctx
+
+	and rewrite
+
+4) need to insert line break at end of file string, if not already present
+
+5) in FileInfo line is 1-based, while character is 0-based (apparrently, but not accurate in displacement)
