@@ -104,7 +104,9 @@ module UntypedRecursLib =
             let results = processCommand commentLines ctx c
             results
 
-        let result, _ =
+        let result, remainingComments =
             List.fold g (ctx, commentLines) cmds
+
+        printRemainingComments remainingComments
 
         result

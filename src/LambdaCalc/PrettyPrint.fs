@@ -270,6 +270,19 @@ module PrettyPrint =
         |> List.where (fun x -> 
             x.LineNbr > line)
 
+    let printRemainingComments (commentLines : CommentLine list) =
+        match commentLines with
+        | [] -> ()
+        | x ->
+            x
+            |> List.iteri (fun i x ->
+                if i = 0 then
+                    pr (x.Comment + "\n")
+                else
+                    pr x.Comment )
+
+            flush()
+
     let printInputSource term inputLines =
         let line = getTermLine term
 
