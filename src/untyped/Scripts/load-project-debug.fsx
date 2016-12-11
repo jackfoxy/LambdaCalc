@@ -4,6 +4,6 @@
 #load "../Parser.fsi"
       "../Parser.fs"
       "../Lexer.fs"
-      "../UntypedLib.fsi"
-      "../UntypedLib.fs"
+      "../Reduce.fsi"
+      "../Reduce.fs"
       "../Main.fs"

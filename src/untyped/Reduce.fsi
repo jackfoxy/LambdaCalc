@@ -1,9 +1,9 @@
-﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
+﻿namespace Jackfoxy.LambdaCalc.Untyped
 
 open Ast
 open Jackfoxy.LambdaCalc
 open CommandLine
 
-module UntypedRecursLib =
+module Reduce =
 
     val processInput : inputSource : Source -> (string * Binding) list 

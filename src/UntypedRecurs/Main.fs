@@ -4,7 +4,7 @@ open Core
 open Jackfoxy.LambdaCalc
 open Common
 open CommandLine
-open UntypedRecursLib
+open Reduce
 
 module Console =
 

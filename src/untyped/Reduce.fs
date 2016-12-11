@@ -9,7 +9,7 @@ This code is provided under the terms of the 2-clause ("Simplified") BSD license
 See LICENSE.TXT for licensing details.
 *)
 
-(* Module UntypedLib: The main program.  Deals with processing the command
+(* Module Reduce: The main program.  Deals with processing the command
    line, reading files, building and connecting lexers and parsers, etc.
    
    For most experiments with the implementation, it should not be
@@ -27,7 +27,7 @@ open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
 open Support.Error
 
-module UntypedLib = 
+module Reduce = 
 
     let mutable inputLines : InputLines list = []
 

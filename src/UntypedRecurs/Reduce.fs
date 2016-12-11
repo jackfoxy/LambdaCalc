@@ -9,7 +9,7 @@ This code is provided under the terms of the 2-clause ("Simplified") BSD license
 See LICENSE.TXT for licensing details.
 *)
 
-(* Module UntypedRecursLib: The main program.  Deals with processing the command
+(* Module Reduce: The main program.  Deals with processing the command
    line, reading files, building and connecting lexers and parsers, etc.
    
    For most experiments with the implementation, it should not be
@@ -28,7 +28,7 @@ open Microsoft.FSharp.Text.Lexing
 open Support.Error
 open System.IO
 
-module UntypedRecursLib = 
+module Reduce = 
     
     [<Literal>]
     let BottomFix = "bottom = lambda t.lambda b. b;\nfix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));"

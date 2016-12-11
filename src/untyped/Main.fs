@@ -4,7 +4,7 @@ open Core
 open Jackfoxy.LambdaCalc
 open Common
 open CommandLine
-open UntypedLib
+open Reduce
 
 module Console =
 

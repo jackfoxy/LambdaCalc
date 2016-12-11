@@ -66,8 +66,8 @@
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
-    <Compile Include="UntypedRecursLib.fsi" />
-    <Compile Include="UntypedRecursLib.fs" />
+    <Compile Include="Reduce.fsi" />
+    <Compile Include="Reduce.fs" />
     <Compile Include="Main.fs" />
     <Content Include="App.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
