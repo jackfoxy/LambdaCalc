@@ -52,24 +52,83 @@ module Common =
                 inputLines
                 |> List.fold (fun s t -> s + t.Lines.Length) 0}::inputLines
 
-    let getInput internalInput (paths : string list) =
+    let getInput (internalInput : string) (paths : string list) =
+
+        let startList =
+            if internalInput.Length > 0 then
+                [{
+                    Input = "INTERNAL"
+                    Lines = internalInput.Split '\n'
+                    PriorLineCount = 0 }]
+                        
+            else 
+                []
+
         let input =
             paths
             |> List.map (fun x -> (new StreamReader(x)), x )
-            |> List.fold createInput ("", [])
+            |> List.fold createInput ("", startList)
+
+        let inputString =
+            if internalInput.Length > 0 then
+                (internalInput + "\n" + (fst input)).Replace("\u03BB", "lambda ")
+            else
+                (fst input).Replace("\u03BB", "lambda ")
 
         {
-        InputReader = new System.IO.StringReader((internalInput + (fst input)).Replace("\u03BB", "lambda "))
+        InputReader = new System.IO.StringReader(inputString)
         ConcatNames = fileNameFromPaths paths
         InputLines = 
-            if internalInput.Length > 0 then
-                {
-                Input = "INTERNAL"
-                Lines = internalInput.Split '\n'
-                PriorLineCount = 0
-                }::snd input
-                |> List.rev
-            else
-                snd input 
+                snd input
                 |> List.rev
         }
+
+    type CommentLine =
+        {
+        LineNbr : int
+        Comment : string
+        }
+
+    let getCommentLines (inputLines : InputLines list) =
+        let (_, _, commentLines) =
+            inputLines
+            |> List.collect (fun x -> 
+                x.Lines
+                |> List.ofArray)
+            |> List.fold (fun (lineNbr, commentIsOpen, commentLines) t -> 
+                let t' = t.Trim()
+                match t'.StartsWith("/*"), commentIsOpen, (t'.EndsWith("*/") && t'.Contains("/*") |> not) with
+                | true, _, true ->
+                    (lineNbr + 1), false, 
+                        {
+                        LineNbr = lineNbr
+                        Comment = t'
+                        }::commentLines
+
+                | true, _, false ->
+                    (lineNbr + 1), true, 
+                        {
+                        LineNbr = lineNbr
+                        Comment = t'
+                        }::commentLines
+
+                | _, true, true ->
+                    (lineNbr + 1), false, 
+                        {
+                        LineNbr = lineNbr
+                        Comment = t'
+                        }::commentLines
+
+                | _, true, _ ->
+                    (lineNbr + 1), true, 
+                        {
+                        LineNbr = lineNbr
+                        Comment = t'
+                        }::commentLines
+
+                | _, _, _ ->
+                    (lineNbr + 1), false, commentLines 
+                    ) (1, false, [])
+
+        commentLines
+        |> List.rev

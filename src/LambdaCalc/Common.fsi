@@ -19,9 +19,17 @@ module Common =
         InputLines : InputLines list
         }
 
+    type CommentLine =
+        {
+        LineNbr : int
+        Comment : string
+        }
+
     exception NoRuleAppliesException
     exception NotFoundException
 
     val reportError : ParsedCommand -> unit
 
     val getInput : internalInput : string -> paths : string list -> Input
+
+    val getCommentLines : inputLines : InputLines list -> CommentLine list

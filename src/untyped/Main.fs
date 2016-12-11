@@ -20,7 +20,7 @@ module Console =
         | input -> 
 
             PrettyPrint.useLambda <- parsedCommand.Lambda
-
+            
             try 
                 processInput input |> ignore
                 PrettyPrint.flush()
