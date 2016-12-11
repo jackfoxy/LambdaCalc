@@ -10,7 +10,7 @@ See LICENSE.TXT for licensing details.
 [<AutoOpen>]
 module Support.Error
 
-open Jackfoxy.LambdaCalc.PrettyPrint
+open Jackfoxy.LambdaCalc.ErrorPrint
 
 exception ExitException of int
 

@@ -11,6 +11,7 @@ See LICENSE.TXT for licensing details.
 
 open Ast
 open Jackfoxy.LambdaCalc
+open CommonAst
 
 /// Core evaluation functions.
 module Core =

@@ -1,7 +1,8 @@
 ﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
 
 open Ast
-open Jackfoxy.LambdaCalc.CommandLine
+open Jackfoxy.LambdaCalc
+open CommandLine
 
 module UntypedRecursLib =
 

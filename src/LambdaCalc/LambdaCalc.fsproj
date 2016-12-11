@@ -48,9 +48,12 @@
     <Compile Include="CommandLine.fs" />
     <Compile Include="Common.fsi" />
     <Compile Include="Common.fs" />
+    <Compile Include="ErrorPrint.fs" />
+    <Compile Include="Error.fs" />
+    <Compile Include="CommonAst.fsi" />
+    <Compile Include="CommonAst.fs" />
     <Compile Include="PrettyPrint.fsi" />
     <Compile Include="PrettyPrint.fs" />
-    <Compile Include="Error.fs" />
     <Compile Include="UntypedAst.fsi" />
     <Compile Include="UntypedAst.fs" />
     <Compile Include="UntypedCore.fsi" />

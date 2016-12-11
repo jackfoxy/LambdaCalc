@@ -19,6 +19,7 @@ See LICENSE.TXT for licensing details.
 open Ast
 open Jackfoxy.LambdaCalc
 open Common
+open CommonAst
 open CommandLine
 open PrettyPrint
 open Core
@@ -65,48 +66,6 @@ module UntypedLib =
             out
 
         | _ -> invalidArg "can't get here" ""
-
-    let getTermLine term =
-        match term with
-        | Variable ((FI (_, line, _)), _ , _) -> line
-        | Abstraction ((FI (_, line, _)), _ , _) -> line
-        | Application ((FI (_, line, _)), _ , _) -> line
-        | _ -> System.Int32.MaxValue
-        
-    let printComments term (commentLines : CommentLine list) =
-        let line = getTermLine term
-
-        let commentsToPrint =
-            commentLines
-            |> List.where (fun x -> 
-                x.LineNbr < line)
-
-        if commentsToPrint.Length > 0 then
-            let commentlength = commentsToPrint.Length - 1
-            pr "\n"
-            commentsToPrint
-            |> List.iteri (fun i x ->
-                if i = commentlength then
-                    pr x.Comment
-                else
-                    pr (x.Comment + "\n") )
-            flush()
-
-        commentLines
-        |> List.where (fun x -> 
-            x.LineNbr > line)
-
-    let printInputSource term inputLines =
-        let line = getTermLine term
-
-        match inputLines |> List.tryFindIndex (fun x -> x.PriorLineCount = (line - 1)) with
-        | Some n -> 
-            if n > 0 then
-                pr "\n"
-            pr ("/*" + (inputLines.[n].Input)  + "*/\n")
-            flush()
-        | None ->
-            ()
 
     let processCommand commentLines ctx cmd = 
         match cmd with
