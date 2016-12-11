@@ -40,10 +40,10 @@ module CommandLine =
     type CLIArguments =
         | [<MainCommand; Last; AppSettingsSeparator(',')>] InputPaths of string list
         //| [<AltCommandLine("-o")>] Output of string
-        | [<AltCommandLine("-c")>] ConsoleInput of string
+        | [<AltCommandLine("-c"); Unique>] ConsoleInput of string
         
-        | [<AltCommandLine("-i")>] InputFolder of string
-        | [<AltCommandLine("-l")>] Lambda
+        | [<AltCommandLine("-i"); Unique>] InputFolder of string
+        | [<AltCommandLine("-l"); Unique>] Lambda
   
          with
             interface IArgParserTemplate with
