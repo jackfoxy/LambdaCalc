@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Context - LambdaCalc</title>
+    <title>Term - LambdaCalc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jack Fox"/>
@@ -35,114 +35,70 @@
 
 
 
-<h1>Context</h1>
+<h1>Term</h1>
 <p>
-  <span>Namespace: Jackfoxy.LambdaCalc.UntypedRecurs</span><br />
+  <span>Namespace: Jackfoxy.LambdaCalc</span><br />
 </p>
 <div class="xmldoc">
 </div>
-  <h3>Instance members</h3>
+  <h3>Union Cases</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Instance member</td><td>Description</td></tr>
+      <tr><td>Union Case</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '72', 72)" onmouseover="showTip(event, '72', 72)">
-            Head
+          <code onmouseout="hideTip(event, '64', 64)" onmouseover="showTip(event, '64', 64)">
+            Abstraction(FileInfo,Name,Abstraction)
           </code>
-          <div class="tip" id="72">
-            <strong>Signature:</strong> string * Binding<br />
+          <div class="tip" id="64">
+            <strong>Signature:</strong> Info * string * Term<br />
                       </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L7-7" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
-              <p>CompiledName: <code>get_Head</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '73', 73)" onmouseover="showTip(event, '73', 73)">
-            IsEmpty
+          <code onmouseout="hideTip(event, '65', 65)" onmouseover="showTip(event, '65', 65)">
+            Application(...)
           </code>
-          <div class="tip" id="73">
-            <strong>Signature:</strong> bool<br />
+          <div class="tip" id="65">
+            <strong>Signature:</strong> Info * Term * Term<br />
                       </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L8-8" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
-              <p>CompiledName: <code>get_IsEmpty</code></p>
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '74', 74)" onmouseover="showTip(event, '74', 74)">
-            [index]
+          <code onmouseout="hideTip(event, '66', 66)" onmouseover="showTip(event, '66', 66)">
+            Variable(...)
           </code>
-          <div class="tip" id="74">
-            <strong>Signature:</strong> index:int -&gt; string * Binding<br />
+          <div class="tip" id="66">
+            <strong>Signature:</strong> Info * int * int<br />
                       </div>
         </td>
         <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L6-6" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
           
-              <p>CompiledName: <code>get_Item</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '75', 75)" onmouseover="showTip(event, '75', 75)">
-            Length
-          </code>
-          <div class="tip" id="75">
-            <strong>Signature:</strong> int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Length</code></p>
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '76', 76)" onmouseover="showTip(event, '76', 76)">
-            Tail
-          </code>
-          <div class="tip" id="76">
-            <strong>Signature:</strong> (string * Binding) list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Tail</code></p>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <h3>Static members</h3>
-  <table class="table table-bordered member-list">
-    <thead>
-      <tr><td>Static member</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '77', 77)" onmouseover="showTip(event, '77', 77)">
-            Empty
-          </code>
-          <div class="tip" id="77">
-            <strong>Signature:</strong> (string * Binding) list<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-          
-              <p>CompiledName: <code>get_Empty</code></p>
         </td>
       </tr>
     </tbody>

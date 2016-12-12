@@ -54,14 +54,6 @@
     <Compile Include="CommonAst.fs" />
     <Compile Include="PrettyPrint.fsi" />
     <Compile Include="PrettyPrint.fs" />
-    <Compile Include="UntypedAst.fsi" />
-    <Compile Include="UntypedAst.fs" />
-    <Compile Include="UntypedCore.fsi" />
-    <Compile Include="UntypedCore.fs" />
-    <Compile Include="UntypedRecursAst.fsi" />
-    <Compile Include="UntypedRecursAst.fs" />
-    <Compile Include="UntypedRecursCore.fsi" />
-    <Compile Include="UntypedRecursCore.fs" />
     <Compile Include="Reduce.fsi" />
     <Compile Include="Reduce.fs" />
     <None Include="paket.references" />
