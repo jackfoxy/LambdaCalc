@@ -62,6 +62,8 @@
     <Compile Include="UntypedRecursAst.fs" />
     <Compile Include="UntypedRecursCore.fsi" />
     <Compile Include="UntypedRecursCore.fs" />
+    <Compile Include="Reduce.fsi" />
+    <Compile Include="Reduce.fs" />
     <None Include="paket.references" />
     <None Include="Scripts\load-references-release.fsx" />
     <None Include="Scripts\load-project-release.fsx" />

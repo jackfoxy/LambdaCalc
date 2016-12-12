@@ -25,6 +25,7 @@ open PrettyPrint
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
+open Reduce
 open Support.Error
 
 module Reduce = 
@@ -67,46 +68,21 @@ module Reduce =
 
         | _ -> invalidArg "can't get here" ""
 
-    let processCommand commentLines ctx cmd = 
-        match cmd with
-        | Eval(_, t) -> 
-            let t' = eval ctx t
-            let reducedCommentLines = 
-                printComments t commentLines
-            printTerm true ctx t'
-            flush()
-            ctx, reducedCommentLines
-
-        | Bind(_, x, bind) -> 
-            let reducedCommentLines =
-                match bind with 
-                | NameBind -> 
-                    commentLines 
-                | AbbstractionBind t ->
-                    printInputSource t inputLines
-                    printComments t commentLines
-
-            let bind' = evalBinding ctx bind
-            pr x
-            pr " "
-            printBinding ctx bind'
-            flush()
-            (addBinding ctx x bind'), reducedCommentLines
-
     let processInput input =
         let ctx = emptyContext
 
         let (cmds, _) = parseInput input ctx
 
+        let reduceParams = 
+            {
+            AddBinding = addBinding
+            Eval = eval
+            EvalBinding = evalBinding
+            PrintTerm = printTerm
+            PrintBinding = printBinding
+            InputLines = inputLines
+            }
+
         let commentLines = getCommentLines inputLines
-        
-        let g (ctx, commentLines) c = 
-            let results = processCommand commentLines ctx c
-            results
 
-        let result, remainingComments =
-            List.fold g (ctx, commentLines) cmds
-
-        printRemainingComments remainingComments
-
-        result
+        reduceInput reduceParams commentLines ctx cmds

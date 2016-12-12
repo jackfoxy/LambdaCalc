@@ -20,3 +20,5 @@
       "../UntypedRecursAst.fs"
       "../UntypedRecursCore.fsi"
       "../UntypedRecursCore.fs"
+      "../Reduce.fsi"
+      "../Reduce.fs"
