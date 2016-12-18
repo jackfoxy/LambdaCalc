@@ -21,13 +21,11 @@ open Jackfoxy.LambdaCalc
 open CommandLine
 open Common
 open CommonAst
-open PrettyPrint
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
 open Reduce
 open Support.Error
-open System.IO
 
 module Reduce = 
     
@@ -36,7 +34,7 @@ module Reduce =
 
     let mutable inputLines : InputLines list = []
 
-    let parseInput (inputSource : Source) = 
+    let parseInput (inputSource : Source) secondaryInput = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1
@@ -54,7 +52,7 @@ module Reduce =
             LexBuffer<char>.FromString (BottomFix + (s'.Replace("\u03BB", "lambda ")) )
             |> parseIt 
         | Source.File paths -> 
-            let input = getInput BottomFix paths
+            let input = getInput (Some BottomFix) paths secondaryInput
 
             Lexer.filename := input.ConcatNames
                 
@@ -68,10 +66,17 @@ module Reduce =
 
         | _ -> invalidArg "can't get here" ""
     
-    let processInput input = 
+    let processInput (input : Source list) = 
         let ctx = emptyContext
 
-        let (cmds, _) = parseInput input ctx
+        let (cmds, _) =
+            match input with
+            | [hd] ->
+                parseInput hd None ctx 
+            | files::[(Source.Console s)] ->
+                parseInput files (Some s) ctx 
+            | _ -> 
+                    invalidArg "processInput" "can't get here"
 
         let reduceParams = 
             {
@@ -83,6 +88,4 @@ module Reduce =
             InputLines = inputLines
             }
 
-        let commentLines = getCommentLines inputLines
-
-        reduceInput reduceParams commentLines ctx cmds
+        reduceInput reduceParams ctx cmds

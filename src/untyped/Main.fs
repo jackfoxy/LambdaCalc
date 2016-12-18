@@ -1,6 +1,5 @@
 ﻿namespace Jackfoxy.LambdaCalc.Untyped
 
-open Core
 open Jackfoxy.LambdaCalc
 open Common
 open CommandLine
@@ -14,7 +13,7 @@ module Console =
         let parsedCommand = parse (System.Reflection.Assembly.GetExecutingAssembly().GetName().Name) argv
 
         match parsedCommand.Source with
-        | NoSource -> 
+        | [] -> 
             reportError parsedCommand
             1
         | input -> 

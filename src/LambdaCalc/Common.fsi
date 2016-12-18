@@ -30,6 +30,6 @@ module Common =
 
     val reportError : ParsedCommand -> unit
 
-    val getInput : internalInput : string -> paths : string list -> Input
+    val getInput : internalInput : string option -> paths : string list -> secondaryInput : string option -> Input
 
     val getCommentLines : inputLines : InputLines list -> CommentLine list

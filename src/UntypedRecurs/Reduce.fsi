@@ -6,4 +6,4 @@ open CommandLine
 
 module Reduce =
 
-    val processInput : inputSource : Source -> (string * Binding) list 
+    val processInput : inputSource : Source list -> (string * Binding) list 

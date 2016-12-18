@@ -52,16 +52,23 @@ module Common =
                 inputLines
                 |> List.fold (fun s t -> s + t.Lines.Length) 0}::inputLines
 
-    let getInput (internalInput : string) (paths : string list) =
+    let secondFixed (secondary : string) =
+        if secondary.EndsWith(";") then
+            secondary
+        else
+            secondary + ";"
+
+    let getInput (internalInput : string option) (paths : string list) (secondaryInput : string option) =
 
         let startList =
-            if internalInput.Length > 0 then
+            match internalInput with
+            | Some intern ->
                 [{
                     Input = "INTERNAL"
-                    Lines = internalInput.Split '\n'
+                    Lines = intern.Split '\n'
                     PriorLineCount = 0 }]
                         
-            else 
+            | None->
                 []
 
         let input =
@@ -70,10 +77,15 @@ module Common =
             |> List.fold createInput ("", startList)
 
         let inputString =
-            if internalInput.Length > 0 then
-                (internalInput + "\n" + (fst input)).Replace("\u03BB", "lambda ")
-            else
-                (fst input).Replace("\u03BB", "lambda ")
+            (match internalInput, secondaryInput with
+                | (Some intern), (Some secondary) ->
+                    intern + "\n" + (fst input) + "\n" + (secondFixed secondary)
+                | _, (Some secondary) ->
+                    (fst input) + "\n" + (secondFixed secondary)
+                | (Some intern), _ ->
+                    intern + "\n" + (fst input)
+                | _, _ ->
+                    fst input ).Replace("\u03BB", "lambda ")
 
         {
         InputReader = new System.IO.StringReader(inputString)

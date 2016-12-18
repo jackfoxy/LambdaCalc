@@ -16,7 +16,7 @@ module CommandLine =
     type ParsedCommand =
         {
         Usage : string
-        Source : Source
+        Source : Source list
         Target : Target
         Lambda : bool
         ErrorMsg: string option

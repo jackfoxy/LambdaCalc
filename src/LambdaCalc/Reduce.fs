@@ -57,7 +57,9 @@ module Reduce =
             flush()
             (reduceParams.AddBinding ctx x bind'), reducedCommentLines 
 
-    let reduceInput (reduceParams : ReduceParams) commentLines ctx cmds =
+    let reduceInput (reduceParams : ReduceParams) ctx cmds =
+        let commentLines = getCommentLines reduceParams.InputLines
+
         let g (ctx, commentLines) c = 
             let results = processCommand reduceParams commentLines ctx c
             results

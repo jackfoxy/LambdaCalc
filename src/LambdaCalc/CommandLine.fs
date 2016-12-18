@@ -31,7 +31,7 @@ module CommandLine =
     type ParsedCommand =
         {
         Usage : string
-        Source : Source
+        Source : Source list
         Target : Target
         Lambda : bool
         ErrorMsg: string option
@@ -117,42 +117,47 @@ module CommandLine =
             []
             |> (fun x -> 
                     match commandLine.TryGetResult <@ InputPaths @> with
-                    | Some paths -> (Source.File paths)::x
+                    | Some paths -> 
+                        (Source.File paths)::x
                     | None -> x
                     )
             |> (fun x -> 
                     match commandLine.TryGetResult <@ ConsoleInput @> with
-                    | Some consoleInput -> (Source.Console consoleInput)::x
+                    | Some consoleInput -> 
+                        (Source.Console consoleInput)::x
                     | None -> x
                     )
 
-        match sourceList with
-        | [] -> 
-            Failure "no input source specified"
-        | [x] -> 
-            match x with
-            | Source.Console _ ->
-                Success x
-            | Source.File fileList ->
-                fileInput commandLine fileList
-            | _ ->
-                Success x
-        | hd::tl ->
-            sprintf "more than one input source specified: %s, %s" (hd.ErrorToString()) (tl.Head.ErrorToString())
-            |> Failure 
-        
+        sourceList
+        |> List.fold (fun state t -> 
+            match state with
+            | Success source ->
+                match t with
+                | Source.File fileList ->
+                    match fileInput commandLine fileList with
+                    | Success x -> 
+                        Success (x::source)
+                    | Failure x ->
+                        Failure x
+                | x -> 
+                    Success (x::source)
+            | Failure x ->
+                Failure x
+            ) (Success [])
+
+
     let parse programName argv = 
 
         match choose { 
                         let! commandLine, usage = parseCommandLine programName argv
                        
                         let! target = parseTarget commandLine
-                        let! source = parseSource commandLine
+                        let! sources = parseSource commandLine
 
                         return 
                             {
                             Usage = usage
-                            Source = source
+                            Source = sources
                             Target = target
                             Lambda = commandLine.Contains <@ Lambda @>
                             ErrorMsg = None
@@ -163,7 +168,7 @@ module CommandLine =
             let usage = ArgumentParser.Create<CLIArguments>(programName = programName).PrintUsage()
             {
             Usage = usage
-            Source = Source.NoSource
+            Source = []
             Target = Target.Console 
             Lambda = false
             ErrorMsg = Some msg

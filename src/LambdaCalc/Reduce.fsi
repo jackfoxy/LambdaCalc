@@ -15,4 +15,4 @@ module Reduce =
         InputLines : InputLines list
         }
 
-    val reduceInput : reduceParams : ReduceParams -> commentLines : CommentLine list -> ctx : Context ->  cmds : Command list -> Context
+    val reduceInput : reduceParams : ReduceParams -> ctx : Context ->  cmds : Command list -> Context
