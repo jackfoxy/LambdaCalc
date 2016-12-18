@@ -3,13 +3,18 @@
 GROUP Build
 NUGET
   remote: https://www.nuget.org/api/v2
-    FAKE (4.45.3)
+    FAKE (4.47)
     FSharp.Compiler.Service (2.0.0.6)
+    FSharp.Core (4.0.0.1)
     FSharp.Formatting (2.14.4)
       FSharp.Compiler.Service (2.0.0.6)
       FSharpVSPowerTools.Core (>= 2.3 < 2.4)
     FSharpVSPowerTools.Core (2.3)
       FSharp.Compiler.Service (>= 2.0.0.3)
+    FsLexYacc (7.0.3)
+      FsLexYacc.Runtime (>= 7.0.3 < 7.1)
+    FsLexYacc.Runtime (7.0.3)
+      FSharp.Core (>= 3.1.2.5)
     Microsoft.Bcl (1.1.10) - framework: net10, net11, net20, net30, net35, net40, net40-full
       Microsoft.Bcl.Build (>= 1.0.14)
     Microsoft.Bcl.Build (1.0.21) - import_targets: false, framework: net10, net11, net20, net30, net35, net40, net40-full
@@ -21,12 +26,12 @@ NUGET
     SourceLink.Fake (1.1)
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (3121e610f04d4c9839f44326ab4ca02e28eb15a2)
+    modules/Octokit/Octokit.fsx (954b349a91b815a707941dd0be0dfda124f51da9)
       Octokit (>= 0.20)
 GROUP Projects
 NUGET
   remote: https://www.nuget.org/api/v2
-    Argu (3.3)
+    Argu (3.5)
       FSharp.Core (>= 4.0.1.7-alpha) - framework: >= net463, >= netstandard16
       NETStandard.Library (>= 1.6) - framework: >= net463, >= netstandard16
       System.Xml.XDocument (>= 4.0.11) - framework: >= net463, >= netstandard16
