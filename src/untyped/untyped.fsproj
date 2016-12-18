@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsLexYacc.Runtime">
-      <HintPath>..\..\lib\FsLexYacc\FsLexYacc.Runtime.dll</HintPath>
+      <HintPath>..\..\packages\build\FsLexYacc.Runtime\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10\FsLexYacc.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
