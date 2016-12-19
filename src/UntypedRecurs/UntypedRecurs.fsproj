@@ -55,7 +55,7 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-  <Import Project="..\..\lib\FsLexYacc\FsLexYacc.targets" />
+  <Import Project="..\..\packages\build\FsLexYacc\build\FsLexYacc.targets" />
   <ItemGroup>
     <Compile Include="Ast.fsi" />
     <Compile Include="Ast.fs" />
