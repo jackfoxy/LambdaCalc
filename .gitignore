@@ -12,7 +12,7 @@ AssemblyInfo.fs
 #Visual Studio files
 *.[Oo]bj
 *.exe
-!.paket/paket.exe
+!.paket/paket.bootstrapper.exe
 *.pdb
 *.user
 *.aps
