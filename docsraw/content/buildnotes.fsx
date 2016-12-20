@@ -14,9 +14,9 @@ The initial build requires 2 steps:
 
 This will result in error messages
 
-    error FS0039: The type 'Toplevel' is not defined [<your path>\LambdaCalc\src\Untyped\Untyped.fsproj]
+    error FS0039: The type 'Toplevel' is not defined  /LambdaCalc/src/Untyped/Untyped.fsproj
 
-    error FS0039: The type 'Toplevel' is not defined [<your path>\LambdaCalc\src\UntypedRecurs\UntypedRecurs.fsproj]
+    error FS0039: The type 'Toplevel' is not defined  /LambdaCalc/src/UntypedRecurs/UntypedRecurs.fsproj
 
 
 * Step 2 -- add the following `open` statements and `type` declaration at the top of the Parser module in the files `Parser.fsi`
@@ -32,7 +32,7 @@ type Toplevel = Context -> (Command list * Context)
 (**
 Run build.cmd again.
 
-If you ever regenerate Parser.fsi (for example by changing the parse file, `Parser.fsy`) you will have to repeat this procedure. 
+When you regenerate Parser.fsi (for example by changing the parse file, `Parser.fsy`) you will have to repeat this procedure. 
 
 Or if your are ambitious, submit a pull request to [FsLexYacc](https://github.com/fsprojects/FsLexYacc) to fix this in `fsi` generation.
 *)

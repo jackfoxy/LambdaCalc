@@ -24,12 +24,8 @@ printfn "hello = %s" <| "world"
 (**
 Some more info
 
-Samples & documentation
+Documentation
 -----------------------
-
-The library comes with comprehensible documentation. 
-It can include tutorials automatically generated from `*.fsx` files in [the content folder][content]. 
-The API reference is automatically generated from Markdown comments in the library implementation.
 
  * [Build Notes](buildnotes.html) describe a simple 2-step manual process required to make the first build..
 
