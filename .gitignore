@@ -1,5 +1,5 @@
 # Generated lex and parse files
-**/fulluntyped/Lexer.fs
+**/Lexer.fs
 **/Parser.fs
 **/Parser.fsi
 
@@ -12,6 +12,7 @@ AssemblyInfo.fs
 #Visual Studio files
 *.[Oo]bj
 *.exe
+!.paket/paket.bootstrapper.exe
 *.pdb
 *.user
 *.aps
@@ -62,7 +63,6 @@ _ReSharper*/
 localpackages/
 paket-files
 *.orig
-.paket/paket.exe
 docsraw/content/license.md
 docsraw/content/release-notes.md
 .fake

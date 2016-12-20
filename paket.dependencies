@@ -12,6 +12,7 @@ group Build
   nuget SourceLink.Fake
   nuget FAKE
   nuget FSharp.Formatting
+  nuget FsLexYacc
 
   github fsharp/FAKE modules/Octokit/Octokit.fsx
 

@@ -15,8 +15,6 @@ See LICENSE.TXT for licensing details.
 open Support.Error
 open Jackfoxy.LambdaCalc
 open Jackfoxy.LambdaCalc.CommonAst
-open Jackfoxy.LambdaCalc.Untyped
-open Jackfoxy.LambdaCalc.Untyped.Ast
 
 // HACK : This works around a bug in the current version of FsYacc
 // (as of Oct-26-2012) where it doesn't correctly parse %type declarations

@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB2AE0-66E4-4747-AFDF-578A64C68034}"
 	ProjectSection(SolutionItems) = preProject
+		docsraw\content\buildnotes.fsx = docsraw\content\buildnotes.fsx
 		docsraw\content\index.fsx = docsraw\content\index.fsx
 		docsraw\content\tutorial.fsx = docsraw\content\tutorial.fsx
 	EndProjectSection
