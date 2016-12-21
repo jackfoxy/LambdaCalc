@@ -1,0 +1,46 @@
+/*it is true, isnil nil*/
+isnil nil;
+
+/*one member list*/
+lst1 = cons c0 nil;
+
+/*two member list*/
+lst2 = cons c1 lst1;
+
+/*it is true, head of lst1 = c0*/
+xnor tru (eql c0 (head lst1));
+
+/*it is true, head of lst2 = c1*/
+xnor tru (eql c1 (head lst2));
+
+/*it is true, head of tail of lst2 = c0*/
+xnor tru (eql c0 (head (tail lst2)));
+
+/*it is false, isnil lst1*/
+xnor fls (isnil lst1);
+
+/*it is false, isnil lst2*/
+xnor fls (isnil lst2);
+
+/*it is tru, isnil tail of tail of lst2*/
+xnor tru (isnil (tail (tail lst2)));
+
+/*works on lists of false as well*/
+lst1f = cons fls nil;
+lst2f = cons fls lst1f;
+xnor tru (xnor fls (head lst1f));
+xnor tru (xnor fls (head lst2f));
+xnor tru (xnor fls (head (tail lst2f)));
+xnor fls (isnil lst1f);
+xnor fls (isnil lst2f);
+xnor tru (isnil (tail (tail lst2f)));
+
+/*...and lists of true*/
+lst1t = cons tru nil;
+lst2t = cons tru lst1t;
+xnor tru (xnor tru (head lst1t));
+xnor tru (xnor tru (head lst2t));
+xnor tru (xnor tru (head (tail lst2t)));
+xnor fls (isnil lst1t);
+xnor fls (isnil lst2t);
+xnor tru (isnil (tail (tail lst2t)));

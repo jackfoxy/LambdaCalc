@@ -1,3 +1,4 @@
 fls = λt. λb. b;
+nil = fls;
 fix = λf. (λx. f (λy. x x y)) (λx. f (λy. x x y));
 c0 = λs. λz. z;
