@@ -31,41 +31,40 @@ module Reduce =
         InputLines : InputLines list
         }
 
-    let processCommand (reduceParams : ReduceParams) commentLines ctx cmd = 
+    let processCommand (reduceParams : ReduceParams) commentLines (inputLines : InputLines list) ctx cmd = 
         match cmd with
         | Eval(_, t) -> 
             let t' = reduceParams.Eval ctx t
-            let reducedCommentLines = 
-                printComments t commentLines
+            let reducedCommentLines, remainingInputLines = 
+                printComments t commentLines inputLines
             reduceParams.PrintTerm true ctx t'
             flush()
-            ctx, reducedCommentLines
+            ctx, reducedCommentLines, remainingInputLines
 
         | Bind(_, x, bind) -> 
-            let reducedCommentLines =
+            let reducedCommentLines, remainingInputLines =
                 match bind with 
                 | NameBind -> 
-                    commentLines 
+                    commentLines, inputLines 
                 | AbbstractionBind t ->
-                    printInputSource t reduceParams.InputLines
-                    printComments t commentLines
+                    printComments t commentLines inputLines
 
             let bind' = reduceParams.EvalBinding ctx bind
             pr x
             pr " "
             reduceParams.PrintBinding ctx bind'
             flush()
-            (reduceParams.AddBinding ctx x bind'), reducedCommentLines 
+            (reduceParams.AddBinding ctx x bind'), reducedCommentLines, remainingInputLines 
 
-    let reduceInput (reduceParams : ReduceParams) ctx cmds =
+    let reduceInput (reduceParams : ReduceParams) (ctx : Context) cmds =
         let commentLines = getCommentLines reduceParams.InputLines
 
-        let g (ctx, commentLines) c = 
-            let results = processCommand reduceParams commentLines ctx c
+        let g (ctx, commentLines, lastFilePrintedLineCount) c = 
+            let results = processCommand reduceParams commentLines lastFilePrintedLineCount ctx c
             results
 
-        let result, remainingComments =
-            List.fold g (ctx, commentLines) cmds
+        let result, remainingComments, _ =
+            List.fold g (ctx, commentLines, reduceParams.InputLines) cmds
 
         printRemainingComments remainingComments
 

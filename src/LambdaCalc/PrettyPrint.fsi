@@ -14,8 +14,6 @@ module PrettyPrint =
 
     val flush : unit -> unit
 
-    val printComments : term : Term -> commentLines : CommentLine list -> CommentLine list
+    val printComments : term : Term -> commentLines : CommentLine list -> inputLines : InputLines list -> CommentLine list * InputLines list
 
     val printRemainingComments : commentLines : CommentLine list -> unit
-
-    val printInputSource : term : Term -> inputLines : InputLines list -> unit
