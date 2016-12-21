@@ -1,0 +1,19 @@
+﻿fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));
+
+fact3 = fix fact c3;
+
+/*it is false that fact3 = c3*/
+xnor fls (eql c3 fact3);
+
+/*it is true that fact3 = c6*/
+xnor tru (eql c6 fact3);
+
+fact2 = fix fact c2;
+
+/*it is true that fact2 = c2*/
+xnor tru (eql c2 fact2);
+
+fact4 = fix fact c4;
+
+/*it is true that fact4 = c24*/
+xnor tru (eql c24 fact4); 

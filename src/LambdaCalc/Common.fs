@@ -58,7 +58,27 @@ module Common =
         else
             secondary + ";"
 
-    let getInput (internalInput : string option) (paths : string list) (secondaryInput : string option) =
+    let getInputLines secondaryInput (input : string * InputLines list) =
+        match secondaryInput with
+        | Some x ->
+            let inputLines = snd input
+
+            match inputLines with
+            | [] ->
+                inputLines
+                |> List.rev
+            | hd::tl ->
+                {
+                Input = "CONSOLE"
+                Lines = [||]
+                PriorLineCount = hd.PriorLineCount + hd.Lines.Length }::inputLines
+                |> List.rev
+                    
+        | None ->
+            snd input
+            |> List.rev
+
+    let getInput (internalInput : string option) (paths : string list) secondaryInput =
 
         let startList =
             match internalInput with
@@ -90,9 +110,7 @@ module Common =
         {
         InputReader = new System.IO.StringReader(inputString)
         ConcatNames = fileNameFromPaths paths
-        InputLines = 
-                snd input
-                |> List.rev
+        InputLines = getInputLines secondaryInput input
         }
 
     type CommentLine =

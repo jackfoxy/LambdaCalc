@@ -247,8 +247,21 @@ module PrettyPrint =
         | Application ((FI (_, line, _)), _ , _) -> line
         | _ -> System.Int32.MaxValue
         
-    let printComments term (commentLines : CommentLine list) =
+    let printInputSource line inputLines =
+
+        match inputLines |> List.tryFindIndex (fun x -> x.PriorLineCount <= (line - 1)) with
+        | Some n -> 
+            pr "\n"
+            pr ("/*" + (inputLines.[n].Input)  + "*/\n")
+            flush()
+            List.skip (n + 1) inputLines
+        | None ->
+            inputLines
+
+    let printComments term (commentLines : CommentLine list) inputLines =
         let line = getTermLine term
+
+        let remainingInputLines = printInputSource line inputLines
 
         let commentsToPrint =
             commentLines
@@ -266,9 +279,9 @@ module PrettyPrint =
                     pr (x.Comment + "\n") )
             flush()
 
-        commentLines
+        (commentLines
         |> List.where (fun x -> 
-            x.LineNbr > line)
+            x.LineNbr > line) ), remainingInputLines
 
     let printRemainingComments (commentLines : CommentLine list) =
         match commentLines with
@@ -282,15 +295,3 @@ module PrettyPrint =
                     pr x.Comment )
 
             flush()
-
-    let printInputSource term inputLines =
-        let line = getTermLine term
-
-        match inputLines |> List.tryFindIndex (fun x -> x.PriorLineCount = (line - 1)) with
-        | Some n -> 
-            if n > 0 then
-                pr "\n"
-            pr ("/*" + (inputLines.[n].Input)  + "*/\n")
-            flush()
-        | None ->
-            ()

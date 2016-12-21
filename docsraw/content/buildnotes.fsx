@@ -35,4 +35,13 @@ Run build.cmd again.
 When you regenerate Parser.fsi (for example by changing the parse file, `Parser.fsy`) you will have to repeat this procedure. 
 
 Or if your are ambitious, submit a pull request to [FsLexYacc](https://github.com/fsprojects/FsLexYacc) to fix this in `fsi` generation.
+
+Git and generating doc files
+============================
+
+Your first build may generate git modified messages for many documentation files.
+
+    modified:   docs/reference/...
+
+Simply commit the changes and you will find the commit disappears from git history. This is an instance of the well-known git/crlf issue.
 *)

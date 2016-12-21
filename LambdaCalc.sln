@@ -60,6 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lambdas", "lambdas", "{31A6
 		lambdas\fixBottomMin.lmbd = lambdas\fixBottomMin.lmbd
 		lambdas\lambdaCalcPgm.lmbd = lambdas\lambdaCalcPgm.lmbd
 		lambdas\lambdaRecursPgm.lmbd = lambdas\lambdaRecursPgm.lmbd
+		lambdas\lists.lmbd = lambdas\lists.lmbd
 		lambdas\numbers.lmbd = lambdas\numbers.lmbd
 		lambdas\recursPrelude.lmbd = lambdas\recursPrelude.lmbd
 		lambdas\test.lmbd = lambdas\test.lmbd
@@ -70,7 +71,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50AD6414-DA94-44F8-BABB-A4345F4AF883}"
 	ProjectSection(SolutionItems) = preProject
 		lambdas\tests\cond.lmbd = lambdas\tests\cond.lmbd
+		lambdas\tests\lists.lmbd = lambdas\tests\lists.lmbd
 		lambdas\tests\numbers.lmbd = lambdas\tests\numbers.lmbd
+		lambdas\tests\recursion.lmbd = lambdas\tests\recursion.lmbd
 	EndProjectSection
 EndProject
 Global
