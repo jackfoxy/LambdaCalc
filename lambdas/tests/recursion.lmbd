@@ -1,4 +1,5 @@
-﻿fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));
+﻿/*fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));*/
+fact = λf. λx. mult x (f (prd x));
 
 fact3 = fix fact c3;
 
@@ -17,3 +18,21 @@ fact4 = fix fact c4;
 
 /*it is true that fact4 = c24*/
 xnor tru (eql c24 fact4); 
+
+/*rev*/
+
+list3 = cons c3 (cons c2 (cons c1 nil));
+
+rev = λf. λx. cond (isnil (tail x)) 
+			(head x)
+			(f (cond (isnil (tail x)) nil (cons (cons (head (tail x)) (head x)) (tail (tail x)) )) );
+
+taillist = fix rev (cons nil list3);
+
+l2 = tail list3;
+l1 = tail l2;
+l0 = tail l1;
+isnil l0;
+
+/*it is true that head of taillist = c1*/
+xnor tru (eql c1 (head taillist)); 
