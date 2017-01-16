@@ -23,9 +23,7 @@ xnor tru (eql c24 fact4);
 
 list3 = cons c3 (cons c2 (cons c1 nil));
 
-rev = λf. λx. cond (isnil (tail x)) 
-			(head x)
-			(f (cond (isnil (tail x)) nil (cons (cons (head (tail x)) (head x)) (tail (tail x)) )) );
+rev = λf. λx. cond (isnil (tail x)) (head x) (f (cond (isnil (tail x)) nil (cons (cons (head (tail x)) (head x)) (tail (tail x)) )) );
 
 taillist = fix rev (cons nil list3);
 

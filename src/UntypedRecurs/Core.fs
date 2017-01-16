@@ -56,7 +56,18 @@ module Core =
             let t2' = eval1 ctx t2 
 
             if isBottom t2' && (isYinFix v1) then
-
+//                printfn "the Y term"
+//                printTerm true ctx v1
+//                PrettyPrint.flush()
+//                printfn "the outer term"
+//                printTerm true ctx t
+//                PrettyPrint.flush()
+//                printfn "the applicand reduced"
+//                printTerm true ctx t2'
+//                PrettyPrint.flush()
+//                printfn "the applicand"
+//                printTerm true ctx t2
+//                PrettyPrint.flush()
                 let bottom = getBottom ctx
                 Application (fi, bottom, bottom)   
  

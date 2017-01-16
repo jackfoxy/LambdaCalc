@@ -74,6 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50AD6414
 		lambdas\tests\lists.lmbd = lambdas\tests\lists.lmbd
 		lambdas\tests\numbers.lmbd = lambdas\tests\numbers.lmbd
 		lambdas\tests\recursion.lmbd = lambdas\tests\recursion.lmbd
+		lambdas\tests\untypedrecurs.lmbd = lambdas\tests\untypedrecurs.lmbd
 	EndProjectSection
 EndProject
 Global
