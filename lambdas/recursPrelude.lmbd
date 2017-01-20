@@ -1,3 +1,4 @@
+﻿bottom = λt. λb. b;
 fls = bottom;
 c0 = bottom;
 nil = bottom;

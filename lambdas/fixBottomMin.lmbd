@@ -1,4 +1,6 @@
-﻿tru = λt. λf. t;
+﻿bottom = λt. λb. b;
+
+tru = λt. λf. t;
 fls = bottom;
 c0 = bottom;
 nil = bottom;
@@ -19,11 +21,11 @@ plus = λm. λn. λs. λz. m s (n s z);
 mult = λm. λn. m (plus n) c0;
 prd = λm. fst (m (λp. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
 fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));
-id = λx. x;
+
 h = fix fact;
 l = h c3; /*stackoverflow*/
 
-fix fact c3;
+/*fix fact c3;*/
 
 not = λa. a fls tru;
 and = λb. λc. b c fls;

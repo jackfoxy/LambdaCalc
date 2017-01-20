@@ -26,16 +26,16 @@ module Core =
 
     let isBottom t = 
         match t with
-        | Abstraction (FI (_, 1, _), _, Abstraction (_, _, Variable (_))) ->
+        | Abstraction (FI (_, _, _), _, Abstraction (FI (_, _, _), _, Variable (FI (_, _, _), _, _))) -> 
             true
         | _ ->
             false
 
-    let getBottom (ctx : Context) =
+    let getIdentity (ctx : Context) =
         let _, binding = ctx.[ctx.Length - 1]
         match binding with
-        | AbbstractionBind bottom ->
-            bottom
+        | AbbstractionBind identity ->
+            identity
         | _ ->
             invalidArg "getBottom" "can't get here"
 
@@ -55,7 +55,7 @@ module Core =
 
             let t2' = eval1 ctx t2 
 
-            if isBottom t2' && (isYinFix v1) then
+            if  isYinFix v1 && isBottom t2' then
 //                printfn "the Y term"
 //                printTerm true ctx v1
 //                PrettyPrint.flush()
@@ -68,8 +68,7 @@ module Core =
 //                printfn "the applicand"
 //                printTerm true ctx t2
 //                PrettyPrint.flush()
-                let bottom = getBottom ctx
-                Application (fi, bottom, bottom)   
+                getIdentity ctx
  
             else
                 Application (fi, v1, t2')
