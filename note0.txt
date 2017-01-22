@@ -14,15 +14,17 @@ let createInfo f l c = FI (f, l, c)
 
 3) in FileInfo line is 1-based, while character is 0-based (apparrently, but not accurate in displacement)
 
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Write-Host "λλλλλ"
+[Console]::WriteLine("λ")
 
 full untyped run
-.\untyped\Untyped -l -c  "(λx. λy. y x) (λx. x) (lambda x.x)" -i ..\lambdas untypedPrelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd
+.\untyped\Untyped -l -c  "(λx. λy. y x) (λx. x) (lambda x.x)" -i ..\lambdas prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd
 
 full recurs run
-.\untypedrecurs\UntypedRecurs -l -c  "(λx. λy. y x) (λx. x) (lambda x.x)" -i ..\lambdas recursPrelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd
+.\untypedrecurs\UntypedRecurs -l -c  "(λx. λy. y x) (λx. x) (lambda x.x)" -i ..\lambdas prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd
 
-
-
+@@@@@@@@@@@@@@@@@@@@@@@@@
 fact3 = λs.λz.(λs'.λz'.(λs''.λz''.(λb. b) s'' ((λt.λb. b) s'' z'')) s'
                 ((λs''.λz''.(λs'''.λz'''.(λb. b) s''' ((λt.λb. b) s''' z'''))
                                                                          s'' ((λt.λb. b) s'' z''))

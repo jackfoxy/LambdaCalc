@@ -30,7 +30,7 @@ open Support.Error
 module Reduce = 
     
     [<Literal>]
-    let IdentityFix = "id = lambda b. b\n;fix = lambda f. (lambda x. f (lambda y. x x y)) (lambda x. f (lambda y. x x y));"
+    let Identity = "id = lambda b. b;"
 
     let mutable inputLines : InputLines list = []
 
@@ -49,10 +49,10 @@ module Reduce =
             let s' = 
                 if s.EndsWith(";") then s
                 else s + ";"
-            LexBuffer<char>.FromString (IdentityFix + (s'.Replace("\u03BB", "lambda ")) )
+            LexBuffer<char>.FromString (Identity + (s'.Replace("\u03BB", "lambda ")) )
             |> parseIt 
         | Source.File paths -> 
-            let input = getInput (Some IdentityFix) paths secondaryInput
+            let input = getInput (Some Identity) paths secondaryInput
 
             Lexer.filename := input.ConcatNames
                 

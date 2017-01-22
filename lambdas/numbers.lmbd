@@ -1,3 +1,4 @@
+c0 = bottom;
 c1 = λs. λz. s z;
 c2 = λs. λz. s (s z);
 c3 = λs. λz. s (s (s z));

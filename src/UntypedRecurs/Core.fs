@@ -10,23 +10,41 @@ See LICENSE.TXT for licensing details.
 *)
 
 open Jackfoxy.LambdaCalc
-open Ast
 open CommonAst
 open Support.Error
 
 /// Core evaluation functions.
 module Core =
 
-    let isYinFix t =
+    // λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y
+    let isInnerYcombinator t =
         match t with
-        | Abstraction (FI (_, 2, _), "y", _) ->
+        | Abstraction (FI (_), _, 
+                        Application (_, 
+                            Application (_, 
+                                        Abstraction (FI (_), _, 
+                                            Application (_, 
+                                                Abstraction (FI (_), _, Abstraction (FI (_), _, Application (_))), 
+                                                Abstraction (FI (_), _, Application (_))
+                                                        )
+                                                    ), 
+                                        Abstraction (FI (_), _, 
+                                            Application (_, 
+                                                Abstraction (FI (_), _, Abstraction (FI (_), _, Application (_))), 
+                                                Abstraction (FI (_), _, Application (_))
+                                                        )
+                                                    )
+                                        ), 
+                            Variable (FI (_), _, _)
+                                    )
+                      ) ->
             true
         | _ ->
             false
 
     let isBottom t = 
         match t with
-        | Abstraction (FI (_, _, _), _, Abstraction (FI (_, _, _), _, Variable (FI (_, _, _), _, _))) -> 
+        | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), _, _))) -> 
             true
         | _ ->
             false
@@ -55,7 +73,7 @@ module Core =
 
             let t2' = eval1 ctx t2 
 
-            if  isYinFix v1 && isBottom t2' then
+            if  isInnerYcombinator v1 && isBottom t2' then
 //                printfn "the Y term"
 //                printTerm true ctx v1
 //                PrettyPrint.flush()
