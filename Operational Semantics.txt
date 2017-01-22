@@ -31,11 +31,11 @@ v ::=
 Evaluation
 
        t1 -> t1'    
-    ---------------      /* E-APP1 */
+    _______________      /* E-APP1 */
     t1 t2 -> t1' t2
 
        t2 -> t2'    
-    ---------------      /* E-APP2 */
+    _______________      /* E-APP2 */
     v1 t2 -> v1 t2'
 
     (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
@@ -43,6 +43,12 @@ Evaluation
 *)
 	
 Operational Semantics
+
+f: (λf. λx. _) |- (λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y) (λt. λb. b)
+_____________________________________________________________________________
+                                   λb. b
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ⊥ (bottom) ::=
 	λ t.λ b. b
@@ -55,9 +61,3 @@ Evaluation
    fix ⊢ (λy. (λx. f (λy'.x x y')) (λx. f (λy'.x x y')) y) ⊥
    -----------------------------------------------------------
                             ⊥ ⊥
-
-
-
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-Write-Host "λλλλλ"
-[Console]::WriteLine("λ")

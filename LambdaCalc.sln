@@ -62,10 +62,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lambdas", "lambdas", "{31A6
 		lambdas\lambdaRecursPgm.lmbd = lambdas\lambdaRecursPgm.lmbd
 		lambdas\lists.lmbd = lambdas\lists.lmbd
 		lambdas\numbers.lmbd = lambdas\numbers.lmbd
-		lambdas\recursPrelude.lmbd = lambdas\recursPrelude.lmbd
+		lambdas\prelude.lmbd = lambdas\prelude.lmbd
 		lambdas\test.lmbd = lambdas\test.lmbd
 		lambdas\tuple.lmbd = lambdas\tuple.lmbd
-		lambdas\untypedPrelude.lmbd = lambdas\untypedPrelude.lmbd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50AD6414-DA94-44F8-BABB-A4345F4AF883}"

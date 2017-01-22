@@ -1,4 +1,5 @@
 tru = λt. λf. t;
+fls = bottom;
 
 not = λa. a fls tru;
 and = λb. λc. b c fls;

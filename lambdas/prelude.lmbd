@@ -1,0 +1,2 @@
+bottom = λt. λb. b;
+fix = λf. (λx. f (λy. x x y)) (λx. f (λy. x x y));

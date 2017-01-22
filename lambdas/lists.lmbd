@@ -1,3 +1,4 @@
+nil = bottom;
 isnil = λl. l (λh. λt. fls) tru;
 cons = lambda h. lambda t.lambda c. c (pair h t);
 head = lambda l. l fst;
