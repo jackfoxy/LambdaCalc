@@ -38,7 +38,7 @@ module CommandLine =
         }
 
     type CLIArguments =
-        | [<MainCommand; Last; AppSettingsSeparator(',')>] InputPaths of string list
+        | [<MainCommand; AppSettingsSeparator(',')>] InputPaths of string list
         //| [<AltCommandLine("-o")>] Output of string
         | [<AltCommandLine("-c"); Unique>] ConsoleInput of string
         
