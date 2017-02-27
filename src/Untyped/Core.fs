@@ -19,7 +19,7 @@ module Core =
         match t with
         | Variable (fi, n, _) ->
             match getBinding fi ctx n with
-            | AbbstractionBind t -> t
+            | AbstractionBind t -> t
             | _ -> raise Common.NoRuleAppliesException
         | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
             termSubstTop v2 t12
@@ -39,8 +39,8 @@ module Core =
   
     let evalBinding ctx b =
         match b with
-        | AbbstractionBind t -> 
+        | AbstractionBind t -> 
             let t' = eval ctx t 
-            AbbstractionBind t'
+            AbstractionBind t'
         | bind -> 
             bind

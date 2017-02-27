@@ -17,7 +17,7 @@ type Term =
 
 type Binding = 
     | NameBind 
-    | AbbstractionBind of Term
+    | AbstractionBind of Term
 
 type Context = (string * Binding) list
 
@@ -75,7 +75,7 @@ module CommonAst =
     let bindingshift d bind =
         match bind with
         | NameBind -> NameBind
-        | AbbstractionBind t -> AbbstractionBind (termShift d t)
+        | AbstractionBind t -> AbstractionBind (termShift d t)
 
     (* Substitution *)
     let termSubst j s t =

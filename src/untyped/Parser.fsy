@@ -97,7 +97,7 @@ Binder :
 	SLASH
       { fun ctx -> NameBind }
   | EQ Term
-      { fun ctx -> AbbstractionBind($2 ctx) }
+      { fun ctx -> AbstractionBind($2 ctx) }
 
 Term :
     AppTerm

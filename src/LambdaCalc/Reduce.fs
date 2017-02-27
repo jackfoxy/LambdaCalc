@@ -46,7 +46,7 @@ module Reduce =
                 match bind with 
                 | NameBind -> 
                     commentLines, inputLines 
-                | AbbstractionBind t ->
+                | AbstractionBind t ->
                     printComments t commentLines inputLines
 
             let bind' = reduceParams.EvalBinding ctx bind

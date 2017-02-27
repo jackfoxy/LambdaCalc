@@ -81,5 +81,5 @@ module Ast =
     let printBinding ctx b =
         match b with 
         | NameBind -> () 
-        | AbbstractionBind t -> (pr "= "; printtm ctx t)
+        | AbstractionBind t -> (pr "= "; printtm ctx t)
   

@@ -9,7 +9,7 @@ type Term =
 
 type Binding = 
     | NameBind 
-    | AbbstractionBind of Term
+    | AbstractionBind of Term
 
 type Command =
     | Eval of FileInfo : Info * Term 

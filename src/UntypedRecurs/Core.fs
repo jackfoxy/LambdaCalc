@@ -52,7 +52,7 @@ module Core =
     let getIdentity (ctx : Context) =
         let _, binding = ctx.[ctx.Length - 1]
         match binding with
-        | AbbstractionBind identity ->
+        | AbstractionBind identity ->
             identity
         | _ ->
             invalidArg "getBottom" "can't get here"
@@ -61,7 +61,7 @@ module Core =
         match t with
         | Variable (fi, n, _) ->
             match getBinding fi ctx n with
-            | AbbstractionBind t -> 
+            | AbstractionBind t -> 
                 t
             | _ -> raise Common.NoRuleAppliesException
 
@@ -107,8 +107,8 @@ module Core =
   
     let evalBinding ctx b =
         match b with
-        | AbbstractionBind t -> 
+        | AbstractionBind t -> 
             let t' = eval ctx t 
-            AbbstractionBind t'
+            AbstractionBind t'
         | bind -> 
             bind
