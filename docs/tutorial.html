@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Introducing your project
+    <title>LambdaCalc Tutorial
 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Stripped-down lambda calculus"/>
@@ -33,21 +33,27 @@
       <div class="row">
         <div class="span9" id="main">
           
-<h1><a name="Introducing-your-project" class="anchor" href="#Introducing-your-project">Introducing your project</a></h1>
-<p>Say more</p>
+<h1><a name="LambdaCalc-Tutorial" class="anchor" href="#LambdaCalc-Tutorial">LambdaCalc Tutorial</a></h1>
+<p>Use build.cmd to build the console app projects. See <a href="buildnotes.html">Build Notes</a> for important information about the first time build
+and builds after making changes to the Parser.fs files.</p>
+<p>Evaluating <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
-<span class="l">2: </span>
-<span class="l">3: </span>
-<span class="l">4: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="prep">#r</span> <span class="s">&quot;LambdaCalc.dll&quot;</span>
-<span class="k">open</span> <span class="i">LambdaCalc</span>
-
-<span class="i">Library</span><span class="o">.</span><span class="i">hello</span> <span class="n">0</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="o">.</span>
 </code></pre></td>
 </tr>
 </table>
-<p>Some more info</p>
+<p><code>-c "(λx. λy. y x) (λx. x) (lambda x.x)"</code> does nothing more than demonstrate submitting a λ-abstraction from the console after the abstractions
+in the files have evaluated. To submit multiple abstractions be sure to <code>;</code> separate them.</p>
+<p>See <a href="index.html">console app documentation</a> for all parameter options.</p>
+<p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="o">.</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Did you know you can write unit tests in the Lambda Calculus? Sure beats desk-checking the abstractions you compose.</p>
 
 
         </div>
@@ -56,6 +62,8 @@
           <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
             <li class="nav-header">LambdaCalc</li>
             <li><a href="/LambdaCalc/index.html">Home page</a></li>
+            <li><a href="/LambdaCalc/operationalSemantics.html">Operational Semantics</a></li>
+            <li><a href="/LambdaCalc/unitTests.html">Unit Tests</a></li>
             <li class="divider"></li>
             <li><a href="http://nuget.org/packages/LambdaCalc">Get Library via NuGet</a></li>
             <li><a href="https://github.com/jackfoxy/LambdaCalc">Source Code on GitHub</a></li>
@@ -63,7 +71,7 @@
             <li><a href="/LambdaCalc/release-notes.html">Release Notes</a></li>
             
             <li class="nav-header">Getting started</li>
-              <li><a href="/LambdaCalc/buildnotes.html">Sample tutorial</a></li>
+              <li><a href="/LambdaCalc/buildnotes.html">Build Notes</a></li>
             <li><a href="/LambdaCalc/tutorial.html">Sample tutorial</a></li>
 
             <li class="nav-header">Documentation</li>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Operational Semantics
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Stripped-down lambda calculus"/>
+    <meta name="author" content="Jack Fox"/>
+
+    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
+
+    <link type="text/css" rel="stylesheet" href="/LambdaCalc/content/style.css" />
+    <script type="text/javascript" src="/LambdaCalc/content/tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="http://fsharp.org">fsharp.org</a></li>
+          <li><a href="https://github.com/jackfoxy/LambdaCalc">github page</a></li>
+        </ul>
+        <h3 class="muted"><a href="/LambdaCalc/index.html">LambdaCalc</a></h3>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="span9" id="main">
+          
+<h1><a name="Operational-Semantics" class="anchor" href="#Operational-Semantics">Operational Semantics</a></h1>
+<p>Operational Semantics specify how a language behaves. The Lambda Calculus specification, in modified <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">Baukus-Naur form</a>, is from TAPL, p. 72.</p>
+<h2><a name="Untyped-Lambda-Calculus" class="anchor" href="#Untyped-Lambda-Calculus">Untyped Lambda Calculus</a></h2>
+<p><strong>Syntax</strong></p>
+<p>The legal forms of the language, terms, are either a variable, abstraction, or abstraction application.</p>
+<p>Values may represent abstractions.</p>
+<table class="pre"><tr>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">t</span> <span class="o">::</span><span class="o">=</span>
+    <span class="i">x</span>       <span class="o">/*</span> <span class="i">variable</span> <span class="o">*/</span>
+    <span class="i">λx</span><span class="o">.</span><span class="i">t</span>    <span class="o">/*</span> <span class="i">abstraction</span> <span class="o">*/</span>
+    <span class="i">t</span> <span class="i">t</span>     <span class="o">/*</span> <span class="i">application</span> <span class="o">*/</span>
+
+<span class="i">v</span> <span class="o">::</span><span class="o">=</span>
+    <span class="i">λx</span><span class="o">.</span><span class="i">t</span>    <span class="o">/*</span> <span class="i">abstraction</span> <span class="i">value</span> <span class="o">*/</span>
+</code></pre></td>
+</tr>
+</table>
+<p><strong>Evaluation</strong></p>
+<p>The horizontal line signifies an IF / THEN rule.</p>
+<p><code>→</code> implies evaluates in one step.</p>
+<p><code>[x ↦ v<sub>2</sub>]t<sub>12</sub></code> reads substitute <code>v<sub>2</sub></code> for all occurences of free variable <code>x</code> in term <code>t<sub>12</sub></code>
+("free" meaning the variable is not bound by an enclosing abstraction).</p>
+<table class="pre"><tr>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">       <span class="i">t<sub>1</sub>  →  t<sub>1</sub>&#39;</span>    
+    <span class="i">_______________</span>      <span class="o">/*</span> <span class="i">E</span><span class="o">-</span><span class="i">APP1</span> <span class="o">*/</span>
+    <span class="i">t<sub>1</sub> t<sub>2</sub>  →  t<sub>1</sub>&#39; t<sub>2</sub></span>
+
+       <span class="i">t<sub>2</sub>  →  t<sub>2</sub>&#39;</span>    
+    <span class="i">_______________</span>      <span class="o">/*</span> <span class="i">E</span><span class="o">-</span><span class="i">APP2</span> <span class="o">*/</span>
+    <span class="i">v<sub>1</sub> t<sub>2</sub>  →  v<sub>1</sub> t<sub>2</sub>&#39;</span>
+
+    (<span class="i">λx</span><span class="o">.</span><span class="i">t<sub>12</sub> v<sub>2</sub>)  →  [x ↦ v<sub>2</sub>]t<sub>12</sub></span>    <span class="o">/*</span> <span class="i">E</span><span class="o">-</span><span class="i">APPABS</span> <span class="o">*/</span>
+</code></pre></td>
+</tr>
+</table>
+<p><code>E-APP1</code> and <code>E-APP2</code> are congruence rules. <code>E-APPABS</code> is the computation or substitution rule, and note the rule matches
+when v<sub>2</sub>, which ranges over values, and is the right-hand side of the left-hand side of the rule. Thus this rule
+controls the order of evaluation, and is the crux of by-value evaluation. This is problematic for evaluating recursion,
+which the following extension to the semantics addresses.</p>
+<h2><a name="Untyped-Recursive-Lambda-Calculus" class="anchor" href="#Untyped-Recursive-Lambda-Calculus">Untyped Recursive Lambda Calculus</a></h2>
+<p>This operational semantics adds one substitution rule to the evaluation operational semantics.</p>
+<p><code>⊢</code> indicates the right-hand side is in the context of the left-hand side.</p>
+<p><code>f: (λf. λx. _)</code> reads <code>f</code> is an abstraction of the form <code>λf. λx. _</code>. Note the recursion; and the form of the abstraction body is unimportant.</p>
+<table class="pre"><tr>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">f</span><span class="o">:</span> (<span class="i">λf</span><span class="o">.</span> <span class="i">λx</span><span class="o">.</span> _) <span class="o"> ⊢ (<span class="i">λy</span><span class="o">.</span> (<span class="i">λx</span><span class="o">.</span> <span class="i">f</span> (<span class="i">λy</span><span class="o">.</span> <span class="i">x</span> <span class="i">x</span> <span class="i">y</span>)) (<span class="i">λx</span><span class="o">.</span> <span class="i">f</span> (<span class="i">λy</span><span class="o">.</span> <span class="i">x</span> <span class="i">x</span> <span class="i">y</span>)) <span class="i">y</span>) (<span class="i">λt</span><span class="o">.</span> <span class="i">λb</span><span class="o">.</span> <span class="i">b</span>)
+<span class="i">_____________________________________________________________________________</span>
+                                   <span class="i">λb</span><span class="o">.</span> <span class="i">b</span>
+</code></pre></td>
+</tr>
+</table>
+
+
+        </div>
+        <div class="span3">
+          <img src="/LambdaCalc/img/logo.png" alt="F# Project" style="width:150px;margin:10px" />  
+          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
+            <li class="nav-header">LambdaCalc</li>
+            <li><a href="/LambdaCalc/index.html">Home page</a></li>
+            <li><a href="/LambdaCalc/operationalSemantics.html">Operational Semantics</a></li>
+            <li><a href="/LambdaCalc/unitTests.html">Unit Tests</a></li>
+            <li class="divider"></li>
+            <li><a href="http://nuget.org/packages/LambdaCalc">Get Library via NuGet</a></li>
+            <li><a href="https://github.com/jackfoxy/LambdaCalc">Source Code on GitHub</a></li>
+            <li><a href="/LambdaCalc/license.html">License</a></li>
+            <li><a href="/LambdaCalc/release-notes.html">Release Notes</a></li>
+            
+            <li class="nav-header">Getting started</li>
+              <li><a href="/LambdaCalc/buildnotes.html">Build Notes</a></li>
+            <li><a href="/LambdaCalc/tutorial.html">Sample tutorial</a></li>
+
+            <li class="nav-header">Documentation</li>
+            <li><a href="/LambdaCalc/reference/index.html">API Reference</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a href="https://github.com/jackfoxy/LambdaCalc"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"/></a>
+  </body>
+  </html>

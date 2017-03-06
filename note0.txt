@@ -1,18 +1,18 @@
 ﻿
-1) can't prove a program is elegant (shortest program for given IO) Chaitin, Meta Math, p. 125
-
-2) change fileinfo here in Error.fs (actually line and character are later rewritten inside parser)
+1) change fileinfo here in Error.fs (actually line and character are later rewritten inside parser)
 
 let createInfo f l c = FI (f, l, c)
 
-2a) next best place to catch it is here in ...Lib.fs
+1a) next best place to catch it is here in ...Lib.fs
 
 	let processInput input ctx = 
         let (cmds, _) = parseInput input ctx
 
 	and rewrite
 
-3) in FileInfo line is 1-based, while character is 0-based (apparrently, but not accurate in displacement)
+2) in FileInfo line is 1-based, while character is 0-based (apparrently, but not accurate in displacement)
+
+3) see https://en.wikipedia.org/wiki/Lambda_calculus#Substitution α-conversion re: De Bruijn index 
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Write-Host "λλλλλ"
@@ -21,7 +21,7 @@ Write-Host "λλλλλ"
 full untyped run
 .\bin\untyped\Untyped prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 
-full recurs run
+full recurs run 
 .\bin\untypedrecurs\UntypedRecurs prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 
 @@@@@@@@@@@@@@@@@@@@@@@@@

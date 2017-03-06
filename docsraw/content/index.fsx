@@ -1,51 +1,81 @@
-(*** hide ***)
-// This block of code is omitted in the generated HTML documentation. Use 
-// it to define helpers that you do not want to show in the documentation.
-#I "../../bin/untyped"
-
-(**
+﻿(**
 LambdaCalc
 ======================
 
-Stripped-down Lambda Calculus parser using fslexyacc. Lexer and parser intended to be as minimalistic as possible, 
+Stripped-down Lambda Calculus parsers using [FsLexYacc](http://fsprojects.github.io/FsLexYacc/). Lexer and parser intended to be as minimalistic as possible, 
 supporting Untyped Lambda Calculus syntax and comments. Also functions as a working interpreter by performing evaluation and reduction.
 
-Example
--------
+Untyped Lambda Calculus
+----------------------------
 
-This example demonstrates using a function defined in this sample library.
+The console app Untyped is a parser/evalutor for the Untyped Lambda Calculus.
 
-*)
-#r "LambdaCalc.dll"
-open LambdaCalc
+Untyped Recursive Lambda Calculus
+---------------------------------
 
-printfn "hello = %s" <| "world"
-
-(**
-Some more info
+The console app UntypedRecurs is a parser/evalutor for the Untyped Recursive Lambda Calculus, a demonstration project in conjunction with a recently submitted research paper, 
+"Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise not terminate under evaluation by value, so long as the function emits 
+the bottom abstraction, `λt.λb. b`, when it is finished recursing.
 
 Documentation
------------------------
+-------------
 
- * [Build Notes](buildnotes.html) describe a simple 2-step manual process required to make the first build..
+````
+USAGE: Untyped [--help] [--consoleinput <string>] [--inputfolder <string>] [--lambda] [<string>...]
+
+INPUTPATHS:
+
+    <string>...           (optional) list file paths of input in order to process
+
+OPTIONS:
+
+    --consoleinput, -c <string>
+                          input from console for process after optional files
+    --inputfolder, -i <string>
+                          folder for input paths
+    --lambda, -l          use and print u03BB for lambda followed by space
+    --help                display this list of options.
+````
+
+λ-abstraction terms must be semi-colon delimited `;`. 
+
+Comments begin with `/*`, end with `*/`, and may span lines.
+
+When running in PowerShell, set the output encoding to UTF-8 encoding to properly display the `λ` character.
+
+````
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+
+````
+
+ * [Build Notes](buildnotes.html) describes a simple 2-step manual process required to make the first build.
 
  * [Tutorial](tutorial.html) contains a further explanation of this project.
 
  * [API Reference](reference/index.html) contains automatically generated documentation for all types, modules
    and functions in the project. 
  
+Acknowledgements
+----------------
+
+This work is based on original source code By Benjamin C. Pierce in support of his classic text, [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/).
+
+Jack Pappas created the original [F# port](https://github.com/jack-pappas/fsharp-tapl) of Pierce's code. 
+[Jackfoxy's fork](https://github.com/jackfoxy/fsharp-tapl) of Pappas' work builds with recent F# and [FsLexYacc](http://fsprojects.github.io/FsLexYacc/) releases.
+
+Most of Pierce's files have been heavily modified for this project. Pretty printing was completely rewritten.
+
 Contributing and copyright
 --------------------------
 
 The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
 the project and submit pull requests. If you're adding a new public API, please also 
-consider adding [samples][content] that can be turned into a documentation. You might
-also want to read the [library design notes][readme] to understand how it works.
+add [samples][content] that can be turned into documentation.
 
 The library is available under permissive licensing, which allows modification and 
 redistribution for both commercial and non-commercial purposes, provided files 
-copyrighted by Benjamin C. Pierce retain their copyright notice. For more information see the 
-[License file][license] in the GitHub repository. 
+copyrighted by Benjamin C. Pierce retain their copyright notice. For more information see the [License file][license] in the GitHub repository. 
 
   [content]: https://github.com/jackfoxy/LambdaCalc/tree/master/docs/content
   [gh]: https://github.com/jackfoxy/LambdaCalc

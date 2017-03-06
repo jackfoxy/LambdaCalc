@@ -30,21 +30,21 @@ v ::=
 
 Evaluation
 
-       t1 -> t1'    
+       t1 → t1'    
     _______________      /* E-APP1 */
-    t1 t2 -> t1' t2
+    t1 t2 → t1' t2
 
-       t2 -> t2'    
+       t2 → t2'    
     _______________      /* E-APP2 */
-    v1 t2 -> v1 t2'
+    v1 t2 → v1 t2'
 
-    (λx.t12) v2 -> [x ↦ v2]t12    /* abstraction value */
+    (λx.t12) v2 → [x ↦ v2]t12    /* abstraction value */
 
 *)
 	
 Operational Semantics
 
-f: (λf. λx. _) |- (λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y) (λt. λb. b)
+f: (λf. λx. _) ⊢ (λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y) (λt. λb. b)
 _____________________________________________________________________________
                                    λb. b
 
