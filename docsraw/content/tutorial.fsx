@@ -23,6 +23,6 @@ Evaluatining abstractions in the Untyped Recursive Lambda Calculus.
 .\bin\untypedrecurs\UntypedRecurs prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 ````
 
-Did you know you can write unit tests in the Lambda Calculus? Sure beats desk-checking the abstractions you compose. 
+Did you know you can write [unit tests](unitTests.html) in the Lambda Calculus? Sure beats desk-checking the abstractions you compose. 
 
 *)

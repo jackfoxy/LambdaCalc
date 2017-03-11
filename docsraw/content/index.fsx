@@ -2,8 +2,8 @@
 LambdaCalc
 ======================
 
-Stripped-down Lambda Calculus parsers using [FsLexYacc](http://fsprojects.github.io/FsLexYacc/). Lexer and parser intended to be as minimalistic as possible, 
-supporting Untyped Lambda Calculus syntax and comments. Also functions as a working interpreter by performing evaluation and reduction.
+Lambda Calculus parsers using [FsLexYacc](http://fsprojects.github.io/FsLexYacc/). The Lexers and parsers are intended to be as minimalistic as possible, 
+supporting Untyped Lambda Calculus syntax and comments. The resulting console applications function as working interpreters performing evaluation and reduction.
 
 Untyped Lambda Calculus
 ----------------------------
@@ -62,14 +62,14 @@ Acknowledgements
 This work is based on original source code By Benjamin C. Pierce in support of his classic text, [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/).
 
 Jack Pappas created the original [F# port](https://github.com/jack-pappas/fsharp-tapl) of Pierce's code. 
-[Jackfoxy's fork](https://github.com/jackfoxy/fsharp-tapl) of Pappas' work builds with recent F# and [FsLexYacc](http://fsprojects.github.io/FsLexYacc/) releases.
+[Jackfoxy's fork](https://github.com/jackfoxy/fsharp-tapl) of Pappas' work builds with recent [F#](http://fsharp.org/) and [FsLexYacc](http://fsprojects.github.io/FsLexYacc/) releases.
 
 Most of Pierce's files have been heavily modified for this project. Pretty printing was completely rewritten.
 
 Contributing and copyright
 --------------------------
 
-The project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
+This project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
 the project and submit pull requests. If you're adding a new public API, please also 
 add [samples][content] that can be turned into documentation.
 
