@@ -2,6 +2,7 @@
 
 open System.IO
 
+/// Command line parsing.
 module CommandLine = 
     
     type Source =

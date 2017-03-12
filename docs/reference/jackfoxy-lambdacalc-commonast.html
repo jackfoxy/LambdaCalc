@@ -56,10 +56,10 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '5', 5)" onmouseover="showTip(event, '5', 5)">
-            addBinding ctx x bind
+            addBinding context x binding
           </code>
           <div class="tip" id="5">
-            <strong>Signature:</strong> ctx:Context -&gt; x:string -&gt; bind:Binding -&gt; Context<br />
+            <strong>Signature:</strong> context:Context -&gt; x:string -&gt; binding:Binding -&gt; Context<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -67,17 +67,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Add binding to the context.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '6', 6)" onmouseover="showTip(event, '6', 6)">
-            addName ctx x
+            addName context name
           </code>
           <div class="tip" id="6">
-            <strong>Signature:</strong> ctx:Context -&gt; x:string -&gt; Context<br />
+            <strong>Signature:</strong> context:Context -&gt; name:string -&gt; Context<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -85,17 +87,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Add a name binding to the context.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '7', 7)" onmouseover="showTip(event, '7', 7)">
-            ctxLength ctx
+            ctxLength context
           </code>
           <div class="tip" id="7">
-            <strong>Signature:</strong> ctx:Context -&gt; int<br />
+            <strong>Signature:</strong> context:Context -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -103,7 +107,9 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Count of bindings in current state (context).</p>
+
+
         </td>
       </tr>
       <tr>
@@ -121,17 +127,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>A context with no bindings.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
-            getBinding fi ctx i
+            getBinding fileInfo context i
           </code>
           <div class="tip" id="9">
-            <strong>Signature:</strong> fi:Info -&gt; ctx:Context -&gt; i:int -&gt; Binding<br />
+            <strong>Signature:</strong> fileInfo:Info -&gt; context:Context -&gt; i:int -&gt; Binding<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -139,17 +147,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Lookup binding in context by index, shifting terms if it is an abstraction bindings.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
-            name2Index fi ctx x
+            name2Index fileInfo context x
           </code>
           <div class="tip" id="10">
-            <strong>Signature:</strong> fi:Info -&gt; ctx:Context -&gt; x:string -&gt; int<br />
+            <strong>Signature:</strong> fileInfo:Info -&gt; context:Context -&gt; x:string -&gt; int<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -157,17 +167,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Get context index by binding name.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
-            pickfreshname ctx x
+            pickfreshname context name
           </code>
           <div class="tip" id="11">
-            <strong>Signature:</strong> ctx:Context -&gt; x:string -&gt; Context * string<br />
+            <strong>Signature:</strong> context:Context -&gt; name:string -&gt; Context * string<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -175,17 +187,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Choose a distinct variable name in the context.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
-            termInfo t
+            termInfo term
           </code>
           <div class="tip" id="12">
-            <strong>Signature:</strong> t:Term -&gt; Info<br />
+            <strong>Signature:</strong> term:Term -&gt; Info<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -193,17 +207,19 @@
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          
+          <p>Retrieve file info for term.</p>
+
+
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
-            termSubstTop s t
+            termSubstTop s term
           </code>
           <div class="tip" id="13">
-            <strong>Signature:</strong> s:Term -&gt; t:Term -&gt; Term<br />
+            <strong>Signature:</strong> s:Term -&gt; term:Term -&gt; Term<br />
                       </div>
         </td>
         <td class="xmldoc">
@@ -233,7 +249,7 @@
             
             <li class="nav-header">Getting started</li>
               <li><a href="/LambdaCalc/buildnotes.html">Build Notes</a></li>
-            <li><a href="/LambdaCalc/tutorial.html">Sample tutorial</a></li>
+            <li><a href="/LambdaCalc/tutorial.html">Tutorial</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/LambdaCalc/reference/index.html">API Reference</a></li>

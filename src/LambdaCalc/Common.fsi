@@ -3,6 +3,7 @@
 open CommandLine
 open System.IO
 
+/// Common evaluation routines.
 module Common =
 
     type InputLines = 

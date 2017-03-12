@@ -2,6 +2,7 @@
 
 open Common
 
+/// Formatted term printing.
 module PrettyPrint =
 
     val mutable useLambda : bool

@@ -1,7 +1,7 @@
-﻿fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));
+﻿/*fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));*/
 
-/*fact = λf. λx. mult x (f (prd x));*/
+fact = λf. λx. mult x (f (prd x));
 
-/*fact3 = fix fact c3;*/
+fact3 = fix fact c3;
 
 /*fact3a = fact (fix fact) c0;*/

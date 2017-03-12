@@ -48,7 +48,7 @@ The horizontal line signifies an IF / THEN rule.
 
 `E-APP1` and `E-APP2` are congruence rules. 
 
-`E-APPABS` is the computation or substitution rule, and note the rule matches
+`E-APPABS` is the computation or substitution rule. Note the rule matches
 when `v<sub>2</sub>` ranges over values. Thus the right-hand side must be evaluated and reduced first, and so this rule 
 controls the order of evaluation and is the crux of by-value evaluation. This is problematic for evaluating recursion, 
 which the following extension to the semantics addresses.

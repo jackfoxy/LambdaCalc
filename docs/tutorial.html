@@ -38,7 +38,8 @@
 and builds after making changes to the Parser.fs files.</p>
 <p>Evaluating <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.</p>
 <table class="pre"><tr>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">.\bin\untyped\Untyped prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">.\bin\untyped\Untyped prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd
+ tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 </code></pre></td>
 </tr>
 </table>
@@ -47,7 +48,8 @@ in the files have evaluated. To submit multiple abstractions be sure to <code>;<
 <p>See <a href="index.html">console app documentation</a> for all parameter options.</p>
 <p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus.</p>
 <table class="pre"><tr>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">.\bin\untypedrecurs\UntypedRecurs prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">.\bin\untypedrecurs\UntypedRecurs prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd
+ tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 </code></pre></td>
 </tr>
 </table>
@@ -70,7 +72,7 @@ in the files have evaluated. To submit multiple abstractions be sure to <code>;<
             
             <li class="nav-header">Getting started</li>
               <li><a href="/LambdaCalc/buildnotes.html">Build Notes</a></li>
-            <li><a href="/LambdaCalc/tutorial.html">Sample tutorial</a></li>
+            <li><a href="/LambdaCalc/tutorial.html">Tutorial</a></li>
 
             <li class="nav-header">Documentation</li>
             <li><a href="/LambdaCalc/reference/index.html">API Reference</a></li>

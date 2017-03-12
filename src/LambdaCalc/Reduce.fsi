@@ -3,6 +3,7 @@
 open Common
 open PrettyPrint
 
+/// Lambda reduction to normal form through call by value.
 module Reduce =
 
     type ReduceParams =
