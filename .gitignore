@@ -14,7 +14,7 @@ LambdaCalc debugging/
 #Visual Studio files
 *.[Oo]bj
 *.exe
-!.paket/paket.bootstrapper.exe
+!paket.bootstrapper.exe
 *.pdb
 *.user
 *.aps
