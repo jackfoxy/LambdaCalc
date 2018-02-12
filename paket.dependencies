@@ -12,5 +12,6 @@ nuget FsLexYacc
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx
 
-nuget NUnit ~> 2
-nuget NUnit.Runners ~> 2
+nuget Expecto
+nuget Expecto.BenchmarkDotNet
+nuget Expecto.FsCheck

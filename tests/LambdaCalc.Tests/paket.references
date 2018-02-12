@@ -1,3 +1,5 @@
 FSharp.Core
-NUnit
-NUnit.Runners
+
+Expecto
+Expecto.BenchmarkDotNet
+Expecto.FsCheck
