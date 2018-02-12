@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>ReduceParams - LambdaCalc</title>
+    <title>token - LambdaCalc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jack Fox"/>
@@ -35,31 +35,31 @@
 
 
 
-<h1>ReduceParams</h1>
+<h1>token</h1>
 <p>
-  <span>Namespace: Jackfoxy.LambdaCalc</span><br />
-  <span>Parent Module: <a href="jackfoxy-lambdacalc-reduce.html">Reduce</a></span>
+  <span>Namespace: global</span><br />
+  <span>Parent Module: <a href="global-parser.html">Parser</a></span>
 </p>
 <div class="xmldoc">
 </div>
-  <h3>Record Fields</h3>
+  <h3>Union Cases</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Record Field</td><td>Description</td></tr>
+      <tr><td>Union Case</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '66', 66)" onmouseover="showTip(event, '66', 66)">
-            AddBinding
+          <code onmouseout="hideTip(event, '97', 97)" onmouseover="showTip(event, '97', 97)">
+            DOT(Info)
           </code>
-          <div class="tip" id="66">
-            <strong>Signature:</strong> Context -&gt; string -&gt; Binding -&gt; Context<br />
+          <div class="tip" id="97">
+            <strong>Signature:</strong> Info<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L11-11" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L17-17" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -69,15 +69,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '67', 67)" onmouseover="showTip(event, '67', 67)">
-            Eval
+          <code onmouseout="hideTip(event, '98', 98)" onmouseover="showTip(event, '98', 98)">
+            EOF(Info)
           </code>
-          <div class="tip" id="67">
-            <strong>Signature:</strong> Context -&gt; Term -&gt; Term<br />
+          <div class="tip" id="98">
+            <strong>Signature:</strong> Info<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L12-12" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L16-16" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -87,15 +87,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '68', 68)" onmouseover="showTip(event, '68', 68)">
-            EvalBinding
+          <code onmouseout="hideTip(event, '99', 99)" onmouseover="showTip(event, '99', 99)">
+            EQ(Info)
           </code>
-          <div class="tip" id="68">
-            <strong>Signature:</strong> Context -&gt; Binding -&gt; Binding<br />
+          <div class="tip" id="99">
+            <strong>Signature:</strong> Info<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L13-13" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L15-15" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -105,15 +105,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '69', 69)" onmouseover="showTip(event, '69', 69)">
-            InputLines
+          <code onmouseout="hideTip(event, '100', 100)" onmouseover="showTip(event, '100', 100)">
+            LAMBDA(Info)
           </code>
-          <div class="tip" id="69">
-            <strong>Signature:</strong> InputLines list<br />
+          <div class="tip" id="100">
+            <strong>Signature:</strong> Info<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L16-16" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L20-20" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -123,15 +123,15 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '70', 70)" onmouseover="showTip(event, '70', 70)">
-            PrintBinding
+          <code onmouseout="hideTip(event, '101', 101)" onmouseover="showTip(event, '101', 101)">
+            LCID(WithInfo&lt;string&gt;)
           </code>
-          <div class="tip" id="70">
-            <strong>Signature:</strong> Context -&gt; Binding -&gt; unit<br />
+          <div class="tip" id="101">
+            <strong>Signature:</strong> WithInfo&lt;string&gt;<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L15-15" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L18-18" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -141,15 +141,87 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '71', 71)" onmouseover="showTip(event, '71', 71)">
-            PrintTerm
+          <code onmouseout="hideTip(event, '102', 102)" onmouseover="showTip(event, '102', 102)">
+            LPAREN(Info)
           </code>
-          <div class="tip" id="71">
-            <strong>Signature:</strong> bool -&gt; Context -&gt; Term -&gt; unit<br />
+          <div class="tip" id="102">
+            <strong>Signature:</strong> Info<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fsi#L14-14" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L14-14" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '103', 103)" onmouseover="showTip(event, '103', 103)">
+            RPAREN(Info)
+          </code>
+          <div class="tip" id="103">
+            <strong>Signature:</strong> Info<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L13-13" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '104', 104)" onmouseover="showTip(event, '104', 104)">
+            SEMI(Info)
+          </code>
+          <div class="tip" id="104">
+            <strong>Signature:</strong> Info<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L12-12" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '105', 105)" onmouseover="showTip(event, '105', 105)">
+            SLASH(Info)
+          </code>
+          <div class="tip" id="105">
+            <strong>Signature:</strong> Info<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L11-11" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '106', 106)" onmouseover="showTip(event, '106', 106)">
+            UCID(WithInfo&lt;string&gt;)
+          </code>
+          <div class="tip" id="106">
+            <strong>Signature:</strong> WithInfo&lt;string&gt;<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Parser.fsi#L19-19" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

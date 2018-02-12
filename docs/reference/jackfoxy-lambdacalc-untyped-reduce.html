@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Term - LambdaCalc</title>
+    <title>Reduce - LambdaCalc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jack Fox"/>
@@ -35,78 +35,37 @@
 
 
 
-<h1>Term</h1>
+<h1>Reduce</h1>
 <p>
-  <span>Namespace: Jackfoxy.LambdaCalc</span><br />
+  <span>Namespace: Jackfoxy.LambdaCalc.Untyped</span><br />
 </p>
 <div class="xmldoc">
-<p>A variable, abstraction, or application of abstraction in the lambda calculus.</p>
-
 </div>
-  <h3>Union Cases</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Union Case</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
-            Abstraction(FileInfo,Name,Abstraction)
+          <code onmouseout="hideTip(event, '27', 27)" onmouseover="showTip(event, '27', 27)">
+            processInput inputSource
           </code>
-          <div class="tip" id="82">
-            <strong>Signature:</strong> Info * string * Term<br />
+          <div class="tip" id="27">
+            <strong>Signature:</strong> inputSource:Source list -&gt; (string * Binding) list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L10-10" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/Untyped/Reduce.fs#L70-70" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>An abstraction, or lambda, in the lambda calculus.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '83', 83)" onmouseover="showTip(event, '83', 83)">
-            Application(...)
-          </code>
-          <div class="tip" id="83">
-            <strong>Signature:</strong> Info * Term * Term<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L12-12" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>An application of abstraction in the lambda calculus.</p>
-
-
-        </td>
-      </tr>
-      <tr>
-        <td class="member-name">
-
-          <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
-            Variable(...)
-          </code>
-          <div class="tip" id="84">
-            <strong>Signature:</strong> Info * int * int<br />
-                      </div>
-        </td>
-        <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L8-8" class="github-link">
-              <img src="../content/img/github.png" class="normal" />
-              <img src="../content/img/github-blue.png" class="hover" />
-            </a>
-          <p>A variable in the lambda calculus.</p>
-
-
+          
         </td>
       </tr>
     </tbody>

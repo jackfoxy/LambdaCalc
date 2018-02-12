@@ -39,8 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
 	ProjectSection(SolutionItems) = preProject
-		docsraw\tools\generate.fsx = docsraw\tools\generate.fsx
-		docsraw\tools\templates\template.cshtml = docsraw\tools\templates\template.cshtml
+		docsrc\tools\generate.fsx = docsrc\tools\generate.fsx
+		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5A9267-6E29-40D7-AA21-115193171F4D}"

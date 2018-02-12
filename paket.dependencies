@@ -1,4 +1,5 @@
 source https://nuget.org/api/v2
+source https://ci.appveyor.com/nuget/fsharp-formatting
 
 nuget FSharp.Core
 
@@ -6,7 +7,7 @@ nuget Argu
 
 nuget SourceLink.Fake
 nuget FAKE
-nuget FSharp.Formatting
+nuget FSharp.Formatting 3.0.0-beta08 beta
 nuget FsLexYacc
 
 github fsharp/FAKE modules/Octokit/Octokit.fsx

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Term - LambdaCalc</title>
+    <title>Ast - LambdaCalc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jack Fox"/>
@@ -35,78 +35,75 @@
 
 
 
-<h1>Term</h1>
+<h1>Ast</h1>
 <p>
-  <span>Namespace: Jackfoxy.LambdaCalc</span><br />
+  <span>Namespace: Jackfoxy.LambdaCalc.UntypedRecurs</span><br />
 </p>
 <div class="xmldoc">
-<p>A variable, abstraction, or application of abstraction in the lambda calculus.</p>
+<p>Syntax trees and associated support functions.</p>
 
 </div>
-  <h3>Union Cases</h3>
+
+<!-- Render nested types and modules, if there are any -->
+
+  <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
     <thead>
-      <tr><td>Union Case</td><td>Description</td></tr>
+      <tr><td>Function or value</td><td>Description</td></tr>
     </thead>
     <tbody>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '82', 82)" onmouseover="showTip(event, '82', 82)">
-            Abstraction(FileInfo,Name,Abstraction)
+          <code onmouseout="hideTip(event, '28', 28)" onmouseover="showTip(event, '28', 28)">
+            printBinding ctx b
           </code>
-          <div class="tip" id="82">
-            <strong>Signature:</strong> Info * string * Term<br />
+          <div class="tip" id="28">
+            <strong>Signature:</strong> ctx:Context -&gt; b:Binding -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L10-10" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/UntypedRecurs/Ast.fs#L81-81" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>An abstraction, or lambda, in the lambda calculus.</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '83', 83)" onmouseover="showTip(event, '83', 83)">
-            Application(...)
+          <code onmouseout="hideTip(event, '29', 29)" onmouseover="showTip(event, '29', 29)">
+            printTerm outer ctx t
           </code>
-          <div class="tip" id="83">
-            <strong>Signature:</strong> Info * Term * Term<br />
+          <div class="tip" id="29">
+            <strong>Signature:</strong> outer:bool -&gt; ctx:Context -&gt; t:Term -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L12-12" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/UntypedRecurs/Ast.fs#L57-57" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>An application of abstraction in the lambda calculus.</p>
-
-
+          
         </td>
       </tr>
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '84', 84)" onmouseover="showTip(event, '84', 84)">
-            Variable(...)
+          <code onmouseout="hideTip(event, '30', 30)" onmouseover="showTip(event, '30', 30)">
+            printtmTerm outer ctx t
           </code>
-          <div class="tip" id="84">
-            <strong>Signature:</strong> Info * int * int<br />
+          <div class="tip" id="30">
+            <strong>Signature:</strong> outer:bool -&gt; ctx:Context -&gt; t:Term -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommonAst.fsi#L8-8" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/UntypedRecurs/Ast.fs#L40-40" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
-          <p>A variable in the lambda calculus.</p>
-
-
+          
         </td>
       </tr>
     </tbody>
