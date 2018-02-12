@@ -43,7 +43,21 @@ supporting Untyped Lambda Calculus syntax and comments. The resulting console ap
 "Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise not terminate under evaluation by value, so long as the function emits
 the bottom abstraction, <code>λt.λb. b</code>, when it is finished recursing.</p>
 <h2><a name="Documentation" class="anchor" href="#Documentation">Documentation</a></h2>
-<table class="pre"><tr>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">USAGE</span><span class="o">:</span> <span class="i">Untyped</span> [<span class="o">--</span><span class="i">help</span>] [<span class="o">--</span><span class="i">consoleinput</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">string</span>&gt;] [<span class="o">--</span><span class="i">inputfolder</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">string</span>&gt;] [<span class="o">--</span><span class="i">lambda</span>] [&lt;<span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="i">string</span><span class="o">&gt;</span>]
 
 <span class="i">INPUTPATHS</span><span class="o">:</span>
@@ -64,9 +78,8 @@ the bottom abstraction, <code>λt.λb. b</code>, when it is finished recursing.<
 <p>λ-abstraction terms must be semi-colon delimited <code>;</code>.</p>
 <p>Comments begin with <code>/*</code>, end with <code>*/</code>, and may span lines.</p>
 <p>When running in PowerShell, set the output encoding to UTF-8 encoding to properly display the <code>λ</code> character.</p>
-<table class="pre"><tr>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-</code></pre></td>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"></pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"></code></pre></td>
 </tr>
 </table>
 <ul>
