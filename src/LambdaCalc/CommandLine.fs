@@ -1,17 +1,22 @@
 ﻿namespace Jackfoxy.LambdaCalc
 
 open Argu
-open FSharpx.Choice
 open System.IO
 
 module CommandLine = 
+    let bind f = 
+        function
+        | Ok x -> f x
+        | Error x -> Error x
 
-    let (|Success|Failure|) = function
-        | Choice1Of2 x -> Success x
-        | Choice2Of2 x -> Failure x
+    let returnM = Ok
 
-    let inline Success x = Choice1Of2 x
-    let inline Failure x = Choice2Of2 x
+    type EitherBuilder() =
+        member __.Return a = returnM a
+        member __.Bind (m, f) = bind f m
+        member __.ReturnFrom m = m
+
+    let choose = EitherBuilder()
 
     type Source =
         | File of string list
@@ -30,11 +35,11 @@ module CommandLine =
 
     type ParsedCommand =
         {
-        Usage : string
-        Source : Source list
-        Target : Target
-        Lambda : bool
-        ErrorMsg: string option
+            Usage : string
+            Source : Source list
+            Target : Target
+            Lambda : bool
+            ErrorMsg: string option
         }
 
     type CLIArguments =
@@ -60,9 +65,9 @@ module CommandLine =
         try
             match argv, argv.Length with
             | _, 0 -> 
-                Failure "no arguments"
+                Error "no arguments"
             | help, 1  when help.[0].ToLower() = "--help" ->
-                Failure ""
+                Error ""
             | _, _ ->
                 let parser = 
                     ArgumentParser.Create<CLIArguments>(programName = programName)
@@ -70,31 +75,31 @@ module CommandLine =
                 let commandLine = parser.Parse argv
                 let usage = parser.PrintUsage()
 
-                Success (commandLine, usage)
+                Ok (commandLine, usage)
         with e ->
             match e with
-            | :? System.ArgumentException -> Failure "unrecognized arguments"
-            | _ -> Failure e.Message
+            | :? System.ArgumentException -> Error "unrecognized arguments"
+            | _ -> Error e.Message
              
     let parseTarget (commandLine : ParseResults<CLIArguments>) = 
 
         let targetList = 
             []
 //            |> (fun x -> 
-//                    if commandLine.Contains <@ Output @> then 
-//                        match commandLine.TryGetResult <@ Output @> with
+//                    if commandLine.Contains Output then 
+//                        match commandLine.TryGetResult Output with
 //                        | Some path -> (Target.File path)::x
 //                        | None -> x
 //                    else x)
 
         match targetList with
-        | [] -> Success Target.Console
-        | [x] -> Success x
-        | hd::tl -> Failure (sprintf "more than one output target specified: %s, %s" (hd.ToString()) (tl.Head.ToString()))
+        | [] -> Ok Target.Console
+        | [x] -> Ok x
+        | hd::tl -> Error (sprintf "more than one output target specified: %s, %s" (hd.ToString()) (tl.Head.ToString()))
 
     let fileInput (commandLine : ParseResults<CLIArguments>) fileList =
         let inputs =
-            match (commandLine.TryGetResult <@ InputFolder @>) with
+            match (commandLine.TryGetResult InputFolder) with
             | Some x -> 
 
                 fileList
@@ -106,23 +111,23 @@ module CommandLine =
             |> List.tryFind (fun x -> x |> (File.Exists >> not)) with
         | Some x ->
             sprintf "input file does not exist: %s" x
-            |> Failure 
+            |> Error 
         | None ->
             Source.File inputs   
-            |> Success 
+            |> Ok 
         
     let parseSource (commandLine : ParseResults<CLIArguments>) = 
 
         let sourceList = 
             []
             |> (fun x -> 
-                    match commandLine.TryGetResult <@ InputPaths @> with
+                    match commandLine.TryGetResult InputPaths with
                     | Some paths -> 
                         (Source.File paths)::x
                     | None -> x
                     )
             |> (fun x -> 
-                    match commandLine.TryGetResult <@ ConsoleInput @> with
+                    match commandLine.TryGetResult ConsoleInput with
                     | Some consoleInput -> 
                         (Source.Console consoleInput)::x
                     | None -> x
@@ -131,19 +136,19 @@ module CommandLine =
         sourceList
         |> List.fold (fun state t -> 
             match state with
-            | Success source ->
+            | Ok source ->
                 match t with
                 | Source.File fileList ->
                     match fileInput commandLine fileList with
-                    | Success x -> 
-                        Success (x::source)
-                    | Failure x ->
-                        Failure x
+                    | Ok x -> 
+                        Ok (x::source)
+                    | Error x ->
+                        Error x
                 | x -> 
-                    Success (x::source)
-            | Failure x ->
-                Failure x
-            ) (Success [])
+                    Ok (x::source)
+            | Error x ->
+                Error x
+            ) (Ok [])
 
 
     let parse programName argv = 
@@ -156,20 +161,20 @@ module CommandLine =
 
                         return 
                             {
-                            Usage = usage
-                            Source = sources
-                            Target = target
-                            Lambda = commandLine.Contains <@ Lambda @>
-                            ErrorMsg = None
+                                Usage = usage
+                                Source = sources
+                                Target = target
+                                Lambda = commandLine.Contains Lambda
+                                ErrorMsg = None
                             } 
                         } with
-        | Success x -> x
-        | Failure msg -> 
+        | Ok x -> x
+        | Error msg -> 
             let usage = ArgumentParser.Create<CLIArguments>(programName = programName).PrintUsage()
             {
-            Usage = usage
-            Source = []
-            Target = Target.Console 
-            Lambda = false
-            ErrorMsg = Some msg
+                Usage = usage
+                Source = []
+                Target = Target.Console 
+                Lambda = false
+                ErrorMsg = Some msg
             } 
