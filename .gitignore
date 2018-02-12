@@ -65,10 +65,10 @@ _ReSharper*/
 localpackages/
 paket-files
 *.orig
-docsraw/content/license.md
-docsraw/content/release-notes.md
+docsrc/content/license.md
+docsrc/content/release-notes.md
 .fake
-docsraw/tools/FSharp.Formatting.svclog
+docsrc/tools/FSharp.Formatting.svclog
 
 # Office Temp Files
 ~$*
