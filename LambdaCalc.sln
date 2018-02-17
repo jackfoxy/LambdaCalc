@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{41897A66-6095-41F8-AB00-BD414B645835}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,9 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4
 		Operational Semantics.txt = Operational Semantics.txt
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Untyped", "src\Untyped\Untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Untyped", "src\Untyped\Untyped.fsproj", "{C88B1088-6A46-4BFF-8B68-71130B83B428}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UntypedRecurs", "src\UntypedRecurs\UntypedRecurs.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "UntypedRecurs", "src\UntypedRecurs\UntypedRecurs.fsproj", "{04563C11-1F58-4EC6-91B1-ECB23DF639D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5D98-4A6A-B1E9-C8264EA8599E}"
 	ProjectSection(SolutionItems) = preProject
@@ -39,15 +39,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
 	ProjectSection(SolutionItems) = preProject
-		docsraw\tools\generate.fsx = docsraw\tools\generate.fsx
-		docsraw\tools\templates\template.cshtml = docsraw\tools\templates\template.cshtml
+		docsrc\tools\generate.fsx = docsrc\tools\generate.fsx
+		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5A9267-6E29-40D7-AA21-115193171F4D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc.Tests", "tests\LambdaCalc.Tests\LambdaCalc.Tests.fsproj", "{74DF7319-3D78-4DE6-8015-3EE1943C62C1}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "LambdaCalc.Tests", "tests\LambdaCalc.Tests\LambdaCalc.Tests.fsproj", "{74DF7319-3D78-4DE6-8015-3EE1943C62C1}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LambdaCalc", "src\LambdaCalc\LambdaCalc.fsproj", "{A42BF79B-3F74-4286-A142-A96C798482E4}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "LambdaCalc", "src\LambdaCalc\LambdaCalc.fsproj", "{A42BF79B-3F74-4286-A142-A96C798482E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{CF43620B-6103-491C-ADFA-5F3A76DEE963}"
 	ProjectSection(SolutionItems) = preProject
@@ -86,22 +86,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.Build.0 = Debug|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.ActiveCfg = Debug|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.Build.0 = Debug|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|Any CPU.ActiveCfg = Release|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|Any CPU.Build.0 = Release|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.ActiveCfg = Release|x86
-		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.Build.0 = Release|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.Build.0 = Debug|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.ActiveCfg = Debug|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.Build.0 = Debug|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.ActiveCfg = Release|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.Build.0 = Release|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.ActiveCfg = Release|x86
-		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.Build.0 = Release|x86
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Debug|x86.Build.0 = Debug|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.ActiveCfg = Release|Any CPU
+		{C88B1088-6A46-4BFF-8B68-71130B83B428}.Release|x86.Build.0 = Release|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Debug|x86.Build.0 = Debug|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{04563C11-1F58-4EC6-91B1-ECB23DF639D3}.Release|x86.Build.0 = Release|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -127,5 +127,8 @@ Global
 		{2331FF94-41B7-4242-B273-D6386055DFCA} = {913E62B0-5D98-4A6A-B1E9-C8264EA8599E}
 		{74DF7319-3D78-4DE6-8015-3EE1943C62C1} = {AE5A9267-6E29-40D7-AA21-115193171F4D}
 		{50AD6414-DA94-44F8-BABB-A4345F4AF883} = {31A6FE9C-2C8C-4C22-9485-83A92B13414D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D21B9123-58C9-4BA4-B521-44A320ACD56F}
 	EndGlobalSection
 EndGlobal

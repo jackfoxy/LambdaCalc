@@ -43,30 +43,43 @@ supporting Untyped Lambda Calculus syntax and comments. The resulting console ap
 "Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise not terminate under evaluation by value, so long as the function emits
 the bottom abstraction, <code>λt.λb. b</code>, when it is finished recursing.</p>
 <h2><a name="Documentation" class="anchor" href="#Documentation">Documentation</a></h2>
-<table class="pre"><tr>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">USAGE</span><span class="o">:</span> <span class="i">Untyped</span> [<span class="o">--</span><span class="i">help</span>] [<span class="o">--</span><span class="i">consoleinput</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">string</span>&gt;] [<span class="o">--</span><span class="i">inputfolder</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="i">string</span>&gt;] [<span class="o">--</span><span class="i">lambda</span>] [&lt;<span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="i">string</span><span class="o">&gt;</span>]
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">USAGE</span><span class="pn">:</span> <span class="id">Untyped</span> <span class="pn">[</span><span class="o">--</span><span class="id">help</span><span class="pn">]</span> <span class="pn">[</span><span class="o">--</span><span class="id">consoleinput</span> <span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">string</span><span class="pn">&gt;]</span> <span class="pn">[</span><span class="o">--</span><span class="id">inputfolder</span> <span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs1', 2)" onmouseover="showTip(event, 'fs1', 2)" class="id">string</span><span class="pn">&gt;]</span> <span class="pn">[</span><span class="o">--</span><span class="id">lambda</span><span class="pn">]</span> <span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="id">string</span><span class="pn">&gt;</span><span class="pn">]</span>
 
-<span class="i">INPUTPATHS</span><span class="o">:</span>
+<span class="id">INPUTPATHS</span><span class="pn">:</span>
 
-    <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="i">string</span><span class="o">&gt;</span>           (<span class="i">optional</span>) <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="i">list</span> <span class="i">file</span> <span class="i">paths</span> <span class="k">of</span> <span class="i">input</span> <span class="k">in</span> <span class="i">order</span> <span class="k">to</span> <span class="i">process</span>
+    <span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs1', 4)" onmouseover="showTip(event, 'fs1', 4)" class="id">string</span><span class="pn">&gt;</span>           <span class="pn">(</span><span class="id">optional</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs2', 5)" onmouseover="showTip(event, 'fs2', 5)" class="id">list</span> <span class="id">file</span> <span class="id">paths</span> <span class="k">of</span> <span class="id">input</span> <span class="k">in</span> <span class="id">order</span> <span class="k">to</span> <span class="id">process</span>
 
-<span class="i">OPTIONS</span><span class="o">:</span>
+<span class="id">OPTIONS</span><span class="pn">:</span>
 
-    <span class="o">--</span><span class="i">consoleinput</span>, <span class="o">-</span><span class="i">c</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="i">string</span><span class="o">&gt;</span>
-                          <span class="i">input</span> <span class="i">from</span> <span class="i">console</span> <span class="k">for</span> <span class="i">process</span> <span class="i">after</span> <span class="i">optional</span> <span class="i">files</span>
-    <span class="o">--</span><span class="i">inputfolder</span>, <span class="o">-</span><span class="i">i</span> <span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 7)" onmouseover="showTip(event, 'fs1', 7)" class="i">string</span><span class="o">&gt;</span>
-                          <span class="i">folder</span> <span class="k">for</span> <span class="i">input</span> <span class="i">paths</span>
-    <span class="o">--</span><span class="i">lambda</span>, <span class="o">-</span><span class="i">l</span>          <span class="k">use</span> <span class="k">and</span> <span class="i">print</span> <span class="i">u03BB</span> <span class="k">for</span> <span class="i">lambda</span> <span class="i">followed</span> <span class="i">by</span> <span class="i">space</span>
-    <span class="o">--</span><span class="i">help</span>                <span class="i">display</span> <span class="i">this</span> <span onmouseout="hideTip(event, 'fs2', 8)" onmouseover="showTip(event, 'fs2', 8)" class="i">list</span> <span class="k">of</span> <span class="i">options</span><span class="o">.</span>
+    <span class="o">--</span><span class="id">consoleinput</span><span class="pn">,</span> <span class="o">-</span><span class="id">c</span> <span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="id">string</span><span class="pn">&gt;</span>
+                          <span class="id">input</span> <span class="id">from</span> <span class="id">console</span> <span class="k">for</span> <span class="id">process</span> <span class="id">after</span> <span class="id">optional</span> <span class="id">files</span>
+    <span class="o">--</span><span class="id">inputfolder</span><span class="pn">,</span> <span class="o">-</span><span class="id">i</span> <span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs1', 7)" onmouseover="showTip(event, 'fs1', 7)" class="id">string</span><span class="pn">&gt;</span>
+                          <span class="id">folder</span> <span class="k">for</span> <span class="id">input</span> <span class="id">paths</span>
+    <span class="o">--</span><span class="id">lambda</span><span class="pn">,</span> <span class="o">-</span><span class="id">l</span>          <span class="k">use</span> <span class="k">and</span> <span class="id">print</span> <span class="id">u03BB</span> <span class="k">for</span> <span class="id">lambda</span> <span class="id">followed</span> <span class="id">by</span> <span class="id">space</span>
+    <span class="o">--</span><span class="id">help</span>                <span class="id">display</span> <span class="id">this</span> <span onmouseout="hideTip(event, 'fs2', 8)" onmouseover="showTip(event, 'fs2', 8)" class="id">list</span> <span class="k">of</span> <span class="id">options</span><span class="pn">.</span>
 </code></pre></td>
 </tr>
 </table>
 <p>λ-abstraction terms must be semi-colon delimited <code>;</code>.</p>
 <p>Comments begin with <code>/*</code>, end with <code>*/</code>, and may span lines.</p>
 <p>When running in PowerShell, set the output encoding to UTF-8 encoding to properly display the <code>λ</code> character.</p>
-<table class="pre"><tr>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-</code></pre></td>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"></pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"></code></pre></td>
 </tr>
 </table>
 <ul>
@@ -90,8 +103,8 @@ add <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/docs/content">sa
 redistribution for both commercial and non-commercial purposes, provided files
 copyrighted by Benjamin C. Pierce retain their copyright notice. For more information see the <a href="https://github.com/jackfoxy/LambdaCalc/blob/master/LICENSE.txt">License file</a> in the GitHub repository.</p>
 
-<div class="tip" id="fs1">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
-<div class="tip" id="fs2">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>
+<div class="tip" id="fs1">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="tip" id="fs2">type &#39;T list = List&lt;&#39;T&gt;</div>
 
         </div>
         <div class="span3">

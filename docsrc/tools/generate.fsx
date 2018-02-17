@@ -27,14 +27,16 @@ let info =
 // For typical project, no changes are needed below
 // --------------------------------------------------------------------------------------
 
-#load "../../packages/build/FSharp.Formatting/FSharp.Formatting.fsx"
-#I "../../packages/build/FAKE/tools/"
+#I "../../packages/FAKE/tools/"
 #r "FakeLib.dll"
 open Fake
-open System.IO
-open Fake.FileHelper
+open Fake.Core
+open Fake.IO
+
+#load "../../packages/FSharp.Formatting/FSharp.Formatting.fsx"
+
 open FSharp.Literate
-open FSharp.MetadataFormat
+open FSharp.Formatting.Razor
 
 // When called from 'build.fsx', use the public project URL as <root>
 // otherwise, use the current 'output' directory.
@@ -44,20 +46,22 @@ let root = website
 let root = "file://" + (__SOURCE_DIRECTORY__ @@ "../../docs")
 #endif
 
+System.IO.Directory.SetCurrentDirectory (__SOURCE_DIRECTORY__)
+
 // Paths with template/source/output locations
 let bin        = __SOURCE_DIRECTORY__ @@ "../../bin"
 let content    = __SOURCE_DIRECTORY__ @@ "../content"
 let output     = __SOURCE_DIRECTORY__ @@ "../../docs"
 let files      = __SOURCE_DIRECTORY__ @@ "../files"
 let templates  = __SOURCE_DIRECTORY__ @@ "templates"
-let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/build/FSharp.Formatting/"
+let formatting = __SOURCE_DIRECTORY__ @@ "../../packages/FSharp.Formatting/"
 let docTemplate = "docpage.cshtml"
 
 // Where to look for *.csproj templates (in this order)
 let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
 layoutRootsAll.Add("en",[ templates; formatting @@ "templates"
                           formatting @@ "templates/reference" ])
-subDirectories (directoryInfo templates)
+DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
 |> Seq.iter (fun d ->
                 let name = d.Name
                 if name.Length = 2 || name.Length = 3 then
@@ -66,30 +70,38 @@ subDirectories (directoryInfo templates)
                                    formatting @@ "templates"
                                    formatting @@ "templates/reference" ]))
 
+let fsiEvaluator = lazy (Some (FsiEvaluator() :> IFsiEvaluator))
+
 // Copy static files and CSS + JS from F# Formatting
 let copyFiles () =
-  CopyRecursive files output true |> Log "Copying file: "
-  ensureDirectory (output @@ "content")
+  CopyRecursive files output true |> Trace.Log "Copying file: "
+  Directory.ensure (output @@ "content")
   CopyRecursive (formatting @@ "styles") (output @@ "content") true 
-    |> Log "Copying styles and scripts: "
+    |> Trace.Log "Copying styles and scripts: "
 
 let binaries =
     let manuallyAdded = 
         referenceBinaries 
         |> List.map (fun b -> bin @@ b)
     
+    let filterDlls name dir =
+        (DirectoryInfo.getSubDirectories dir |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard2.0")) ).[0].GetFiles()
+        |> Array.filter (fun x -> 
+            x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
+        |> Array.map (fun x -> x.FullName) 
+
     let conventionBased = 
-        directoryInfo bin 
-        |> subDirectories
-        |> Array.map (fun d -> d.FullName @@ (sprintf "%s.dll" d.Name))
+        DirectoryInfo.ofPath bin 
+        |> DirectoryInfo.getSubDirectories
+        |> Array.collect (fun d -> filterDlls d.Name d)
         |> List.ofArray
 
     conventionBased @ manuallyAdded
 
 let libDirs =
     let conventionBasedbinDirs =
-        directoryInfo bin 
-        |> subDirectories
+        DirectoryInfo.ofPath bin 
+        |> DirectoryInfo.getSubDirectories
         |> Array.map (fun d -> d.FullName)
         |> List.ofArray
 
@@ -98,7 +110,7 @@ let libDirs =
 // Build API reference from XML comments
 let buildReference () =
   CleanDir (output @@ "reference")
-  MetadataFormat.Generate
+  RazorMetadataFormat.Generate
     ( binaries, output @@ "reference", layoutRootsAll.["en"],
       parameters = ("root", root)::info,
       sourceRepo = githubLink @@ "tree/master",
@@ -107,33 +119,25 @@ let buildReference () =
 
 // Build documentation from `fsx` and `md` files in `docs/content`
 let buildDocumentation () =
-
-  // First, process files which are placed in the content root directory.
-
-  Literate.ProcessDirectory
-    ( content, docTemplate, output, replacements = ("root", root)::info,
-      layoutRoots = layoutRootsAll.["en"],
-      generateAnchors = true,
-      processRecursive = false)
-
-  // And then process files which are placed in the sub directories
-  // (some sub directories might be for specific language).
-
-  let subdirs = Directory.EnumerateDirectories(content, "*", SearchOption.TopDirectoryOnly)
-  for dir in subdirs do
-    let dirname = (new DirectoryInfo(dir)).Name
+  let subdirs =
+    [ content, docTemplate; ]
+  for dir, template in subdirs do
+    let sub = "." // Everything goes into the same output directory here
+    let langSpecificPath(lang, path:string) =
+        path.Split([|'/'; '\\'|], System.StringSplitOptions.RemoveEmptyEntries)
+        |> Array.exists(fun i -> i = lang)
     let layoutRoots =
-        // Check whether this directory name is for specific language
-        let key = layoutRootsAll.Keys
-                  |> Seq.tryFind (fun i -> i = dirname)
+        let key = layoutRootsAll.Keys |> Seq.tryFind (fun i -> langSpecificPath(i, dir))
         match key with
         | Some lang -> layoutRootsAll.[lang]
         | None -> layoutRootsAll.["en"] // "en" is the default language
-
-    Literate.ProcessDirectory
-      ( dir, docTemplate, output @@ dirname, replacements = ("root", root)::info,
+    RazorLiterate.ProcessDirectory
+      ( dir, template, output @@ sub, replacements = ("root", root)::info,
         layoutRoots = layoutRoots,
-        generateAnchors = true )
+        generateAnchors = true,
+        processRecursive = false,
+        includeSource = true, // Only needed for 'side-by-side' pages, but does not hurt others
+        ?fsiEvaluator = fsiEvaluator.Value ) // Currently we don't need it but it's a good stress test to have it here.
 
 // Generate
 copyFiles()
