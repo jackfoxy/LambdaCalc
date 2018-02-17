@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net47;netcoreapp2.0</TargetFrameworks>
     <RootNamespace>UntypedRecurs</RootNamespace>
     <AssemblyName>UntypedRecurs</AssemblyName>
     <Name>UntypedRecurs</Name>
@@ -10,7 +10,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-  <Import Project="..\..\packages\build\FsLexYacc\build\FsLexYacc.targets" />
+  <Import Project="..\..\packages\FsLexYacc\build\FsLexYacc.targets" />
   <ItemGroup>
     <Compile Include="Ast.fsi" />
     <Compile Include="Ast.fs" />
@@ -28,9 +28,6 @@
     <Compile Include="Reduce.fsi" />
     <Compile Include="Reduce.fs" />
     <Compile Include="Main.fs" />
-    <Content Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="paket.references" />
     <None Include="Scripts\load-references-debug.fsx" />
     <None Include="Scripts\load-project-debug.fsx" />
@@ -40,7 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LambdaCalc\LambdaCalc.fsproj" />
     <Reference Include="FsLexYacc.Runtime">
-      <HintPath>..\..\packages\build\FsLexYacc.Runtime\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10\FsLexYacc.Runtime.dll</HintPath>
+      <HintPath>..\..\packages\FsLexYacc.Runtime\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10\FsLexYacc.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
