@@ -30,12 +30,13 @@ let info =
 #I "../../packages/FAKE/tools/"
 #r "FakeLib.dll"
 open Fake
-open Fake.Core
-open Fake.IO
+open System.IO
+open Fake.FileHelper
 
 #load "../../packages/FSharp.Formatting/FSharp.Formatting.fsx"
 
 open FSharp.Literate
+open FSharp.MetadataFormat
 open FSharp.Formatting.Razor
 
 // When called from 'build.fsx', use the public project URL as <root>
@@ -61,7 +62,7 @@ let docTemplate = "docpage.cshtml"
 let layoutRootsAll = new System.Collections.Generic.Dictionary<string, string list>()
 layoutRootsAll.Add("en",[ templates; formatting @@ "templates"
                           formatting @@ "templates/reference" ])
-DirectoryInfo.getSubDirectories (DirectoryInfo.ofPath templates)
+subDirectories (directoryInfo templates)
 |> Seq.iter (fun d ->
                 let name = d.Name
                 if name.Length = 2 || name.Length = 3 then
@@ -74,34 +75,35 @@ let fsiEvaluator = lazy (Some (FsiEvaluator() :> IFsiEvaluator))
 
 // Copy static files and CSS + JS from F# Formatting
 let copyFiles () =
-  CopyRecursive files output true |> Trace.Log "Copying file: "
-  Directory.ensure (output @@ "content")
+  CopyRecursive files output true |> Log "Copying file: "
+  ensureDirectory (output @@ "content")
   CopyRecursive (formatting @@ "styles") (output @@ "content") true 
-    |> Trace.Log "Copying styles and scripts: "
+    |> Log "Copying styles and scripts: "
 
 let binaries =
     let manuallyAdded = 
         referenceBinaries 
         |> List.map (fun b -> bin @@ b)
     
-    let filterDlls name dir =
-        (DirectoryInfo.getSubDirectories dir |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard2.0")) ).[0].GetFiles()
-        |> Array.filter (fun x -> 
-            x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
-        |> Array.map (fun x -> x.FullName) 
-
     let conventionBased = 
-        DirectoryInfo.ofPath bin 
-        |> DirectoryInfo.getSubDirectories
-        |> Array.collect (fun d -> filterDlls d.Name d)
+        directoryInfo bin 
+        |> subDirectories
+        |> Array.map (fun d -> d.Name, (subDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains("netstandard2.0")) ).[0] )
+        |> Array.map (fun (name, d) -> 
+            d.GetFiles()
+            |> Array.filter (fun x -> 
+                x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
+            |> Array.map (fun x -> x.FullName) 
+            )
+        |> Array.concat
         |> List.ofArray
 
     conventionBased @ manuallyAdded
 
 let libDirs =
     let conventionBasedbinDirs =
-        DirectoryInfo.ofPath bin 
-        |> DirectoryInfo.getSubDirectories
+        directoryInfo bin 
+        |> subDirectories
         |> Array.map (fun d -> d.FullName)
         |> List.ofArray
 

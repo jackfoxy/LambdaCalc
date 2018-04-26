@@ -4,16 +4,11 @@
 
 #r @"packages/FAKE/tools/FakeLib.dll"
 open Fake
-open Fake.Core
-//open Fake.Core.Globbing.Operators
-open Fake.Core.TargetOperators
-open Fake.DotNet
-open Fake.DotNet.AssemblyInfo
-open Fake.DotNet.AssemblyInfoFile
-open Fake.IO
+open Fake.Git
+open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
-open Fake.Tools
 open Fake.Testing.Expecto
+open Fake.UserInputHelper
 open System
 
 // --------------------------------------------------------------------------------------
@@ -78,13 +73,13 @@ let (|Fsproj|Csproj|Vbproj|Shproj|) (projFileName:string) =
     | _                           -> failwith (sprintf "Project file %s not supported. Unknown project type." projFileName)
 
 // Generate assembly info files with the right version & up-to-date information
-Target.Create "AssemblyInfo" (fun _ ->
+Target "AssemblyInfo" (fun _ ->
     let getAssemblyInfoAttributes projectName =
-        [ Title (projectName)
-          Product project
-          Description summary
-          Fake.DotNet.AssemblyInfo.Version release.AssemblyVersion
-          FileVersion release.AssemblyVersion ]
+        [ Attribute.Title (projectName)
+          Attribute.Product project
+          Attribute.Description summary
+          Attribute.Version release.AssemblyVersion
+          Attribute.FileVersion release.AssemblyVersion ]
 
     let getProjectDetails projectPath =
         let projectName = System.IO.Path.GetFileNameWithoutExtension(projectPath)
@@ -98,9 +93,9 @@ Target.Create "AssemblyInfo" (fun _ ->
     |> Seq.map getProjectDetails
     |> Seq.iter (fun (projFileName, projectName, folderName, attributes) ->
         match projFileName with
-        | Fsproj -> CreateFSharp (folderName </> "AssemblyInfo.fs") attributes
-        | Csproj -> CreateCSharp ((folderName </> "Properties") </> "AssemblyInfo.cs") attributes
-        | Vbproj -> CreateVisualBasic ((folderName </> "My Project") </> "AssemblyInfo.vb") attributes
+        | Fsproj -> CreateFSharpAssemblyInfo (folderName </> "AssemblyInfo.fs") attributes
+        | Csproj -> CreateCSharpAssemblyInfo ((folderName </> "Properties") </> "AssemblyInfo.cs") attributes
+        | Vbproj -> CreateVisualBasicAssemblyInfo ((folderName </> "My Project") </> "AssemblyInfo.vb") attributes
         | Shproj -> ()
         )
 )
@@ -108,7 +103,7 @@ Target.Create "AssemblyInfo" (fun _ ->
 // Copies binaries from default VS location to expected bin folder
 // But keeps a subdirectory structure for each project in the
 // src folder to support multiple project outputs
-Target.Create "CopyBinaries" (fun _ ->
+Target "CopyBinaries" (fun _ ->
     !! "src/**/*.??proj"
     -- "src/**/*.shproj"
     |>  Seq.map (fun f -> ((System.IO.Path.GetDirectoryName f) </> "bin/Release", "bin" </> (System.IO.Path.GetFileNameWithoutExtension f)))
@@ -118,46 +113,43 @@ Target.Create "CopyBinaries" (fun _ ->
 // --------------------------------------------------------------------------------------
 // Clean build results
 
-Target.Create "Clean" (fun _ ->
-    !! solutionFile |> Fake.DotNet.MsBuild.RunRelease "" "Clean" |> ignore
+Target "Clean" (fun _ ->
+    !! solutionFile |> MSBuildRelease "" "Clean" |> ignore
     CleanDirs ["bin"; "temp"; "docs"]
 )
 
 // --------------------------------------------------------------------------------------
 // Build library & test project
 
-Target.Create "Build" (fun _ ->
+Target "Build" (fun _ ->
     DotNetCli.Restore id
     !! solutionFile
-#if MONO
-    |> MSBuildReleaseExt "" [ ("DefineConstants","MONO") ] "Build"
-#else
-    |> Fake.DotNet.MsBuild.RunRelease "" "Build"
-#endif
+    |> MSBuildRelease "" "Build"
     |> ignore
 )
 
 // --------------------------------------------------------------------------------------
 // Run the unit tests using test runner
 
-Target.Create "RunTests" (fun _ ->
+Target "RunTests" (fun _ ->
     !! testAssemblies
     |> Expecto id
+
 )
 
 // --------------------------------------------------------------------------------------
 // Build a NuGet package
 
-Target.Create "NuGet" (fun _ ->
+Target "NuGet" (fun _ ->
     Paket.Pack(fun p ->
         { p with
             LockDependencies = true
             OutputPath = "bin"
             Version = release.NugetVersion
-            ReleaseNotes = String.toLines release.Notes})
+            ReleaseNotes = toLines release.Notes})
 )
 
-Target.Create "PublishNuget" (fun _ ->
+Target "PublishNuget" (fun _ ->
     Paket.Push(fun p ->
         { p with
             WorkingDir = "bin" })
@@ -178,7 +170,7 @@ let fakeStartInfo script workingDirectory args fsiargs environmentVars =
             info.EnvironmentVariables.[k] <- v
         for (k, v) in environmentVars do
             setVar k v
-        setVar "MSBuild" Fake.DotNet.MsBuild.msBuildExe
+        setVar "MSBuild" msBuildExe
         setVar "GIT" Git.CommandHelper.gitPath
         setVar "FSI" fsiPath)
 
@@ -199,7 +191,7 @@ let buildDocumentationTarget fsiargs target =
         failwith "generating reference documentation failed"
     ()
 
-Target.Create "GenerateReferenceDocs" (fun _ ->
+Target "GenerateReferenceDocs" (fun _ ->
     buildDocumentationTarget "-d:RELEASE -d:REFERENCE" "Default"
 )
 
@@ -211,37 +203,37 @@ let generateHelp' fail debug =
         buildDocumentationTarget args "Default"
         traceImportant "Help generated"
     with
-    | _ when not fail ->
+    | e when not fail ->
         traceImportant "generating help documentation failed"
 
 let generateHelp fail =
     generateHelp' fail false
 
-Target.Create "GenerateHelp" (fun _ ->
-    File.delete "docsrc/content/release-notes.md"
-    Shell.CopyFile "docsrc/content/" "RELEASE_NOTES.md"
+Target "GenerateHelp" (fun _ ->
+    DeleteFile "docsrc/content/release-notes.md"
+    CopyFile "docsrc/content/" "RELEASE_NOTES.md"
     Rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
 
-    File.delete "docsrc/content/license.md"
-    Shell.CopyFile "docsrc/content/" "LICENSE.txt"
+    DeleteFile "docsrc/content/license.md"
+    CopyFile "docsrc/content/" "LICENSE.txt"
     Rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
 
     generateHelp true
 )
 
-Target.Create "GenerateHelpDebug" (fun _ ->
-    File.delete "docsrc/content/release-notes.md"
-    Shell.CopyFile "docsrc/content/" "RELEASE_NOTES.md"
+Target "GenerateHelpDebug" (fun _ ->
+    DeleteFile "docsrc/content/release-notes.md"
+    CopyFile "docsrc/content/" "RELEASE_NOTES.md"
     Rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
 
-    File.delete "docsrc/content/license.md"
-    Shell.CopyFile "docsrc/content/" "LICENSE.txt"
+    DeleteFile "docsrc/content/license.md"
+    CopyFile "docsrc/content/" "LICENSE.txt"
     Rename "docsrc/content/license.md" "docsrc/content/LICENSE.txt"
 
     generateHelp' true true
 )
 
-Target.Create "KeepRunning" (fun _ ->
+Target "KeepRunning" (fun _ ->
     use watcher = !! "docsrc/content/**/*.*" |> WatchChanges (fun changes ->
          generateHelp' true true
     )
@@ -253,7 +245,7 @@ Target.Create "KeepRunning" (fun _ ->
     watcher.Dispose()
 )
 
-Target.Create "GenerateDocs" Target.DoNothing
+Target "GenerateDocs" DoNothing
 
 let createIndexFsx lang =
     let content = """(*** hide ***)
@@ -268,10 +260,10 @@ F# Project Scaffold ({0})
 """
     let targetDir = "docsrc/content" </> lang
     let targetFile = targetDir </> "index.fsx"
-    Directory.ensure targetDir
+    ensureDirectory targetDir
     System.IO.File.WriteAllText(targetFile, System.String.Format(content, lang))
 
-Target.Create "AddLangDocs" (fun _ ->
+Target "AddLangDocs" (fun _ ->
     let args = System.Environment.GetCommandLineArgs()
     if args.Length < 4 then
         failwith "Language not specified."
@@ -289,7 +281,7 @@ Target.Create "AddLangDocs" (fun _ ->
         if System.IO.File.Exists(langTemplateFileName) then
             failwithf "Documents for specified language '%s' have already been added." lang
 
-        Directory.ensure langTemplateDir
+        ensureDirectory langTemplateDir
         Copy langTemplateDir [ templateDir </> templateFileName ]
 
         createIndexFsx lang)
@@ -298,7 +290,7 @@ Target.Create "AddLangDocs" (fun _ ->
 #load "paket-files/fsharp/FAKE/modules/Octokit/Octokit.fsx"
 open Octokit
 
-Target.Create "Release" (fun _ ->
+Target "Release" (fun _ ->
     let user =
         match getBuildParam "github-user" with
         | s when not (String.IsNullOrWhiteSpace s) -> s
@@ -313,12 +305,12 @@ Target.Create "Release" (fun _ ->
         |> Seq.tryFind (fun (s: string) -> s.Contains(gitOwner + "/" + gitName))
         |> function None -> gitHome + "/" + gitName | Some (s: string) -> s.Split().[0]
 
-    Git.Staging.StageAll ""
+    StageAll ""
     Git.Commit.Commit "" (sprintf "Bump version to %s" release.NugetVersion)
-    Git.Branches.pushBranch "" remote (Git.Information.getBranchName "")
+    Branches.pushBranch "" remote (Information.getBranchName "")
 
-    Git.Branches.tag "" release.NugetVersion
-    Git.Branches.pushTag "" remote release.NugetVersion
+    Branches.tag "" release.NugetVersion
+    Branches.pushTag "" remote release.NugetVersion
 
     // release on github
     createClient user pw
@@ -328,12 +320,12 @@ Target.Create "Release" (fun _ ->
     |> Async.RunSynchronously
 )
 
-Target.Create "BuildPackage" Target.DoNothing
+Target "BuildPackage" DoNothing
 
 // --------------------------------------------------------------------------------------
 // Run all targets by default. Invoke 'build <Target>' to override
 
-Target.Create "All" Target.DoNothing
+Target "All" DoNothing
 
 "AssemblyInfo"
   ==> "Build"
@@ -359,4 +351,4 @@ Target.Create "All" Target.DoNothing
   ==> "PublishNuget"
   ==> "Release"
 
-Target.RunOrDefault "All"
+RunTargetOrDefault "All"
