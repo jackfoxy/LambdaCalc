@@ -26,9 +26,6 @@ type Command =
     | Bind of FileInfo : Info * Name : string * Binding
 
 module CommonAst =
-
-    (* Context management *)
-
     let emptyContext : Context = []
 
     let ctxLength (ctx : Context) = List.length ctx
@@ -47,27 +44,27 @@ module CommonAst =
         then pickfreshname ctx (x + "'")
         else (((x, NameBind) :: ctx), x)
   
-    let rec name2Index fi (ctx : Context) x =
+    let rec name2Index fileInfo (ctx : Context) x =
         match ctx with
-        | [] -> error fi ("Identifier '" + (x + "' is unbound"))
-        | (y, _) :: rest -> if y = x then 0 else 1 + (name2Index fi rest x)
+        | [] -> error fileInfo ("Identifier '" + (x + "' is unbound"))
+        | (y, _) :: rest -> if y = x then 0 else 1 + (name2Index fileInfo rest x)
 
     (* Shifting *)
     let tmmap onvar c t =
         let rec walk c t =
             match t with
-            | Variable (fi, x, n) -> 
-                onvar fi c x n
-            | Abstraction (fi, x, t2) -> 
-                Abstraction (fi, x, walk (c + 1) t2)
-            | Application (fi, t1, t2) -> 
-                Application (fi, walk c t1, walk c t2)
+            | Variable (fileInfo, x, n) -> 
+                onvar fileInfo c x n
+            | Abstraction (fileInfo, x, t2) -> 
+                Abstraction (fileInfo, x, walk (c + 1) t2)
+            | Application (fileInfo, t1, t2) -> 
+                Application (fileInfo, walk c t1, walk c t2)
         walk c t
   
     let termShiftAbove d c t =
         tmmap
-            (fun fi c x n ->
-                if x >= c then Variable (fi, x + d, n + d) else Variable (fi, x, n + d))
+            (fun fileInfo c x n ->
+                if x >= c then Variable (fileInfo, x + d, n + d) else Variable (fileInfo, x, n + d))
             c t
   
     let termShift d t = termShiftAbove d 0 t

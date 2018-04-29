@@ -15,32 +15,33 @@ open CommonAst
 /// Core evaluation functions.
 module Core =
 
-    let rec eval1 ctx t =
-        match t with
-        | Variable (fi, n, _) ->
-            match getBinding fi ctx n with
+    let rec eval1 ctx term =
+        match term with
+        | Variable (fileInfo, n, _) ->
+            match getBinding fileInfo ctx n with
             | AbstractionBind t -> t
             | _ -> raise Common.NoRuleAppliesException
         | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
             termSubstTop v2 t12
-        | Application (fi, (Abstraction (_) as v1), t2) ->
+        | Application (fileInfo, (Abstraction (_) as v1), t2) ->
             let t2' = eval1 ctx t2 
-            Application (fi, v1, t2')
-        | Application (fi, t1, t2) -> 
+            Application (fileInfo, v1, t2')
+        | Application (fileInfo, t1, t2) -> 
             let t1' = eval1 ctx t1 
-            Application (fi, t1', t2)
-        | _ -> raise Common.NoRuleAppliesException
+            Application (fileInfo, t1', t2)
+        | _ -> 
+            raise Common.NoRuleAppliesException
   
-    let rec eval ctx t =
+    let rec eval ctx term =
         try 
-            let t' = eval1 ctx t 
+            let t' = eval1 ctx term 
             eval ctx t' 
-        with | Common.NoRuleAppliesException -> t
+        with | Common.NoRuleAppliesException -> term
   
-    let evalBinding ctx b =
-        match b with
-        | AbstractionBind t -> 
-            let t' = eval ctx t 
+    let evalBinding ctx binding =
+        match binding with
+        | AbstractionBind term -> 
+            let t' = eval ctx term 
             AbstractionBind t'
         | bind -> 
             bind
