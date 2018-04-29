@@ -17,58 +17,64 @@ open PrettyPrint
 /// Syntax trees and associated support functions.
 module Ast =
 
-    let small term = 
-        match term with 
+    (* Printing *)
+    (* The printing functions call these utility functions to insert grouping
+      information the pretty-printing library
+    *)
+
+    let small t = 
+        match t with 
         | Variable (_) -> true 
         | _ -> false
   
-    let index2Name fileInfo (ctx : Context) i =
+    let index2Name fi (ctx : Context) x =
         try 
-            let (xn, _) = List.item i ctx 
+            let (xn, _) = List.item x ctx 
             xn
         with
         | Failure _ ->
           let msg =
             Printf.sprintf "Variable lookup failure: offset: %d, ctx size: %d"
-          error fileInfo (msg i (List.length ctx))
+          error fi (msg x (List.length ctx))
 
-    let rec printtmTerm outer ctx term =
-        match term with
-        | Abstraction (_, name, term2) ->
-            let (ctx', name') = pickfreshname ctx name
-            pr <| sprintf "lambda %s." name'
-            if (small term2) && (not outer) then printSpace ()
-            printtmTerm outer ctx' term2;
-        | t -> 
-            printApplicationTerm outer ctx t
-    and printApplicationTerm outer ctx term =
-        match term with
-        | Application (_, term1, term2) ->
-            printApplicationTerm false ctx term1
+    let rec printtmTerm outer ctx t =
+        match t with
+        | Abstraction (_, x, t2) ->
+            let (ctx', x') = pickfreshname ctx x
+            pr "lambda "
+            pr x'
+            pr "."
+            if (small t2) && (not outer) then printSpace ()
+            printtmTerm outer ctx' t2;
+        | t -> printApplicationTerm outer ctx t
+    and printApplicationTerm outer ctx t =
+        match t with
+        | Application (_, t1, t2) ->
+            printApplicationTerm false ctx t1
             printSpace ()
-            printTerm false ctx term2
-        | t -> 
-            printTerm outer ctx t
-    and printTerm outer (ctx : Context) term =
-        match term with
-        | Variable (fileInfo, deBruinIndex, contextLength) ->
-          if (ctxLength ctx) = contextLength
-          then 
-            pr (index2Name fileInfo ctx deBruinIndex)
+            printTerm false ctx t2
+        | t -> printTerm outer ctx t
+    and printTerm outer (ctx : Context) t =
+        match t with
+        | Variable (fi, x, n) ->
+          if (ctxLength ctx) = n
+          then pr (index2Name fi ctx x)
           else
-            pr <| sprintf "[bad index: %s/%s in {%s }]"
-                    (string deBruinIndex)
-                    (string contextLength)
-                    (List.fold (fun s (x, _) -> sprintf "%s  %s" s x) "" ctx)
-        | term -> 
-            pr "("
-            printtmTerm outer ctx term
-            pr ")"
+            pr
+              ("[bad index: " +
+                 ((string x) +
+                    ("/" +
+                       ((string n) +
+                          (" in {" +
+                             ((List.fold (fun s (x, _) -> s + (" " + x)) ""
+                                 ctx)
+                                + " }]"))))))
+        | t -> (pr "("; printtmTerm outer ctx t; pr ")")
   
-    let printBinding ctx binding =
-        match binding with 
+    let printtm ctx t = printtmTerm true ctx t
+  
+    let printBinding ctx b =
+        match b with 
         | NameBind -> () 
-        | AbstractionBind term -> 
-            pr "= "
-            printtmTerm true ctx term
+        | AbstractionBind t -> (pr "= "; printtm ctx t)
   

@@ -695,5 +695,5 @@ NUGET
       System.ValueTuple (>= 4.4 < 5.0)
 GITHUB
   remote: fsharp/FAKE
-    modules/Octokit/Octokit.fsx (7f99a9c4350b6b15a044254977c882574cd72b61)
+    modules/Octokit/Octokit.fsx (b3961e973484a8dc61ee94af13fc6898d0bee705)
       Octokit (>= 0.20)

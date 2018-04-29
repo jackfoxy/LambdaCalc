@@ -17,8 +17,8 @@ open Support.Error
 module Core =
 
     // λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y
-    let isInnerYcombinator term =
-        match term with
+    let isInnerYcombinator t =
+        match t with
         | Abstraction (FI (_), _, 
                         Application (_, 
                             Application (_, 
@@ -42,8 +42,8 @@ module Core =
         | _ ->
             false
 
-    let isBottom term = 
-        match term with
+    let isBottom t = 
+        match t with
         | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), _, _))) -> 
             true
         | _ ->
@@ -57,32 +57,47 @@ module Core =
         | _ ->
             invalidArg "getBottom" "can't get here"
 
-    let rec eval1 ctx term =
-        match term with
-        | Variable (fileInfo, n, _) ->
-            match getBinding fileInfo ctx n with
+    let rec eval1 ctx t =
+        match t with
+        | Variable (fi, n, _) ->
+            match getBinding fi ctx n with
             | AbstractionBind t -> 
                 t
-            | _ -> 
-                raise Common.NoRuleAppliesException
+            | _ -> raise Common.NoRuleAppliesException
 
         | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
+
             termSubstTop v2 t12
 
-        | Application (fileInfo, (Abstraction (_) as v1), t2) ->
+        | Application (fi, (Abstraction (_) as v1), t2) ->
+
             let t2' = eval1 ctx t2 
 
             if  isInnerYcombinator v1 && isBottom t2' then
+//                printfn "the Y term"
+//                printTerm true ctx v1
+//                PrettyPrint.flush()
+//                printfn "the outer term"
+//                printTerm true ctx t
+//                PrettyPrint.flush()
+//                printfn "the applicand reduced"
+//                printTerm true ctx t2'
+//                PrettyPrint.flush()
+//                printfn "the applicand"
+//                printTerm true ctx t2
+//                PrettyPrint.flush()
                 getIdentity ctx
+ 
             else
-                Application (fileInfo, v1, t2')
+                Application (fi, v1, t2')
 
-        | Application (fileInfo, t1, t2) -> 
+        | Application (fi, t1, t2) -> 
+
             let t1' = eval1 ctx t1 
-            Application (fileInfo, t1', t2)
 
-        | _ -> 
-            raise Common.NoRuleAppliesException
+            Application (fi, t1', t2)
+
+        | _ -> raise Common.NoRuleAppliesException
   
     let rec eval ctx t =
         try 

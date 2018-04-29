@@ -54,7 +54,7 @@ module CommandLine =
             interface IArgParserTemplate with
                 member s.Usage =
                     match s with
-                    | InputPaths _ -> "(optional) list file paths (space separated) of input in order to process"
+                    | InputPaths _ -> "(optional) list file paths of input in order to process"
                     //| Output _ -> "(optional, not implemented) output path"
                     | ConsoleInput _ -> "input from console for process after optional files"
                     | Lambda -> @"use and print \u03BB for lambda followed by space"

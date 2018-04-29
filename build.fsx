@@ -134,6 +134,7 @@ Target "Build" (fun _ ->
 Target "RunTests" (fun _ ->
     !! testAssemblies
     |> Expecto id
+
 )
 
 // --------------------------------------------------------------------------------------
