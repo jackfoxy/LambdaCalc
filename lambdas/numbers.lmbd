@@ -10,7 +10,13 @@ c8 = λs. λz. s (s (s (s (s (s (s (s z)))))));
 c9 = λs. λz. s (s (s (s (s (s (s (s (s z))))))));
 
 c20 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))));
+
 c24 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))));
+c25 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z))))))))))))))))))))))));
+
+c28 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))))))));
+
+c30 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))))))))));
 
 iszro = λm. m (λx. fls) tru;
 

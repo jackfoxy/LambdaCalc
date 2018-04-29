@@ -19,10 +19,10 @@ Write-Host "λλλλλ"
 [Console]::WriteLine("λ")
 
 full untyped run
-.\bin\untyped\net47\Untyped prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+dotnet .\bin\untyped\netcoreapp2.0\Untyped.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 
 full recurs run 
-.\bin\untypedrecurs\net47\UntypedRecurs prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+dotnet .\bin\untypedrecurs\netcoreapp2.0\UntypedRecurs.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
 
 @@@@@@@@@@@@@@@@@@@@@@@@@
 fact3 = λs.λz.(λs'.λz'.(λs''.λz''.(λb. b) s'' ((λt.λb. b) s'' z'')) s'
