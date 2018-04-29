@@ -17,7 +17,7 @@ open Support.Error
 module Core =
 
     // λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y
-    let isInnerYcombinator term =
+    let inline isInnerYcombinator term =
         match term with
         | Abstraction (FI (_), _, 
                         Application (_, 
@@ -42,7 +42,7 @@ module Core =
         | _ ->
             false
 
-    let isBottom term = 
+    let inline isBottom term = 
         match term with
         | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), _, _))) -> 
             true
@@ -64,7 +64,7 @@ module Core =
             | AbstractionBind t -> 
                 t
             | _ -> 
-                raise Common.NoRuleAppliesException
+                term
 
         | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
             termSubstTop v2 t12
@@ -72,13 +72,14 @@ module Core =
         | Application (fileInfo, (Abstraction (_) as v1), t2) ->
             let t2' = eval ctx t2 
 
-            if  isInnerYcombinator v1 && isBottom t2' then
+            match isInnerYcombinator v1, isBottom t2' with
+            | true, true ->
                 getIdentity ctx
-            else
+            | _ ->
                 Application (fileInfo, v1, t2')
 
         | Application (fileInfo, t1, t2) -> 
             Application (fileInfo, (eval ctx t1 ), t2)
 
         | _ -> 
-            raise Common.NoRuleAppliesException
+            term

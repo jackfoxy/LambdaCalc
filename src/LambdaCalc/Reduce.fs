@@ -57,9 +57,9 @@ module Reduce =
             (reduceParams.AddBinding ctx x bind'), reducedCommentLines, remainingInputLines 
 
     let rec evalDriver (eval : Context -> Term -> Term) ctx term =
-        try 
-            evalDriver eval ctx <| eval ctx term 
-        with | Common.NoRuleAppliesException -> term
+        match eval ctx term with
+        | t when t = term -> term
+        | t -> evalDriver eval ctx t
   
     let evalBinding eval ctx binding =
         match binding with

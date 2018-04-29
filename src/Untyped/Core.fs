@@ -22,7 +22,7 @@ module Core =
             | AbstractionBind t -> 
                 t
             | _ -> 
-                raise Common.NoRuleAppliesException
+                term
 
         | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
             termSubstTop v2 t12
@@ -34,4 +34,4 @@ module Core =
             Application (fileInfo, (eval ctx t1), t2)
 
         | _ -> 
-            raise Common.NoRuleAppliesException
+            term

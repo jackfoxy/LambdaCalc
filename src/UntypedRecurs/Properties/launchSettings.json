@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "UntypedRecurs": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"lambda x. x\""
+    }
+  }
+}

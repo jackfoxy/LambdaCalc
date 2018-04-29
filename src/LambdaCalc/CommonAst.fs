@@ -80,9 +80,8 @@ module CommonAst =
             (fun fileInfo c x n -> if x = (j + c) then termShift c s else Variable (fileInfo, x, n))
             0 term
   
-    let termSubstTop s term = termShift (-1) (termSubst 0 (termShift 1 s) term)
+    let termSubstTop abstractionTerm term = termShift (-1) (termSubst 0 (termShift 1 abstractionTerm) term)
 
-    (* Context management (continued) *)
     let rec getBinding fileInfo (ctx : Context) i =
         try 
             let (_, bind) = List.item i ctx 
@@ -93,7 +92,6 @@ module CommonAst =
             Printf.sprintf "Variable lookup failure: offset: %d, ctx size: %d"
           error fileInfo (msg i (List.length ctx))
   
-    (* Extracting file info *)
     let termInfo term =
         match term with
         | Variable (fileInfo, _, _) -> fileInfo

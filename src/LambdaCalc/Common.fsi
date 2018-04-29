@@ -26,9 +26,6 @@ module Common =
         Comment : string
         }
 
-    exception NoRuleAppliesException
-    exception NotFoundException
-
     val reportError : ParsedCommand -> unit
 
     val getInput : internalInput : string option -> paths : string list -> secondaryInput : string option -> Input

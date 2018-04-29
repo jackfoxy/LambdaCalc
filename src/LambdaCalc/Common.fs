@@ -5,9 +5,6 @@ open System.IO
 
 module Common =
 
-    exception NoRuleAppliesException
-    exception NotFoundException
-
     type InputLines = 
         {
         Input : string
