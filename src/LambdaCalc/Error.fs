@@ -11,7 +11,30 @@ See LICENSE.TXT for licensing details.
 /// Parsing support module.
 module Support.Error
 
-open Jackfoxy.LambdaCalc.ErrorPrint
+let mutable private buffer : string list = []
+
+let private toBuffer s =
+    buffer <- s::buffer
+
+let private printInt (i : int) = 
+    i.ToString()
+    |> toBuffer
+
+let private pr (s : string) =
+    toBuffer s
+
+let private printSpace() =
+    toBuffer " "
+
+let private flush() =
+
+    buffer
+    |> List.rev
+    |> List.iter (fun x -> Microsoft.FSharp.Core.Printf.printf "%s" x)
+
+    Microsoft.FSharp.Core.Printf.printf "%s" "\n"
+
+    buffer <- []
 
 exception internal ExitException of int
 
