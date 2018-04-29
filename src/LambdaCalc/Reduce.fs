@@ -23,38 +23,50 @@ module Reduce =
 
     type ReduceParams =
         {
-        AddBinding : Context -> string -> Binding -> Context
-        Eval : Context -> Term -> Term
-        EvalBinding : Context -> Binding -> Binding
-        PrintTerm : bool -> Context -> Term -> unit
-        PrintBinding : Context -> Binding -> unit
-        InputLines : InputLines list
+            AddBinding : Context -> string -> Binding -> Context
+            Eval : Context -> Term -> Term
+            EvalBinding : Context -> Binding -> Binding
+            PrintTerm : bool -> Context -> Term -> unit
+            PrintBinding : Context -> Binding -> unit
+            InputLines : InputLines list
         }
 
     let processCommand (reduceParams : ReduceParams) commentLines (inputLines : InputLines list) ctx cmd = 
         match cmd with
-        | Eval(_, t) -> 
-            let t' = reduceParams.Eval ctx t
+        | Eval(_, term) -> 
+            let t' = reduceParams.Eval ctx term
             let reducedCommentLines, remainingInputLines = 
-                printComments t commentLines inputLines
+                printComments term commentLines inputLines
             reduceParams.PrintTerm true ctx t'
             flush()
             ctx, reducedCommentLines, remainingInputLines
 
-        | Bind(_, x, bind) -> 
+        | Bind(_, x, binding) -> 
             let reducedCommentLines, remainingInputLines =
-                match bind with 
+                match binding with 
                 | NameBind -> 
                     commentLines, inputLines 
                 | AbstractionBind t ->
                     printComments t commentLines inputLines
 
-            let bind' = reduceParams.EvalBinding ctx bind
+            let bind' = reduceParams.EvalBinding ctx binding
             pr x
             pr " "
             reduceParams.PrintBinding ctx bind'
             flush()
             (reduceParams.AddBinding ctx x bind'), reducedCommentLines, remainingInputLines 
+
+    let rec evalDriver (eval : Context -> Term -> Term) ctx term =
+        try 
+            evalDriver eval ctx <| eval ctx term 
+        with | Common.NoRuleAppliesException -> term
+  
+    let evalBinding eval ctx binding =
+        match binding with
+        | AbstractionBind term -> 
+            AbstractionBind <| evalDriver eval ctx term
+        | bind -> 
+            bind
 
     let reduceInput (reduceParams : ReduceParams) (ctx : Context) cmds =
         let commentLines = getCommentLines reduceParams.InputLines

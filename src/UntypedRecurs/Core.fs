@@ -57,7 +57,7 @@ module Core =
         | _ ->
             invalidArg "getBottom" "can't get here"
 
-    let rec eval1 ctx term =
+    let rec eval ctx term =
         match term with
         | Variable (fileInfo, n, _) ->
             match getBinding fileInfo ctx n with
@@ -70,7 +70,7 @@ module Core =
             termSubstTop v2 t12
 
         | Application (fileInfo, (Abstraction (_) as v1), t2) ->
-            let t2' = eval1 ctx t2 
+            let t2' = eval ctx t2 
 
             if  isInnerYcombinator v1 && isBottom t2' then
                 getIdentity ctx
@@ -78,22 +78,7 @@ module Core =
                 Application (fileInfo, v1, t2')
 
         | Application (fileInfo, t1, t2) -> 
-            let t1' = eval1 ctx t1 
-            Application (fileInfo, t1', t2)
+            Application (fileInfo, (eval ctx t1 ), t2)
 
         | _ -> 
             raise Common.NoRuleAppliesException
-  
-    let rec eval ctx t =
-        try 
-            let t' = eval1 ctx t 
-            eval ctx t' 
-        with | Common.NoRuleAppliesException -> t
-  
-    let evalBinding ctx b =
-        match b with
-        | AbstractionBind t -> 
-            let t' = eval ctx t 
-            AbstractionBind t'
-        | bind -> 
-            bind

@@ -80,12 +80,12 @@ module Reduce =
 
         let reduceParams = 
             {
-            AddBinding = addBinding
-            Eval = eval
-            EvalBinding = evalBinding
-            PrintTerm = printTerm
-            PrintBinding = printBinding
-            InputLines = inputLines
+                AddBinding = addBinding
+                Eval = (evalDriver eval)
+                EvalBinding = (evalBinding eval)
+                PrintTerm = printTerm
+                PrintBinding = printBinding
+                InputLines = inputLines
             }
 
         reduceInput reduceParams ctx cmds

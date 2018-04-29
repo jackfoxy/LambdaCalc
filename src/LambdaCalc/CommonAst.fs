@@ -30,7 +30,7 @@ module CommonAst =
 
     let ctxLength (ctx : Context) = List.length ctx
   
-    let addBinding (ctx : Context) x bind = (x, bind) :: ctx
+    let addBinding (ctx : Context) x binding = (x, binding) :: ctx
   
     let addName ctx x = addBinding ctx x NameBind
   
@@ -50,24 +50,24 @@ module CommonAst =
         | (y, _) :: rest -> if y = x then 0 else 1 + (name2Index fileInfo rest x)
 
     (* Shifting *)
-    let tmmap onvar c t =
-        let rec walk c t =
-            match t with
+    let tmmap onvar c term =
+        let rec walk c term =
+            match term with
             | Variable (fileInfo, x, n) -> 
                 onvar fileInfo c x n
             | Abstraction (fileInfo, x, t2) -> 
                 Abstraction (fileInfo, x, walk (c + 1) t2)
             | Application (fileInfo, t1, t2) -> 
                 Application (fileInfo, walk c t1, walk c t2)
-        walk c t
+        walk c term
   
-    let termShiftAbove d c t =
+    let termShiftAbove d c term =
         tmmap
             (fun fileInfo c x n ->
                 if x >= c then Variable (fileInfo, x + d, n + d) else Variable (fileInfo, x, n + d))
-            c t
+            c term
   
-    let termShift d t = termShiftAbove d 0 t
+    let termShift d term = termShiftAbove d 0 term
   
     let bindingshift d bind =
         match bind with
@@ -75,15 +75,15 @@ module CommonAst =
         | AbstractionBind t -> AbstractionBind (termShift d t)
 
     (* Substitution *)
-    let termSubst j s t =
+    let termSubst j s term =
         tmmap
-            (fun fi c x n -> if x = (j + c) then termShift c s else Variable (fi, x, n))
-            0 t
+            (fun fileInfo c x n -> if x = (j + c) then termShift c s else Variable (fileInfo, x, n))
+            0 term
   
-    let termSubstTop s t = termShift (-1) (termSubst 0 (termShift 1 s) t)
+    let termSubstTop s term = termShift (-1) (termSubst 0 (termShift 1 s) term)
 
     (* Context management (continued) *)
-    let rec getBinding fi (ctx : Context) i =
+    let rec getBinding fileInfo (ctx : Context) i =
         try 
             let (_, bind) = List.item i ctx 
             bindingshift (i + 1) bind
@@ -91,11 +91,11 @@ module CommonAst =
         | Failure _ ->
           let msg =
             Printf.sprintf "Variable lookup failure: offset: %d, ctx size: %d"
-          error fi (msg i (List.length ctx))
+          error fileInfo (msg i (List.length ctx))
   
     (* Extracting file info *)
-    let termInfo t =
-        match t with
-        | Variable (fi, _, _) -> fi
-        | Abstraction (fi, _, _) -> fi
-        | Application (fi, _, _) -> fi
+    let termInfo term =
+        match term with
+        | Variable (fileInfo, _, _) -> fileInfo
+        | Abstraction (fileInfo, _, _) -> fileInfo
+        | Application (fileInfo, _, _) -> fileInfo
