@@ -9,6 +9,7 @@ c7 = λs. λz. s (s (s (s (s (s (s z))))));
 c8 = λs. λz. s (s (s (s (s (s (s (s z)))))));
 c9 = λs. λz. s (s (s (s (s (s (s (s (s z))))))));
 
+c20 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))));
 c24 = λs. λz. s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s (s z)))))))))))))))))))))));
 
 iszro = λm. m (λx. fls) tru;
