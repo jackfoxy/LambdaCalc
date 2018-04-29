@@ -44,6 +44,9 @@ xnor tru (eql c24 (mult c4 c6));
 xnor tru (eql c25 (mult c5 c5));
 /* xnor tru (eql c28 (mult c4 c7));  stack overflow*/
 
+testnumber = mult c4 c7;
+/*eql c28 testnumber; compare test number  stack overflow*/
+
 /* 25 = 5 + 4 * 5 */
 xnor tru (eql c25 (plus c5 (mult c4 c5)));
 
