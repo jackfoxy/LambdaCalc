@@ -17,11 +17,6 @@ open PrettyPrint
 /// Syntax trees and associated support functions.
 module Ast =
 
-    (* Printing *)
-    (* The printing functions call these utility functions to insert grouping
-      information the pretty-printing library
-    *)
-
     let small t = 
         match t with 
         | Variable (_) -> true 
@@ -41,9 +36,7 @@ module Ast =
         match t with
         | Abstraction (_, x, t2) ->
             let (ctx', x') = pickfreshname ctx x
-            pr "lambda "
-            pr x'
-            pr "."
+            pr <| sprintf "lambda %s." x'
             if (small t2) && (not outer) then printSpace ()
             printtmTerm outer ctx' t2;
         | t -> printApplicationTerm outer ctx t
@@ -65,21 +58,21 @@ module Ast =
                 if (ctxLength ctx) = n
                 then pr (index2Name fi ctx x)
                 else
-                    pr
-                      ("[bad index: " +
-                         ((string x) +
-                            ("/" +
-                               ((string n) +
-                                  (" in {" +
-                                     ((List.fold (fun s (x, _) -> s + (" " + x)) ""
-                                         ctx)
-                                        + " }]"))))))
-        | t -> (pr "("; printtmTerm outer ctx t; pr ")")
+                     pr <| sprintf "[bad index: %s/%s in {%s }]"
+                        (string x)
+                        (string n)
+                        (List.fold (fun s (x, _) -> sprintf "%s  %s" s x) "" ctx)
+        | t -> 
+            pr "("
+            printtmTerm outer ctx t
+            pr ")"
   
     let printtm ctx t = printtmTerm true ctx t
   
     let printBinding ctx b =
         match b with 
         | NameBind -> () 
-        | AbstractionBind t -> (pr "= "; printtm ctx t)
+        | AbstractionBind term ->
+            pr "= "
+            printtmTerm true ctx term
   

@@ -16,7 +16,6 @@
     <Compile Include="CommandLine.fs" />
     <Compile Include="Common.fsi" />
     <Compile Include="Common.fs" />
-    <Compile Include="ErrorPrint.fs" />
     <Compile Include="Error.fs" />
     <Compile Include="CommonAst.fsi" />
     <Compile Include="CommonAst.fs" />

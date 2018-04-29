@@ -1,8 +1,8 @@
 ﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
 
 open Jackfoxy.LambdaCalc
-open CommonAst
-open Ast
+//open CommonAst
+//open Ast
 
 /// Evaluation 
 module Core =

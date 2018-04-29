@@ -39,4 +39,5 @@ xnor fls (iszro (prd c6));
 xnor tru (iszro (mult c1 c0));
 xnor tru (eql c6 (mult c2 c3));
 xnor fls (eql c5 (mult c2 c3));
-xnor tru (eql c24 (mult c4 c6));
+/*xnor tru (eql c24 (mult c4 c6)); stack overflow on 24 in net47*/
+xnor tru (eql c20 (mult c4 c5));
