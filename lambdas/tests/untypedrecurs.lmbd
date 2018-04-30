@@ -1,7 +1,9 @@
-﻿/*fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));*/
-
-fact = λf. λx. mult x (f (prd x));
+﻿fact = λf. λx. mult x (f (prd x));
 
 fact3 = fix fact c3;
 
-/*fact3a = fact (fix fact) c0;*/
+/* 3 factorial = 6 */
+xnor tru (eql c6 fact3);
+
+/* 4 factorial = 24 */
+xnor tru (eql c24 (fix fact c4));

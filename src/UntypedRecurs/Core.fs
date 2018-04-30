@@ -17,7 +17,7 @@ open Support.Error
 module Core =
 
     // λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y
-    let inline isInnerYcombinator term =
+    let inline private isInnerYcombinator term =
         match term with
         | Abstraction (FI (_), _, 
                         Application (_, 
@@ -42,14 +42,14 @@ module Core =
         | _ ->
             false
 
-    let inline isBottom term = 
+    let inline private isBottom term = 
         match term with
         | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), _, _))) -> 
             true
         | _ ->
             false
 
-    let getIdentity (ctx : Context) =
+    let private getIdentity (ctx : Context) =
         let _, binding = ctx.[ctx.Length - 1]
         match binding with
         | AbstractionBind identity ->
@@ -74,12 +74,12 @@ module Core =
 
             match isInnerYcombinator v1, isBottom t2' with
             | true, true ->
-                getIdentity ctx
+                termSubstTop v1 <| getIdentity ctx
             | _ ->
                 Application (fileInfo, v1, t2')
 
         | Application (fileInfo, t1, t2) -> 
-            Application (fileInfo, (eval ctx t1 ), t2)
+            Application (fileInfo, (eval ctx t1), t2)
 
         | _ -> 
             term

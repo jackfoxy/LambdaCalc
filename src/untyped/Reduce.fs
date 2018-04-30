@@ -16,7 +16,6 @@ See LICENSE.TXT for licensing details.
    necessary to change this file.
 *)
 
-open Ast
 open Jackfoxy.LambdaCalc
 open Common
 open CommonAst
@@ -24,6 +23,7 @@ open CommandLine
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
+open PrettyPrint
 open Reduce
 open Support.Error
 

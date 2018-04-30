@@ -2,7 +2,7 @@
   "profiles": {
     "UntypedRecurs": {
       "commandName": "Project",
-      "commandLineArgs": "-c \"lambda x. x\""
+      "commandLineArgs": "-c \"(λx. λy. y x) (λx. x) (lambda x.x)\" -l"
     }
   }
 }

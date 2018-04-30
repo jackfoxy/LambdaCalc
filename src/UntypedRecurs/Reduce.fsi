@@ -1,6 +1,5 @@
 ﻿namespace Jackfoxy.LambdaCalc.UntypedRecurs
 
-open Ast
 open Jackfoxy.LambdaCalc
 open CommandLine
 
