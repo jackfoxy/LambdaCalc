@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "UntypedRecurs": {
-      "commandName": "Project",
-      "commandLineArgs": "-c \"(λx. λy. y x) (λx. x) (lambda x.x)\" -l"
-    }
-  }
-}

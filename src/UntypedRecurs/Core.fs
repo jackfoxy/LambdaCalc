@@ -44,7 +44,7 @@ module Core =
 
     let inline private isBottom term = 
         match term with
-        | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), _, _))) -> 
+        | Abstraction (FI (_), _, Abstraction (FI (_), _, Variable (FI (_), deBruijnIndex, _))) when deBruijnIndex = 0 -> 
             true
         | _ ->
             false

@@ -45,6 +45,7 @@ obj/
 Ankh.NoLoad
 *.gpState
 .vs/
+*/**/Properties/**
 
 #Tooling
 _ReSharper*/
