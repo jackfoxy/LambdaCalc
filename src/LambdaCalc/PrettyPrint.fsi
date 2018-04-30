@@ -18,3 +18,7 @@ module PrettyPrint =
     val printComments : term : Term -> commentLines : CommentLine list -> inputLines : InputLines list -> CommentLine list * InputLines list
 
     val printRemainingComments : commentLines : CommentLine list -> unit
+
+    val printTerm : outer : bool -> ctx : Context -> t : Term -> unit
+
+    val printBinding : ctx : Context -> b : Binding -> unit

@@ -39,4 +39,16 @@ xnor fls (iszro (prd c6));
 xnor tru (iszro (mult c1 c0));
 xnor tru (eql c6 (mult c2 c3));
 xnor fls (eql c5 (mult c2 c3));
+xnor tru (eql c20 (mult c4 c5));
 xnor tru (eql c24 (mult c4 c6));
+xnor tru (eql c25 (mult c5 c5));
+/* xnor tru (eql c28 (mult c4 c7));  stack overflow*/
+
+testnumber = mult c4 c7;
+/*eql c28 testnumber; compare test number  stack overflow*/
+
+/* 25 = 5 + 4 * 5 */
+xnor tru (eql c25 (plus c5 (mult c4 c5)));
+
+/* 30 * 30 */
+mult c30 c30;

@@ -63,7 +63,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L216-216" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L217-217" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -81,7 +81,7 @@
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L45-45" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L46-46" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -92,14 +92,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
-            printComments (...)
+            printBinding ctx b
           </code>
           <div class="tip" id="16">
-            <strong>Signature:</strong> term:Term -&gt; commentLines:CommentLine list -&gt; inputLines:InputLines list -&gt; CommentLine list * InputLines list<br />
+            <strong>Signature:</strong> ctx:Context -&gt; b:Binding -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L261-261" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L348-348" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -110,14 +110,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '17', 17)" onmouseover="showTip(event, '17', 17)">
-            printInt i
+            printComments (...)
           </code>
           <div class="tip" id="17">
-            <strong>Signature:</strong> i:int -&gt; unit<br />
+            <strong>Signature:</strong> term:Term -&gt; commentLines:CommentLine list -&gt; inputLines:InputLines list -&gt; CommentLine list * InputLines list<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L41-41" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L262-262" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -128,14 +128,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '18', 18)" onmouseover="showTip(event, '18', 18)">
-            printRemainingComments commentLines
+            printInt i
           </code>
           <div class="tip" id="18">
-            <strong>Signature:</strong> commentLines:CommentLine list -&gt; unit<br />
+            <strong>Signature:</strong> i:int -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L286-286" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L42-42" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -146,14 +146,14 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '19', 19)" onmouseover="showTip(event, '19', 19)">
-            printSpace ()
+            printRemainingComments commentLines
           </code>
           <div class="tip" id="19">
-            <strong>Signature:</strong> unit -&gt; unit<br />
+            <strong>Signature:</strong> commentLines:CommentLine list -&gt; unit<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L50-50" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L287-287" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>
@@ -164,14 +164,50 @@
         <td class="member-name">
 
           <code onmouseout="hideTip(event, '20', 20)" onmouseover="showTip(event, '20', 20)">
-            useLambda 
+            printSpace ()
           </code>
           <div class="tip" id="20">
+            <strong>Signature:</strong> unit -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L51-51" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
+            printTerm outer ctx t
+          </code>
+          <div class="tip" id="21">
+            <strong>Signature:</strong> outer:bool -&gt; ctx:Context -&gt; t:Term -&gt; unit<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L332-332" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '22', 22)" onmouseover="showTip(event, '22', 22)">
+            useLambda 
+          </code>
+          <div class="tip" id="22">
             <strong>Signature:</strong> bool<br />
                       </div>
         </td>
         <td class="xmldoc">
-            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L21-21" class="github-link">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/PrettyPrint.fs#L22-22" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

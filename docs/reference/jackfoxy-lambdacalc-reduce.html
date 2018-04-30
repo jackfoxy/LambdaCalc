@@ -72,15 +72,53 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '21', 21)" onmouseover="showTip(event, '21', 21)">
-            reduceInput reduceParams ctx cmds
+          <code onmouseout="hideTip(event, '23', 23)" onmouseover="showTip(event, '23', 23)">
+            evalBinding eval ctx binding
           </code>
-          <div class="tip" id="21">
-            <strong>Signature:</strong> reduceParams:ReduceParams -&gt; ctx:Context -&gt; cmds:Command list -&gt; Context<br />
+          <div class="tip" id="23">
+            <strong>Signature:</strong> eval:(Context -&gt; Term -&gt; Term) -&gt; ctx:Context -&gt; binding:Binding -&gt; Binding<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fs#L64-64" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          <p>Evaluate binding</p>
+
+
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '24', 24)" onmouseover="showTip(event, '24', 24)">
+            evalDriver eval ctx term
+          </code>
+          <div class="tip" id="24">
+            <strong>Signature:</strong> eval:(Context -&gt; Term -&gt; Term) -&gt; ctx:Context -&gt; term:Term -&gt; Term<br />
                       </div>
         </td>
         <td class="xmldoc">
             <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fs#L59-59" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '25', 25)" onmouseover="showTip(event, '25', 25)">
+            reduceInput reduceParams ctx cmds
+          </code>
+          <div class="tip" id="25">
+            <strong>Signature:</strong> reduceParams:ReduceParams -&gt; ctx:Context -&gt; cmds:Command list -&gt; Context<br />
+                      </div>
+        </td>
+        <td class="xmldoc">
+            <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/Reduce.fs#L71-71" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

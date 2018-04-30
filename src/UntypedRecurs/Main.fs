@@ -22,7 +22,6 @@ module Console =
 
             try 
                 processInput input |> ignore
-                PrettyPrint.flush()
                 0 
             with e ->
                 printfn "%A" e

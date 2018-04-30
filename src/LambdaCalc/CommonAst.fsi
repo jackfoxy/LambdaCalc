@@ -49,7 +49,7 @@ module CommonAst =
     /// Get context index by binding name.
     val name2Index : fileInfo : Info -> context : Context -> x : string-> int
 
-    val termSubstTop : s : Term -> term : Term -> Term
+    val termSubstTop : abstractionTerm : Term -> term : Term -> Term
 
     /// Lookup binding in context by index, shifting terms if it is an abstraction bindings.
     val getBinding : fileInfo : Info -> context : Context -> i : int -> Binding

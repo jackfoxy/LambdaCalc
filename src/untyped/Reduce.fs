@@ -16,7 +16,6 @@ See LICENSE.TXT for licensing details.
    necessary to change this file.
 *)
 
-open Ast
 open Jackfoxy.LambdaCalc
 open Common
 open CommonAst
@@ -24,14 +23,15 @@ open CommandLine
 open Core
 open Microsoft.FSharp.Text
 open Microsoft.FSharp.Text.Lexing
+open PrettyPrint
 open Reduce
 open Support.Error
 
 module Reduce = 
 
-    let mutable inputLines : InputLines list = []
+    let mutable private inputLines : InputLines list = []
 
-    let parseInput (inputSource : Source) secondaryInput = 
+    let private parseInput (inputSource : Source) secondaryInput = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1
@@ -81,12 +81,12 @@ module Reduce =
 
         let reduceParams = 
             {
-            AddBinding = addBinding
-            Eval = eval
-            EvalBinding = evalBinding
-            PrintTerm = printTerm
-            PrintBinding = printBinding
-            InputLines = inputLines
+                AddBinding = addBinding
+                Eval = (evalDriver eval)
+                EvalBinding = (evalBinding eval)
+                PrintTerm = printTerm
+                PrintBinding = printBinding
+                InputLines = inputLines
             }
 
         reduceInput reduceParams ctx cmds
