@@ -29,9 +29,9 @@ open Support.Error
 
 module Reduce = 
 
-    let mutable inputLines : InputLines list = []
+    let mutable private inputLines : InputLines list = []
 
-    let parseInput (inputSource : Source) secondaryInput = 
+    let private parseInput (inputSource : Source) secondaryInput = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1

@@ -32,9 +32,9 @@ module Reduce =
     [<Literal>]
     let Identity = "id = lambda b. b;"
 
-    let mutable inputLines : InputLines list = []
+    let mutable private inputLines : InputLines list = []
 
-    let parseInput (inputSource : Source) secondaryInput = 
+    let private parseInput (inputSource : Source) secondaryInput = 
 
         let parseIt lexbuf = 
             Lexer.lineno := 1

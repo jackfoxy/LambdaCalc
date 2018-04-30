@@ -23,7 +23,6 @@
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
     <Compile Include="Core.fs" />
-    <Compile Include="Reduce.fsi" />
     <Compile Include="Reduce.fs" />
     <Compile Include="Main.fs" />
     <None Include="paket.references" />
