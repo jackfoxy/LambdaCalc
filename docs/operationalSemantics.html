@@ -39,30 +39,32 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 <h2><a name="Untyped-Lambda-Calculus" class="anchor" href="#Untyped-Lambda-Calculus">Untyped Lambda Calculus</a></h2>
 <p><strong>Syntax</strong></p>
 <p>The legal forms of the language, terms, are either a variable, abstraction, or abstraction application.</p>
-<p>Values may represent abstractions.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
 <span class="l">4: </span>
-<span class="l">5: </span>
-<span class="l">6: </span>
-<span class="l">7: </span>
 </pre></td>
 <td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">t</span> <span class="o">::</span><span class="o">=</span>
     <span class="id">x</span>       <span class="o">/*</span> <span class="id">variable</span> <span class="o">*/</span>
     <span class="id">λx</span><span class="pn">.</span><span class="id">t</span>    <span class="o">/*</span> <span class="id">abstraction</span> <span class="o">*/</span>
     <span class="id">t</span> <span class="id">t</span>     <span class="o">/*</span> <span class="id">application</span> <span class="o">*/</span>
-
-<span class="id">v</span> <span class="o">::</span><span class="o">=</span>
+</code></pre></td>
+</tr>
+</table>
+<p>Values may represent abstractions.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">v</span> <span class="o">::</span><span class="o">=</span>
     <span class="id">λx</span><span class="pn">.</span><span class="id">t</span>    <span class="o">/*</span> <span class="id">abstraction</span> <span class="id">value</span> <span class="o">*/</span>
 </code></pre></td>
 </tr>
 </table>
 <p><strong>Evaluation</strong></p>
 <p>The horizontal line signifies an IF / THEN rule.</p>
-<p><code>→</code> implies evaluates in one step.</p>
-<p><code>[x ↦ v&lt;sub&gt;2&lt;/sub&gt;]t&lt;sub&gt;12&lt;/sub&gt;</code> reads substitute <code>v&lt;sub&gt;2&lt;/sub&gt;</code> for all occurences of free variable <code>x</code> in term <code>t&lt;sub&gt;12&lt;/sub&gt;</code>
-("free" meaning the variable is not bound by an enclosing abstraction).</p>
+<p><code>↦</code> implies evaluates in one step.</p>
+<span class="pre">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
+("free" meaning the variable is not bound by an enclosing abstraction).
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>

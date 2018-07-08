@@ -2,8 +2,9 @@
 LambdaCalc
 ======================
 
-Lambda Calculus parsers using [FsLexYacc](http://fsprojects.github.io/FsLexYacc/). The Lexers and parsers are intended to be as minimalistic as possible, 
-supporting Untyped Lambda Calculus syntax and comments. The resulting console applications function as working interpreters performing evaluation and reduction.
+Lambda Calculus parsers using [FsLexYacc](http://fsprojects.github.io/FsLexYacc/). The lexers and parsers are as minimalistic as possible, 
+supporting Untyped Lambda Calculus syntax and comments. The resulting console and .NETCore applications function as working interpreters 
+performing evaluation and reduction.
 
 Untyped Lambda Calculus
 ----------------------------
@@ -13,9 +14,9 @@ The console app Untyped is a parser/evalutor for the Untyped Lambda Calculus.
 Untyped Recursive Lambda Calculus
 ---------------------------------
 
-The console app UntypedRecurs is a parser/evalutor for the Untyped Recursive Lambda Calculus, a demonstration project in conjunction with a recently submitted research paper, 
-"Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise not terminate under evaluation by value, so long as the function emits 
-the bottom abstraction, `λt.λb. b`, when it is finished recursing.
+The console app UntypedRecurs is a parser/evalutor for the Untyped Recursive Lambda Calculus, a demonstration project in conjunction with 
+a recently submitted research paper, "Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise 
+not terminate under evaluation by value, so long as the function emits the bottom abstraction, `λt.λb. b`, when it is finished recursing.
 
 Documentation
 -------------
@@ -33,7 +34,7 @@ OPTIONS:
                           input from console for process after optional files
     --inputfolder, -i <string>
                           folder for input paths
-    --lambda, -l          use and print u03BB for lambda followed by space
+    --lambda, -l          use and print u03BB for lambda, followed by space
     --help                display this list of options.
 ````
 
@@ -49,7 +50,7 @@ When running in PowerShell, set the output encoding to UTF-8 encoding to properl
 
 ````
 
- * [Build Notes](buildnotes.html) describes a simple 2-step manual process required to make the first build.
+ * [Build Notes](buildnotes.html) describes the simple 2-step manual process required to make the first build.
 
  * [Tutorial](tutorial.html) contains a further explanation of this project.
 
@@ -59,10 +60,12 @@ When running in PowerShell, set the output encoding to UTF-8 encoding to properl
 Acknowledgements
 ----------------
 
-This work is based on original source code By Benjamin C. Pierce in support of his classic text, [Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/).
+This work is based on original source code By Benjamin C. Pierce in support of his classic text, 
+[Types and Programming Languages](http://www.cis.upenn.edu/~bcpierce/tapl/).
 
 Jack Pappas created the original [F# port](https://github.com/jack-pappas/fsharp-tapl) of Pierce's code. 
-[Jackfoxy's fork](https://github.com/jackfoxy/fsharp-tapl) of Pappas' work builds with recent [F#](http://fsharp.org/) and [FsLexYacc](http://fsprojects.github.io/FsLexYacc/) releases.
+[Jackfoxy's fork](https://github.com/jackfoxy/fsharp-tapl) of Pappas' work builds with recent [F#](http://fsharp.org/) 
+and [FsLexYacc](http://fsprojects.github.io/FsLexYacc/) releases.
 
 Most of Pierce's files have been heavily modified for this project. Pretty printing was completely rewritten.
 
@@ -71,7 +74,7 @@ Contributing and copyright
 
 This project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
 the project and submit pull requests. If you're adding a new public API, please also 
-add [samples][content] that can be turned into documentation.
+add [samples][../docsrc/content] that can be turned into documentation.
 
 The library is available under permissive licensing, which allows modification and 
 redistribution for both commercial and non-commercial purposes, provided files 

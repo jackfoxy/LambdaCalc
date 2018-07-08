@@ -12,15 +12,15 @@ Untyped Lambda Calculus
 **Syntax**
 
 The legal forms of the language, terms, are either a variable, abstraction, or abstraction application.
-
-Values may represent abstractions.
-
 ````
 t ::=
     x       /* variable */
     λx.t    /* abstraction */
     t t     /* application */
+````
+Values may represent abstractions.
 
+````
 v ::=
     λx.t    /* abstraction value */
 ````
@@ -29,9 +29,9 @@ v ::=
 
 The horizontal line signifies an IF / THEN rule. 
 
-`→` implies evaluates in one step.
+`↦` implies evaluates in one step.
 
-`[x ↦ v<sub>2</sub>]t<sub>12</sub>` reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
+<span class="pre">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
 ("free" meaning the variable is not bound by an enclosing abstraction).
 
 ````
