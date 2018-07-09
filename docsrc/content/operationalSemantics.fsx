@@ -1,4 +1,5 @@
 ﻿(**
+<style>.adsf{padding: 2px 4px;color: #d14;background-color: #f7f7f9;border: 1px solid #e1e1e8;font-family: Monaco,Menlo,Consolas,"Courier New",monospace;font-size: 12px;-moz-border-radius: 3px;border-radius: 3px;}</style>
 Operational Semantics
 =====================
 
@@ -31,7 +32,7 @@ The horizontal line signifies an IF / THEN rule.
 
 `↦` implies evaluates in one step.
 
-<span style="padding: 2px 4px;color: #d14;background-color: #f7f7f9;border: 1px solid #e1e1e8;font-family: Monaco,Menlo,Consolas,"Courier New",monospace;font-size: 12px;-moz-border-radius: 3px;border-radius: 3px;">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
+<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
 ("free" meaning the variable is not bound by an enclosing abstraction).
 
 ````

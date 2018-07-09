@@ -33,6 +33,7 @@
       <div class="row">
         <div class="span9" id="main">
           
+<style>.adsf{padding: 2px 4px;color: #d14;background-color: #f7f7f9;border: 1px solid #e1e1e8;font-family: Monaco,Menlo,Consolas,"Courier New",monospace;font-size: 12px;-moz-border-radius: 3px;border-radius: 3px;}</style>
 <h1><a name="Operational-Semantics" class="anchor" href="#Operational-Semantics">Operational Semantics</a></h1>
 <p>Operational Semantics specify how a language behaves. The Lambda Calculus specification, in modified <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">Baukus-Naur form</a>,
 is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Programming Languages</a>, p. 72.</p>
@@ -63,7 +64,7 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 <p><strong>Evaluation</strong></p>
 <p>The horizontal line signifies an IF / THEN rule.</p>
 <p><code>↦</code> implies evaluates in one step.</p>
-<span style="padding: 2px 4px;color: #d14;background-color: #f7f7f9;border: 1px solid #e1e1e8;font-family: Monaco,Menlo,Consolas,"Courier New",monospace;font-size: 12px;-moz-border-radius: 3px;border-radius: 3px;">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
+<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
 ("free" meaning the variable is not bound by an enclosing abstraction).
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
