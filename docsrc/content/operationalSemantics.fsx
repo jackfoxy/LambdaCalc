@@ -31,7 +31,7 @@ The horizontal line signifies an IF / THEN rule.
 
 `↦` implies evaluates in one step.
 
-<span class="pre">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
+<span class="code pre">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute `v<sub>2</sub>` for all occurences of free variable `x` in term `t<sub>12</sub>` 
 ("free" meaning the variable is not bound by an enclosing abstraction).
 
 ````
