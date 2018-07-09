@@ -32,16 +32,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{913E62B0-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A9CB2AE0-66E4-4747-AFDF-578A64C68034}"
 	ProjectSection(SolutionItems) = preProject
-		docsraw\content\buildnotes.fsx = docsraw\content\buildnotes.fsx
-		docsraw\content\index.fsx = docsraw\content\index.fsx
-		docsraw\content\operationalSemantics.fsx = docsraw\content\operationalSemantics.fsx
-		docsraw\content\tutorial.fsx = docsraw\content\tutorial.fsx
-		docsraw\content\unitTests.fsx = docsraw\content\unitTests.fsx
+		docsrc\content\buildnotes.fsx = docsrc\content\buildnotes.fsx
+		docsrc\content\index.fsx = docsrc\content\index.fsx
+		docsrc\content\operationalSemantics.fsx = docsrc\content\operationalSemantics.fsx
+		docsrc\content\tutorial.fsx = docsrc\content\tutorial.fsx
+		docsrc\content\unitTests.fsx = docsrc\content\unitTests.fsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{2331FF94-41B7-4242-B273-D6386055DFCA}"
 	ProjectSection(SolutionItems) = preProject
-		docsrc\tools\generate.fsx = docsrc\tools\generate.fsx
 		docsrc\tools\templates\template.cshtml = docsrc\tools\templates\template.cshtml
 	EndProjectSection
 EndProject
