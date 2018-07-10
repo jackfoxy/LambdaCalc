@@ -9,19 +9,19 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NoWarn>NU1701</NoWarn>
   </PropertyGroup>
   <Import Project="..\..\packages\FsLexYacc\build\FsLexYacc.targets" />
   <ItemGroup>
     <Compile Include="Parser.fsi" />
     <Compile Include="Parser.fs" />
-    <Compile Include="Lexer.fs" />
     <FsYacc Include="Parser.fsy">
       <OtherFlags>--module Parser</OtherFlags>
     </FsYacc>
     <FsLex Include="Lexer.fsl">
       <OtherFlags>--unicode</OtherFlags>
     </FsLex>
+    <Compile Include="Lexer.fs" />
     <Compile Include="Core.fs" />
     <Compile Include="Reduce.fs" />
     <Compile Include="Main.fs" />
@@ -33,9 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LambdaCalc\LambdaCalc.fsproj" />
-    <Reference Include="FsLexYacc.Runtime">
-      <HintPath>..\..\packages\FsLexYacc.Runtime\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10\FsLexYacc.Runtime.dll</HintPath>
-    </Reference>
+    <PackageReference Include="FsLexYacc" Version="7.0.6" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
