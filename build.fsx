@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------
 // FAKE build script
 // --------------------------------------------------------------------------------------
 
@@ -247,6 +247,31 @@ let copyFiles () =
     Directory.ensure (output @@ "content")
     Shell.copyRecursive (formatting @@ "styles") (output @@ "content") true 
     |> Trace.logItems "Copying styles and scripts: "
+
+let replace t r (lines:seq<string>) =
+  seq {
+    for s in lines do
+      if s.Contains(t) then 
+        yield s.Replace(t, r)
+      else yield s }
+
+let postProcessDocs () =
+    let dirInfo = DirectoryInfo.ofPath output
+
+    let filePath = System.IO.Path.Combine(dirInfo.FullName, "operationalSemantics.html")
+    let newContent =
+        File.ReadAllLines filePath
+        |> Array.toSeq
+        |> replace "t1X2B62Xt1" "t<sub>1</sub> → t<sub>1</sub>"
+        |> replace "t1Xt2X2B62Xt1xXt2" "t<sub>1</sub> t<sub>2</sub> → t<sub>1</sub>&#39; t<sub>2</sub>"
+        |> replace "t2X2B62Xt2" "t<sub>2</sub> → t<sub>2</sub>"
+        |> replace "v1Xt2X2B62Xv1Xt2x" "v<sub>1</sub> t<sub>2</sub> → v<sub>1</sub> t<sub>2</sub>&#39;"
+        |> replace "Yt12Y" "t<sub>12</sub>"
+        |> replace "Xv2X2B62" " v<sub>2</sub> →"
+        |> replace "Yv2Y" "v<sub>2</sub>"
+        |> replace @"22A6" "⊢"
+        |> replace @"21B6" "↦"
+    File.WriteAllLines(filePath, newContent)
         
 Target.create "Docs" (fun _ ->
     File.delete "docsrc/content/release-notes.md"
@@ -285,6 +310,8 @@ Target.create "Docs" (fun _ ->
                 LayoutRoots = layoutRoots
                 ProjectParameters  = ("root", root)::info
                 Template = docTemplate } )
+
+    postProcessDocs()
 )
 
 Target.create "GenerateDocs" ignore

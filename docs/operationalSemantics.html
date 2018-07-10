@@ -63,9 +63,9 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 </table>
 <p><strong>Evaluation</strong></p>
 <p>The horizontal line signifies an IF / THEN rule.</p>
-<p><code>↦</code> implies evaluates in one step.</p>
-<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span> 
-("free" meaning the variable is not bound by an enclosing abstraction).
+<p><code>→</code> implies evaluates in one step.</p>
+<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span>. 
+<p>("free" meaning the variable is not bound by an enclosing abstraction)</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
 <span class="l">3: </span>
@@ -76,21 +76,21 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 <span class="l">8: </span>
 <span class="l">9: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">       <span class="id">t1</span> <span class="o">&amp;</span><span class="n">2B62</span><span class="pn">;</span> <span class="id">t1&#39;</span>    
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp">       <span class="id">t<sub>1</sub> → t<sub>1</sub>&#39;</span>    
     <span class="id">_______________</span>      <span class="o">/*</span> <span class="id">E</span><span class="o">-</span><span class="id">APP1</span> <span class="o">*/</span>
-    <span class="id">t1</span> <span class="id">t2</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">2B62</span><span class="pn">;</span> <span class="id">t1&#39;</span> <span class="id">t2</span>
+    <span class="id">t<sub>1</sub> t<sub>2</sub> → t<sub>1</sub>&#39; t<sub>2</sub></span>
 
-       <span class="id">t2</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">2B62</span><span class="pn">;</span> <span class="id">t2&#39;</span>    
+       <span class="id">t<sub>2</sub> → t<sub>2</sub>&#39;</span>    
     <span class="id">_______________</span>      <span class="o">/*</span> <span class="id">E</span><span class="o">-</span><span class="id">APP2</span> <span class="o">*/</span>
-    <span class="id">v1</span> <span class="id">t2</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">2B62</span><span class="pn">;</span> <span class="id">v1</span> <span class="id">t2&#39;</span>
+    <span class="id">v<sub>1</sub> t<sub>2</sub> → v<sub>1</sub> t<sub>2</sub>&#39;</span>
 
-    <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span><span class="id">t12</span><span class="pn">)</span> <span class="id">v2</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">2B62</span><span class="pn">;</span> <span class="pn">[</span><span class="id">x</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">21B6</span><span class="pn">;</span> <span class="id">v2</span><span class="pn">]</span><span class="id">t12</span>    <span class="o">/*</span> <span class="id">E</span><span class="o">-</span><span class="id">APPABS</span> <span class="o">*/</span>
+    <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span><span class="id">t<sub>12</sub></span><span class="pn">)</span><span class="id"> v<sub>2</sub> →</span> <span class="pn">[</span><span class="id">x</span> <span class="n">↦</span> <span class="id">v<sub>2</sub></span><span class="pn">]</span><span class="id">t<sub>12</sub></span>    <span class="o">/*</span> <span class="id">E</span><span class="o">-</span><span class="id">APPABS</span> <span class="o">*/</span>
 </code></pre></td>
 </tr>
 </table>
 <p><code>E-APP1</code> and <code>E-APP2</code> are congruence rules.</p>
 <p><code>E-APPABS</code> is the computation or substitution rule. Note the rule matches
-when <code>v&lt;sub&gt;2&lt;/sub&gt;</code> ranges over values. Thus the right-hand side must be evaluated and reduced first, and so this rule
+when <span class="adsf">v<sub>2</sub></span> ranges over values. Thus the right-hand side must be evaluated and reduced first, and so this rule
 controls the order of evaluation and is the crux of by-value evaluation. This is problematic for evaluating recursion,
 which the following extension to the semantics addresses.</p>
 <h2><a name="Untyped-Recursive-Lambda-Calculus" class="anchor" href="#Untyped-Recursive-Lambda-Calculus">Untyped Recursive Lambda Calculus</a></h2>
@@ -101,7 +101,7 @@ which the following extension to the semantics addresses.</p>
 <span class="l">2: </span>
 <span class="l">3: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">f</span><span class="pn">:</span> <span class="pn">(</span><span class="id">λf</span><span class="pn">.</span> <span class="id">λx</span><span class="pn">.</span> <span class="id">_</span><span class="pn">)</span> <span class="o">&amp;</span><span class="pn">#</span><span class="n">22A6</span><span class="pn">;</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span> <span class="id">f</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="id">x</span> <span class="id">x</span> <span class="id">y</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span> <span class="id">f</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="id">x</span> <span class="id">x</span> <span class="id">y</span><span class="pn">)</span><span class="pn">)</span> <span class="id">y</span><span class="pn">)</span> <span class="pn">(</span><span class="id">λt</span><span class="pn">.</span> <span class="id">λb</span><span class="pn">.</span> <span class="id">b</span><span class="pn">)</span>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="id">f</span><span class="pn">:</span> <span class="pn">(</span><span class="id">λf</span><span class="pn">.</span> <span class="id">λx</span><span class="pn">.</span> <span class="id">_</span><span class="pn">)</span> <span class="n">⊢</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span> <span class="id">f</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="id">x</span> <span class="id">x</span> <span class="id">y</span><span class="pn">)</span><span class="pn">)</span> <span class="pn">(</span><span class="id">λx</span><span class="pn">.</span> <span class="id">f</span> <span class="pn">(</span><span class="id">λy</span><span class="pn">.</span> <span class="id">x</span> <span class="id">x</span> <span class="id">y</span><span class="pn">)</span><span class="pn">)</span> <span class="id">y</span><span class="pn">)</span> <span class="pn">(</span><span class="id">λt</span><span class="pn">.</span> <span class="id">λb</span><span class="pn">.</span> <span class="id">b</span><span class="pn">)</span>
 <span class="id">_____________________________________________________________________________</span>
                                    <span class="id">λb</span><span class="pn">.</span> <span class="id">b</span>
 </code></pre></td>
