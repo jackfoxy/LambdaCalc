@@ -47,7 +47,6 @@ When running in PowerShell, set the output encoding to UTF-8 encoding to properl
 ````
 [lang=powershell]
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
 ````
 
  * [Build Notes](buildnotes.html) describes the simple 2-step manual process required to make the first build.
