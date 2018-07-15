@@ -79,10 +79,11 @@ not terminate under evaluation by value, so long as the function emits the botto
 <p>λ-abstraction terms must be semi-colon delimited <code>;</code>.</p>
 <p>Comments begin with <code>/*</code>, end with <code>*/</code>, and may span lines.</p>
 <p>When running in PowerShell, set the output encoding to UTF-8 encoding to properly display the <code>λ</code> character.</p>
-<table class="pre"><tr><td class="lines"><pre class="fssnip"></pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"></code></pre></td>
-</tr>
-</table>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+</code></pre></td></tr></table>
 <ul>
 <li><p><a href="buildnotes.html">Build Notes</a> describes the simple 2-step manual process required to make the first build.</p></li>
 <li><p><a href="tutorial.html">Tutorial</a> contains a further explanation of this project.</p></li>

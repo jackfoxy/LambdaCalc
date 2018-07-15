@@ -45,8 +45,8 @@ Comments begin with `/*`, end with `*/`, and may span lines.
 When running in PowerShell, set the output encoding to UTF-8 encoding to properly display the `λ` character.
 
 ````
+[lang=powershell]
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
 
 ````
 
