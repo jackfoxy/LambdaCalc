@@ -27,6 +27,7 @@ open PrettyPrint
 open Reduce
 open Support.Error
 
+/// Lambda reduction to normal form through call by value.
 module Reduce = 
     
     [<Literal>]

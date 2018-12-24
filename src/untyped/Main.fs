@@ -5,6 +5,7 @@ open Common
 open CommandLine
 open Reduce
 
+/// The console app.
 module Console =
 
     [<EntryPoint>]

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>CommandLine - LambdaCalc</title>
+    <title>Reduce - LambdaCalc</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content=""/>
     <meta name="author" content="Jack Fox"/>
@@ -35,57 +35,16 @@
 
 
 
-<h1>CommandLine</h1>
+<h1>Reduce</h1>
 <p>
-  <span>Namespace: Jackfoxy.LambdaCalc</span><br />
+  <span>Namespace: Jackfoxy.LambdaCalc.UntypedRecurs</span><br />
   </p>
 <div class="xmldoc">
-<p>Command line parsing.</p>
+<p>Lambda reduction to normal form through call by value.</p>
 
 </div>
 
 <!-- Render nested types and modules, if there are any -->
-  <h2>Nested types and modules</h2>
-  <div>
-      <table class="table table-bordered type-list">
-    <thead>
-      <tr><td>Type</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td class="type-name">
-            <a href="jackfoxy-lambdacalc-commandline-parsedcommand.html">ParsedCommand</a>
-          </td>
-          <td class="xmldoc">
-          <p>console command parsed</p>
-
-
-          </td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="jackfoxy-lambdacalc-commandline-source.html">Source</a>
-          </td>
-          <td class="xmldoc">
-          <p>lambda calculus input</p>
-
-
-          </td>
-        </tr>
-        <tr>
-          <td class="type-name">
-            <a href="jackfoxy-lambdacalc-commandline-target.html">Target</a>
-          </td>
-          <td class="xmldoc">
-          <p>output target - not implemented</p>
-
-
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-  </div>
 
   <h3>Functions and values</h3>
   <table class="table table-bordered member-list">
@@ -96,15 +55,37 @@
       <tr>
         <td class="member-name">
 
-          <code onmouseout="hideTip(event, '1', 1)" onmouseover="showTip(event, '1', 1)">
-            parse programName argv
+          <code onmouseout="hideTip(event, '31', 31)" onmouseover="showTip(event, '31', 31)">
+            Identity
           </code>
-          <div class="tip" id="1">
-            <strong>Signature:</strong> programName:string -&gt; argv:string [] -&gt; ParsedCommand<br />
+          <div class="tip" id="31">
+            <strong>Signature:</strong> string<br />
+                                    <span>
+            <strong>Attributes:</strong><br />
+[&lt;Literal&gt;]<br />
+          </span>
+          </div>
+        </td>
+        <td class="xmldoc">
+                      <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/UntypedRecurs/Reduce.fs#L34-34" class="github-link">
+              <img src="../content/img/github.png" class="normal" />
+              <img src="../content/img/github-blue.png" class="hover" />
+            </a>
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="member-name">
+
+          <code onmouseout="hideTip(event, '32', 32)" onmouseover="showTip(event, '32', 32)">
+            processInput(input)
+          </code>
+          <div class="tip" id="32">
+            <strong>Signature:</strong> input:Source list -&gt; Context<br />
                                   </div>
         </td>
         <td class="xmldoc">
-                      <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/LambdaCalc/CommandLine.fs#L154-154" class="github-link">
+                      <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/src/UntypedRecurs/Reduce.fs#L70-70" class="github-link">
               <img src="../content/img/github.png" class="normal" />
               <img src="../content/img/github-blue.png" class="hover" />
             </a>

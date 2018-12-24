@@ -27,6 +27,7 @@ open PrettyPrint
 open Reduce
 open Support.Error
 
+/// Lambda reduction to normal form through call by value.
 module Reduce = 
 
     let mutable private inputLines : InputLines list = []

@@ -41,8 +41,6 @@ let solutionFile  = "LambdaCalc.sln"
 // Default target configuration
 let configuration = "Release"
 
-let netFramework = "net47"
-
 // Pattern specifying assemblies to be tested using Expecto
 let testAssemblies = "tests/**/bin/Release/net47/LambdaCalcTests.exe"
 
@@ -241,7 +239,24 @@ let createAndGetDefault () =
             |> replace @"21B6" "↦"
         File.WriteAllLines(filePath, newContent)
 
-    let docs = BuildTask.create "Docs" [cleanDocs; copyBinaries] {
+        let filePath = System.IO.Path.Combine(dirInfo.FullName, "index.html")
+        let newContent =
+            File.ReadAllLines filePath
+            |> Array.toSeq
+            |> replace "<h2>global Namespace</h2>" ""
+        File.WriteAllLines(filePath, newContent)
+
+    let postProcessReferenceDocs () =
+        let dirInfo = DirectoryInfo.ofPath <| sprintf "%s/%s" output "reference"
+
+        let filePath = System.IO.Path.Combine(dirInfo.FullName, "index.html")
+        let newContent =
+            File.ReadAllLines filePath
+            |> Array.toSeq
+            |> replace "<h2>global Namespace</h2>" ""
+        File.WriteAllLines(filePath, newContent)
+
+    let docsOnly = BuildTask.create "DocsOnly" [cleanDocs] {
         File.delete "docsrc/content/release-notes.md"
         Shell.copyFile "docsrc/content/" "RELEASE_NOTES.md"
         Shell.rename "docsrc/content/release-notes.md" "docsrc/content/RELEASE_NOTES.md"
@@ -281,6 +296,8 @@ let createAndGetDefault () =
         postProcessDocs()
     }
 
+    let docs = BuildTask.createEmpty "Docs" [copyBinaries; docsOnly]
+
     let referenceDocs = BuildTask.create "ReferenceDocs" [cleanDocs; copyBinaries] {
         Directory.ensure (output @@ "reference")
         
@@ -291,10 +308,21 @@ let createAndGetDefault () =
            
             let conventionBased = 
                 DirectoryInfo.getSubDirectories <| DirectoryInfo bin
-                |> Array.filter (fun d -> d.Name = "LambdaCalc")
+                |> Array.filter (fun d -> 
+                    d.Name = "LambdaCalc"
+                    || d.Name = "Untyped"
+                    || d.Name = "UntypedRecurs"
+                )
                 |> Array.collect (fun d ->
+                    printfn "%s" d.FullName
                     let name, dInfo = 
-                            d.Name, (DirectoryInfo.getSubDirectories d |> Array.filter(fun x -> x.FullName.ToLower().Contains(netFramework))).[0]
+                            d.Name, 
+                                (DirectoryInfo.getSubDirectories d 
+                                 |> Array.filter(fun x -> 
+                                    x.FullName.ToLower().Contains("netcoreapp2.1")
+                                    || x.FullName.ToLower().Contains("netstandard2.0")
+                                 )
+                                ).[0]
                     dInfo.GetFiles()
                     |> Array.filter (fun x -> 
                         x.Name.ToLower() = (sprintf "%s.dll" name).ToLower())
@@ -312,6 +340,8 @@ let createAndGetDefault () =
                 ProjectParameters = ("root", root)::info
                 SourceRepository = githubLink @@ "tree/master" }
                    )
+
+        postProcessReferenceDocs ()
     }
 
     let generateDocs = BuildTask.createEmpty "GenerateDocs" [docs; referenceDocs] 

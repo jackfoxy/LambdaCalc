@@ -36,24 +36,26 @@
 <h1><a name="LambdaCalc-Tutorial" class="anchor" href="#LambdaCalc-Tutorial">LambdaCalc Tutorial</a></h1>
 <p>Use build.cmd to build the console app projects. See <a href="buildnotes.html">Build Notes</a> for important information about the first time build
 and builds after making changes to the Parser.fs files.</p>
-<p>Evaluating <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.</p>
+<p>When in PowerShell, set the output encoding to UTF-8 encoding to properly display the λ character.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">.</span>
-</code></pre></td>
-</tr>
-</table>
-<p><code>-c "(λx. λy. y x) (λx. x) (lambda x.x)"</code> does nothing more than demonstrate submitting a λ-abstraction from the console after the abstractions
-in the files have evaluated. To submit multiple abstractions be sure to <code>;</code> separate them.</p>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+</code></pre></td></tr></table>
+<p>The following console command evaluates <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.
+Note order of lambda files is significant, as subsequent lambdas may depend on values defined in previous files.</p>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+</code></pre></td></tr></table>
+<p>The final input in the list <code>-c "(λx. λy. y x) (λx. x) (lambda x.x)"</code> is an example of lambda calculus typed into the console and does nothing more than demonstrate
+submitting a λ-abstraction from the console after the abstractions in the files have evaluated. To submit multiple abstractions from the console be sure to <code>;</code> separate them.</p>
 <p>See <a href="index.html">console app documentation</a> for all parameter options.</p>
-<p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus.</p>
+<p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">.</span>
-</code></pre></td>
-</tr>
-</table>
-<p>Did you know you can write <a href="unitTests.html">unit tests</a> in the Lambda Calculus? Sure beats desk-checking the abstractions you compose.</p>
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+</code></pre></td></tr></table>
+<p>Now you can write <a href="unitTests.html">unit tests</a> in the untyped Lambda Calculus. Sure beats desk-checking the abstractions you compose.</p>
 
 
         </div>
