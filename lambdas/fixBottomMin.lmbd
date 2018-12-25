@@ -1,4 +1,6 @@
-﻿bottom = λt. λb. b;
+﻿/*stand-alone file with minimal λ to test untyped recursion*/
+
+bottom = λt. λb. b;
 
 tru = λt. λf. t;
 fls = bottom;
@@ -48,9 +50,9 @@ xnor fls (eql c1 (cond tru c1 c0));
 xnor fls (eql c3 l);
 /*it is true that c6 = l (true)*/
 xnor tru (eql c6 l);
-/*
+
 l2 = h c2;
 xnor tru (eql c2 l2);
 
 l4 = h c4;
-xnor tru (eql c24 l4); */
+xnor tru (eql c24 l4);

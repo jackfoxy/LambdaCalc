@@ -1,3 +1,5 @@
+/*requires values defined in lambdas/boolean.lmbd and lambdas/lists.lmbd*/
+
 /*it is true, isnil nil*/
 isnil nil;
 

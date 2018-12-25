@@ -72,8 +72,7 @@ Contributing and copyright
 --------------------------
 
 This project is hosted on [GitHub][gh] where you can [report issues][issues], fork 
-the project and submit pull requests. If you're adding a new public API, please also 
-add [samples][../docsrc/content] that can be turned into documentation.
+the project and submit pull requests.
 
 The library is available under permissive licensing, which allows modification and 
 redistribution for both commercial and non-commercial purposes, provided files 

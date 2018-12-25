@@ -1,4 +1,5 @@
 /*conditional tests*/
+/*requires values defined in lambdas/boolean.lmbd*/
 xnor tru (eql c1 (cond tru c1 c0));
 xnor tru (eql c0 (cond fls c1 c0));
 xnor fls (eql c1 (cond fls c1 c0));
