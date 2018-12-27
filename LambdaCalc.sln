@@ -8,7 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{41897A
 		build.cmd = build.cmd
 		paket.dependencies = paket.dependencies
 		paket.lock = paket.lock
-		paket.references = paket.references
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{C680EAE4-7F71-491B-9D2E-CCDB186BCD84}"
