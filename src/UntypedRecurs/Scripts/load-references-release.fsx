@@ -2,5 +2,5 @@
 #I __SOURCE_DIRECTORY__
 #r "System.Core.dll"
 #r "System.dll"
-#r "../../LambdaCalc/bin/Release/LambdaCalc.dll"
-#r "../../../packages/build/FsLexYacc.Runtime/lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10/FsLexYacc.Runtime.dll"
+#r "../../../bin/Untyped/net47/LambdaCalc.dll"
+#r "../../../packages/FsLexYacc.Runtime/lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid10+MonoTouch10/FsLexYacc.Runtime.dll"

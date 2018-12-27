@@ -1,4 +1,5 @@
-/* ensure ignoring bottom variable de Bruijn indexing still works with same variable name reused */
+/* ensure de Bruijn indexing still works with same variable name reused */
+/* requires prelude.lmbd */
 tru = lambda t. lambda f. t;
 fls = bottom;
 c0 = bottom;
@@ -22,9 +23,7 @@ prd = lambda m. fst (m (lambda p. pair (snd p) (plus c1 (snd p))) (pair c0 c0));
 fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
 id = lambda x. x;
 h = fix fact;
-l = h c3; /*stackoverflow*/
-
-
+l = h c3; /*stackoverflow if not run from UntypedRecurs*/
 
 /*tests */
 not = lambda a. a fls tru;

@@ -14,7 +14,7 @@ The console app Untyped is a parser/evalutor for the Untyped Lambda Calculus.
 Untyped Recursive Lambda Calculus
 ---------------------------------
 
-The console app UntypedRecurs is a parser/evalutor for the Untyped Recursive Lambda Calculus, a demonstration project in conjunction with 
+The console app UntypedRecurs is a parser/evaluator for the Untyped Recursive Lambda Calculus, a demonstration project in conjunction with 
 a recently submitted research paper, "Recursion and the Bottom of Lambda Calculus". It successfully recurses functions that would otherwise 
 not terminate under evaluation by value, so long as the function emits the bottom abstraction, `λt.λb. b`, when it is finished recursing.
 

@@ -1,4 +1,5 @@
-﻿/*fact = λf. λx. cond (iszro x) c1 (mult x (f (prd x)));*/
+﻿/*requires (in order) prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd*/
+/*requires UntypedRecurs, does not return from untyped*/
 fact = λf. λx. mult x (f (prd x));
 
 fact3 = fix fact c3;

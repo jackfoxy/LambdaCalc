@@ -1,4 +1,6 @@
-﻿fact = λf. λx. mult x (f (prd x));
+﻿/*requires (in order) prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd */
+/*requires UntypedRecurs, does not return from untyped*/
+fact = λf. λx. mult x (f (prd x));
 
 fact3 = fix fact c3;
 

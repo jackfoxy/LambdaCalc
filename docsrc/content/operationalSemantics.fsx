@@ -32,7 +32,7 @@ The horizontal line signifies an IF / THEN rule.
 
 `→` implies evaluates in one step.
 
-<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span>. 
+<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurrences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span>. 
 
 ("free" meaning the variable is not bound by an enclosing abstraction)
 
@@ -51,7 +51,7 @@ The horizontal line signifies an IF / THEN rule.
 `E-APP1` and `E-APP2` are congruence rules. 
 
 `E-APPABS` is the computation or substitution rule. Note the rule matches
-when <span class="adsf">v<sub>2</sub></span> ranges over values. Thus the right-hand side must be evaluated and reduced first, and so this rule 
+when <span class="adsf">v<sub>2</sub></span> ranges over values, thus the right-hand side must be evaluated and reduced first, and so this rule 
 controls the order of evaluation and is the crux of by-value evaluation. This is problematic for evaluating recursion, 
 which the following extension to the semantics addresses.
 
@@ -69,4 +69,9 @@ f: (λf. λx. _) 22A6 (λy. (λx. f (λy. x x y)) (λx. f (λy. x x y)) y) (λt.
 _____________________________________________________________________________
                                    λb. b
 ````
+
+This is implemented in the project [UntypedRecurs](https://github.com/jackfoxy/LambdaCalc/blob/master/src/UntypedRecurs/Core.fs#L75)
+and can be tested [here](https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/tests/recursion.lmbd)
+and [here](https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/tests/untypedrecurs.lmbd)
+
 *)

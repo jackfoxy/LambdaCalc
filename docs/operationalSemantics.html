@@ -64,7 +64,7 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 <p><strong>Evaluation</strong></p>
 <p>The horizontal line signifies an IF / THEN rule.</p>
 <p><code>→</code> implies evaluates in one step.</p>
-<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span>. 
+<span class="adsf">[x ↦ v<sub>2</sub>]t<sub>12</sub></span> reads substitute <span class="adsf">v<sub>2</sub></span> for all occurrences of free variable <span class="adsf">x</span> in term <span class="adsf">t<sub>12</sub></span>. 
 <p>("free" meaning the variable is not bound by an enclosing abstraction)</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
 <span class="l">2: </span>
@@ -90,7 +90,7 @@ is from Pierce's <a href="http://www.cis.upenn.edu/~bcpierce/tapl/">Types and Pr
 </table>
 <p><code>E-APP1</code> and <code>E-APP2</code> are congruence rules.</p>
 <p><code>E-APPABS</code> is the computation or substitution rule. Note the rule matches
-when <span class="adsf">v<sub>2</sub></span> ranges over values. Thus the right-hand side must be evaluated and reduced first, and so this rule
+when <span class="adsf">v<sub>2</sub></span> ranges over values, thus the right-hand side must be evaluated and reduced first, and so this rule
 controls the order of evaluation and is the crux of by-value evaluation. This is problematic for evaluating recursion,
 which the following extension to the semantics addresses.</p>
 <h2><a name="Untyped-Recursive-Lambda-Calculus" class="anchor" href="#Untyped-Recursive-Lambda-Calculus">Untyped Recursive Lambda Calculus</a></h2>
@@ -107,6 +107,9 @@ which the following extension to the semantics addresses.</p>
 </code></pre></td>
 </tr>
 </table>
+<p>This is implemented in the project <a href="https://github.com/jackfoxy/LambdaCalc/blob/master/src/UntypedRecurs/Core.fs#L75">UntypedRecurs</a>
+and can be tested <a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/tests/recursion.lmbd">here</a>
+and <a href="https://github.com/jackfoxy/LambdaCalc/blob/master/lambdas/tests/untypedrecurs.lmbd">here</a></p>
 
 
         </div>

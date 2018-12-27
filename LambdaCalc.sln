@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28407.52
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{41897A66-6095-41F8-AB00-BD414B645835}"
 	ProjectSection(SolutionItems) = preProject
@@ -58,8 +58,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lambdas", "lambdas", "{31A6
 	ProjectSection(SolutionItems) = preProject
 		lambdas\boolean.lmbd = lambdas\boolean.lmbd
 		lambdas\deBruijnTest.lmbd = lambdas\deBruijnTest.lmbd
-		lambdas\fixBottomMin.lmbd = lambdas\fixBottomMin.lmbd
-		lambdas\lambdaCalcPgm.lmbd = lambdas\lambdaCalcPgm.lmbd
 		lambdas\lambdaRecursPgm.lmbd = lambdas\lambdaRecursPgm.lmbd
 		lambdas\lists.lmbd = lambdas\lists.lmbd
 		lambdas\numbers.lmbd = lambdas\numbers.lmbd
@@ -71,6 +69,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{50AD6414-DA94-44F8-BABB-A4345F4AF883}"
 	ProjectSection(SolutionItems) = preProject
 		lambdas\tests\cond.lmbd = lambdas\tests\cond.lmbd
+		lambdas\tests\fixBottomMin.lmbd = lambdas\tests\fixBottomMin.lmbd
 		lambdas\tests\lists.lmbd = lambdas\tests\lists.lmbd
 		lambdas\tests\numbers.lmbd = lambdas\tests\numbers.lmbd
 		lambdas\tests\recursion.lmbd = lambdas\tests\recursion.lmbd
