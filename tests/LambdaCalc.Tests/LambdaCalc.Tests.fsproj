@@ -12,7 +12,6 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Generators.fs" />
     <Compile Include="Tests.fs" />
     <None Include="paket.references" />
     <Compile Include="RunTests.fs" />

@@ -7,7 +7,7 @@ module RunTests =
     [<EntryPoint>]
     let main args =
 
-        Tests.runTestsWithArgs defaultConfig args Tests.testSimpleTests |> ignore
+        [Tests.runTestsWithArgs defaultConfig args Tests.testCond]
+        |> List.sum
 
-        0
 

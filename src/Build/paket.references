@@ -1,4 +1,7 @@
 FSharp.Core
+
+group build
+
 BlackFox.Fake.BuildTask
 Fake.Core.Target
 Fake.IO.FileSystem

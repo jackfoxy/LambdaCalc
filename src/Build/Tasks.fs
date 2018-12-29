@@ -42,7 +42,7 @@ let solutionFile  = "LambdaCalc.sln"
 let configuration = "Release"
 
 // Pattern specifying assemblies to be tested using Expecto
-let testAssemblies = "tests/**/bin/Release/net47/LambdaCalcTests.exe"
+let testAssemblies = "tests/**/bin/Release/net47/*Tests.exe"
 
 // Git configuration (used for publishing documentation in gh-pages branch)
 // The profile where the project is posted
@@ -135,10 +135,21 @@ let createAndGetDefault () =
     // --------------------------------------------------------------------------------------
     // Run the unit tests using test runner
 
-    let runTests = BuildTask.create "RunTests" [copyBinaries] {
+    let tests() = 
         !! testAssemblies
         |> Seq.filter (fun x -> x.ToLower().Contains("benchmark") |> not)
         |> Expecto.run id
+
+    let runTests = BuildTask.create "RunTests" [copyBinaries] {
+        tests()
+    }
+
+    let runTestsOnly = BuildTask.create "RunTestsOnly" [] {
+        "tests/LambdaCalc.Tests/LambdaCalc.Tests.fsproj"
+        |> DotNet.build (fun p -> 
+            { p with
+                Configuration = buildConfiguration })
+        tests()
     }
 
     let runBenchmarks = BuildTask.create "RunBenchmarks" [copyBinaries] {
