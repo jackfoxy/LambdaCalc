@@ -1,4 +1,4 @@
-/*requires values defined in lambdas/boolean.lmbd and lambdas/numbers.lmbd*/
+/*requires values defined in lambdas/boolean.lmbd, lambdas/tuple.lmbd, and lambdas/numbers.lmbd*/
 
 /*exponate tests*/
 xnor tru (eql c1 (exp c1 c0));
