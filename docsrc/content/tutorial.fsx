@@ -17,7 +17,11 @@ Note order of lambda files is significant, as subsequent lambdas may depend on v
 
 ````
 [lang=powershell]
-dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
 ````
 
 The final input in the list `-c "(λx. λy. y x) (λx. x) (lambda x.x)"` is an example of lambda calculus typed into the console and does nothing more than demonstrate 
@@ -29,7 +33,11 @@ Evaluatining abstractions in the Untyped Recursive Lambda Calculus:
 
 ````
 [lang=powershell]
-dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
 ````
 
 Now you can write [unit tests](unitTests.html) in the untyped Lambda Calculus. Sure beats desk-checking the abstractions you compose. 

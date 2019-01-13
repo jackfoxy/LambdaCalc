@@ -44,16 +44,32 @@ and builds after making changes to the Parser.fs files.</p>
 <p>The following console command evaluates <a href="https://github.com/jackfoxy/LambdaCalc/tree/master/lambdas">example λ-abstractions and unit tests</a> in the Untyped Lambda Calculus.
 Note order of lambda files is significant, as subsequent lambdas may depend on values defined in previous files.</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\Untyped\netcoreapp2.1\Untyped.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
 </code></pre></td></tr></table>
 <p>The final input in the list <code>-c "(λx. λy. y x) (λx. x) (lambda x.x)"</code> is an example of lambda calculus typed into the console and does nothing more than demonstrate
 submitting a λ-abstraction from the console after the abstractions in the files have evaluated. To submit multiple abstractions from the console be sure to <code>;</code> separate them.</p>
 <p>See <a href="index.html">console app documentation</a> for all parameter options.</p>
 <p>Evaluatining abstractions in the Untyped Recursive Lambda Calculus:</p>
 <table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd numbers.lmbd lists.lmbd tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd -c "(λx. λy. y x) (λx. x) (lambda x.x)" -l -i .\lambdas
+<td class="snippet"><pre class="fssnip"><code lang="powershell">dotnet .\bin\UntypedRecurs\netcoreapp2.1\UntypedRecurs.dll `
+-l -i .\lambdas `
+prelude.lmbd boolean.lmbd tuple.lmbd numbers.lmbd lists.lmbd `
+tests\cond.lmbd tests\numbers.lmbd tests\lists.lmbd tests\recursion.lmbd `
+-c "(λx. λy. y x) (λx. x) (lambda x.x)"
 </code></pre></td></tr></table>
 <p>Now you can write <a href="unitTests.html">unit tests</a> in the untyped Lambda Calculus. Sure beats desk-checking the abstractions you compose.</p>
 
