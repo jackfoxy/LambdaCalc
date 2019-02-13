@@ -2,6 +2,7 @@
 
 open Common
 open PrettyPrint
+open Continuation
 
 (*
 Copyright (c) 2003, Benjamin C. Pierce
@@ -34,7 +35,7 @@ module Reduce =
     let processCommand (reduceParams : ReduceParams) commentLines (inputLines : InputLines list) ctx cmd = 
         match cmd with
         | Eval(_, term) -> 
-            let t' = reduceParams.Eval ctx term
+            let t' = reduceParams.Eval ctx term 
             let reducedCommentLines, remainingInputLines = 
                 printComments term commentLines inputLines
             reduceParams.PrintTerm true ctx t'
@@ -56,8 +57,8 @@ module Reduce =
             flush()
             (reduceParams.AddBinding ctx x bind'), reducedCommentLines, remainingInputLines 
 
-    let rec evalDriver (eval : Context -> Term -> Term) ctx term =
-        match eval ctx term with
+    let rec evalDriver (eval : Context -> Term -> (('T -> 'T) -> Term)) ctx term =
+        match eval ctx term id with
         | t when t = term -> term
         | t -> evalDriver eval ctx t
   

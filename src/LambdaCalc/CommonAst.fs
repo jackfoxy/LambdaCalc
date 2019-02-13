@@ -22,7 +22,7 @@ type Binding =
 type Context = (string * Binding) list
 
 type Command = 
-    | Eval of FileInfo : Info * Term 
+    | Eval of FileInfo : Info * Term
     | Bind of FileInfo : Info * Name : string * Binding
 
 module CommonAst =

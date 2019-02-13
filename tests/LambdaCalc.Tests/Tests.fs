@@ -3,6 +3,7 @@
 open Expecto
 open System
 open System.Diagnostics
+open System.Text
 
 module Tests =
     let runProcess filename args startDir = 
@@ -77,12 +78,15 @@ module Tests =
 
         let args = sprintf "%s.dll %s -c \"%s\" -l -i ..\..\..\lambdas" (typeDll.ToString()) files assertion
 
-        let msg = sprintf "%s %s expected true" (typeDll.ToString()) assertion
+        let msg = sprintf "%s %s expected " (typeDll.ToString()) assertion
 
         let output, _ = runProcess "dotnet" args typeDirectory
         let result = output |> Seq.last
 
-        Expect.isTrue (result = lambdaTrue) msg
+        printfn "result %A" <| Encoding.Unicode.GetBytes(result)
+        printfn "expected %A" <| Encoding.Unicode.GetBytes(lambdaTrue)
+
+        Expect.isTrue (result = lambdaTrue) (sprintf "%s %s = %s" msg result lambdaTrue)
 
     let runLambdaTest (typeDll : LambdaType) requiredFiles assertion =
         match typeDll with

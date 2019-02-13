@@ -1,6 +1,7 @@
 ﻿namespace Jackfoxy.LambdaCalc
 
 open Common
+open Continuation
 
 /// Lambda reduction to normal form through call by value.
 module Reduce =
@@ -15,9 +16,9 @@ module Reduce =
         InputLines : InputLines list
         }
 
-    val evalDriver : eval : (Context -> Term -> Term) -> ctx : Context -> term : Term -> Term
+    val evalDriver : eval : (Context -> Term -> (('T -> 'T) -> Term)) -> ctx : Context -> term : Term -> Term
 
     /// Evaluate binding
-    val evalBinding : eval : (Context -> Term -> Term) -> ctx : Context ->  binding : Binding -> Binding
+    val evalBinding : eval : (Context -> Term -> (('T -> 'T) -> Term)) -> ctx : Context ->  binding : Binding -> Binding
 
     val reduceInput : reduceParams : ReduceParams -> ctx : Context ->  cmds : Command list -> Context

@@ -17,6 +17,8 @@
     <Compile Include="Common.fsi" />
     <Compile Include="Common.fs" />
     <Compile Include="Error.fs" />
+    <Compile Include="Continuation.fsi" />
+    <Compile Include="Continuation.fs" />
     <Compile Include="CommonAst.fsi" />
     <Compile Include="CommonAst.fs" />
     <Compile Include="PrettyPrint.fsi" />

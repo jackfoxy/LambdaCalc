@@ -15,7 +15,7 @@ open CommonAst
 /// Core evaluation functions.
 module Core =
 
-    let rec eval ctx term =
+    let rec eval ctx term _ =
         match term with
         | Variable (fileInfo, n, _) ->
             match getBinding fileInfo ctx n with
@@ -28,10 +28,10 @@ module Core =
             termSubstTop v2 t12
 
         | Application (fileInfo, (Abstraction (_) as v1), t2) ->
-            Application (fileInfo, v1, (eval ctx t2))
+            Application (fileInfo, v1, (eval ctx t2 id))
 
         | Application (fileInfo, t1, t2) -> 
-            Application (fileInfo, (eval ctx t1), t2)
+            Application (fileInfo, (eval ctx t1 id), t2)
 
         | _ -> 
             term

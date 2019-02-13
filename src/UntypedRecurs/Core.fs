@@ -12,6 +12,7 @@ See LICENSE.TXT for licensing details.
 open Jackfoxy.LambdaCalc
 open CommonAst
 open Support.Error
+open Continuation
 
 /// Core evaluation functions.
 module Core =
@@ -57,29 +58,34 @@ module Core =
         | _ ->
             invalidArg "getBottom" "can't get here"
 
-    let rec eval ctx term =
-        match term with
-        | Variable (fileInfo, n, _) ->
-            match getBinding fileInfo ctx n with
-            | AbstractionBind t -> 
-                t
+    let continuation = ContinuationBuilder()
+
+    let rec eval ctx (term : Term) =
+        continuation {
+            match term with
+            | Variable (fileInfo, n, _) ->
+                match getBinding fileInfo ctx n with
+                | AbstractionBind t -> 
+                    return t
+                | _ -> 
+                    return term
+
+            | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
+                return termSubstTop v2 t12
+
+            | Application (fileInfo, (Abstraction (_) as v1), t2) ->
+                let! t2' = eval ctx t2 
+
+                match isInnerYcombinator v1, isBottom t2' with
+                | true, true ->
+                    return termSubstTop v1 <| getIdentity ctx
+                | _ ->
+                    return Application (fileInfo, v1, t2')
+
+            | Application (fileInfo, t1, t2) ->
+                let! inner = eval ctx t1
+                return Application (fileInfo, inner, t2)
+
             | _ -> 
-                term
-
-        | Application (_, (Abstraction (_, _, t12)), (Abstraction (_) as v2)) ->
-            termSubstTop v2 t12
-
-        | Application (fileInfo, (Abstraction (_) as v1), t2) ->
-            let t2' = eval ctx t2 
-
-            match isInnerYcombinator v1, isBottom t2' with
-            | true, true ->
-                termSubstTop v1 <| getIdentity ctx
-            | _ ->
-                Application (fileInfo, v1, t2')
-
-        | Application (fileInfo, t1, t2) -> 
-            Application (fileInfo, (eval ctx t1), t2)
-
-        | _ -> 
-            term
+                return term
+        }

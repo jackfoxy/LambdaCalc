@@ -21,7 +21,7 @@ type Binding =
 /// Actions on parsed term.
 type Command =
     /// Evaluate the parsed term.
-    | Eval of FileInfo : Info * Term 
+    | Eval of FileInfo : Info * Term
     /// Bind the parsed term.
     | Bind of FileInfo : Info * Name : string * Binding
 
