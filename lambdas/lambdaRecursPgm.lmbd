@@ -17,5 +17,3 @@ fact = lambda f. lambda x. cond (iszro x) c1 (mult x (f (prd x)));
 
 h = fix fact;
 l = h c3; /*stackoverflow if not run from UntypedRecurs*/
-
-

@@ -54,8 +54,9 @@ module Tests =
     let untypedRecursDirectory =
         sprintf "%s\\bin\\UntypedRecurs\\netcoreapp2.1" <| getGrandParent __SOURCE_DIRECTORY__
 
-    let lambdaTrue = "λt.λf.t"
-    let lambdaFalse = "λt.λf.f"
+    let lambda = Encoding.Unicode.GetChars([|187uy;  3uy;|]).[0]
+    let lambdaTrue = sprintf "%ct.%cf.t" lambda lambda
+    let lambdaFalse = sprintf "%ct.%cf.f" lambda lambda
 
     type LambdaType =
         | Untyped 
@@ -82,10 +83,7 @@ module Tests =
 
         let output, _ = runProcess "dotnet" args typeDirectory
         let result = output |> Seq.last
-
-        printfn "result %A" <| Encoding.Unicode.GetBytes(result)
-        printfn "expected %A" <| Encoding.Unicode.GetBytes(lambdaTrue)
-
+        
         Expect.isTrue (result = lambdaTrue) (sprintf "%s %s = %s" msg result lambdaTrue)
 
     let runLambdaTest (typeDll : LambdaType) requiredFiles assertion =
