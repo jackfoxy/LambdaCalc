@@ -16,7 +16,6 @@
     <None Include="paket.references" />
     <Compile Include="RunTests.fs" />
     <None Include="paket.references" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\LambdaCalc\LambdaCalc.fsproj" />
