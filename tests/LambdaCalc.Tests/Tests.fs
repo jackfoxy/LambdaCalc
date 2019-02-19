@@ -90,7 +90,11 @@ module Tests =
         let output, _ = runProcess "dotnet" args typeDirectory
         let result = output |> Seq.last
 
+        let isBadDeBruijnIndex =
+            output |> Seq.exists (fun x -> x.Contains("bad index:"))
+
         Expect.isTrue (result = lambdaTrue1 || result = lambdaTrue2) (sprintf "%s %s = %s or %s" msg result lambdaTrue1 lambdaTrue2)
+        Expect.isFalse isBadDeBruijnIndex "bad deBruijn Index"
 
     let runLambdaTest (typeDll : LambdaType) requiredFiles assertion =
         match typeDll with
