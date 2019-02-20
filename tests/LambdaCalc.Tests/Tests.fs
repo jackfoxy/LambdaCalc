@@ -6,7 +6,7 @@ open System.Diagnostics
 open System.Text
 
 module Tests =
-    let runProcess filename args startDir = 
+    let runProcess filename args startDir =    
         let procStartInfo = 
             ProcessStartInfo(
                 RedirectStandardOutput = true,
@@ -15,13 +15,15 @@ module Tests =
                 FileName = filename,
                 Arguments = args
             )
+
         match startDir with | Some d -> procStartInfo.WorkingDirectory <- d | _ -> ()
 
         let outputs = System.Collections.Generic.List<string>()
         let errors = System.Collections.Generic.List<string>()
         let outputHandler f (_sender:obj) (args:DataReceivedEventArgs) = f args.Data
-
+        
         use p = new Process(StartInfo = procStartInfo)
+
         p.OutputDataReceived.AddHandler(DataReceivedEventHandler (outputHandler outputs.Add))
         p.ErrorDataReceived.AddHandler(DataReceivedEventHandler (outputHandler errors.Add))
 
@@ -54,9 +56,13 @@ module Tests =
     let untypedRecursDirectory =
         sprintf "%s\\bin\\UntypedRecurs\\netcoreapp2.1" <| getGrandParent __SOURCE_DIRECTORY__
 
-    let lambda = Encoding.Unicode.GetChars([|187uy;  3uy;|]).[0]
-    let lambdaTrue = sprintf "%ct.%cf.t" lambda lambda
-    let lambdaFalse = sprintf "%ct.%cf.f" lambda lambda
+    //can't trust current encoding, and can't set it
+    let lambda1 = Encoding.Unicode.GetChars([|187uy;  3uy;|]).[0]
+    let lambda2 = Encoding.Unicode.GetChars([|63uy;  0uy;|]).[0]
+    let lambdaTrue1 = sprintf "%ct.%cf.t" lambda1 lambda1
+    let lambdaTrue2 = sprintf "%ct.%cf.t" lambda2 lambda2
+    let lambdaFalse1 = sprintf "%ct.%cf.f" lambda1 lambda1
+    let lambdaFalse2 = sprintf "%ct.%cf.f" lambda2 lambda2
 
     type LambdaType =
         | Untyped 
@@ -83,8 +89,12 @@ module Tests =
 
         let output, _ = runProcess "dotnet" args typeDirectory
         let result = output |> Seq.last
-        
-        Expect.isTrue (result = lambdaTrue) (sprintf "%s %s = %s" msg result lambdaTrue)
+
+        let isBadDeBruijnIndex =
+            output |> Seq.exists (fun x -> x.Contains("bad index:"))
+
+        Expect.isTrue (result = lambdaTrue1 || result = lambdaTrue2) (sprintf "%s %s = %s or %s" msg result lambdaTrue1 lambdaTrue2)
+        Expect.isFalse isBadDeBruijnIndex "bad deBruijn Index"
 
     let runLambdaTest (typeDll : LambdaType) requiredFiles assertion =
         match typeDll with
