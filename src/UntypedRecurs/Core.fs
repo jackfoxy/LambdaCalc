@@ -74,7 +74,7 @@ module Core =
 
             match isInnerYcombinator v1, isBottom t2' with
             | true, true ->
-                termSubstTop v1 <| getIdentity ctx
+                 termSubstTop v1 <| getIdentity ctx
             | _ ->
                 Application (fileInfo, v1, t2')
 

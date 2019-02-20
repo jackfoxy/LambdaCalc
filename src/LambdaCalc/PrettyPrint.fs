@@ -332,14 +332,18 @@ module PrettyPrint =
     and printTerm outer (ctx : Context) term =
         match term with
         | Variable (fileInfo, deBruinIndex, contextLength) ->
-          if (ctxLength ctx) = contextLength
-          then 
-            pr (index2Name fileInfo ctx deBruinIndex)
-          else
-            pr <| sprintf "[bad index: %s/%s in {%s }]"
-                    (string deBruinIndex)
-                    (string contextLength)
-                    (List.fold (fun s (x, _) -> sprintf "%s  %s" s x) "" ctx)
+            match fileInfo with
+            | FI (_, 1, _) ->
+                // bottom variable always uniquely bound, so de Bruijn indexing can be safely ingored
+                pr (index2Name fileInfo ctx deBruinIndex)
+            | _ ->
+                if (ctxLength ctx) = contextLength
+                then pr (index2Name fileInfo ctx deBruinIndex)
+                else
+                     pr <| sprintf "[bad index: %s/%s in {%s }]"
+                        (string deBruinIndex)
+                        (string contextLength)
+                        (List.fold (fun s (x, _) -> sprintf "%s  %s" s x) "" ctx)
         | term -> 
             pr "("
             printtmTerm outer ctx term
